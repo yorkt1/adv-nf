@@ -1,0 +1,1630 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Portal Jurídico</title>
+  <meta name="description" content="publicações e notícias, inspirado em portais de conteúdo jurídico." />
+  <style>
+    /* Reset básico */
+    :root {
+      --accent: #0b74da;
+      --muted: #6b7280;
+      --bg: #f6f7f9;
+      --card: #ffffff;
+      --maxwidth: 1200px;
+      font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    }
+
+    * {
+      box-sizing: border-box
+    }
+
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      background: var(--bg);
+      color: #111
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none
+    }
+
+    header {
+      background: #fff;
+      border-bottom: 1px solid #e6e9ee;
+      position: relative;
+    }
+
+    .container {
+      max-width: var(--maxwidth);
+      margin: 0 auto;
+      padding: 18px
+    }
+
+    /* Top bar */
+    .topbar {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      justify-content: space-between
+    }
+
+    .brand {
+      display: flex;
+      gap: 12px;
+      align-items: center
+    }
+
+    .logo {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, var(--accent), #3b82f6);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-weight: 700
+    }
+
+    /* Navegação Principal */
+    nav.main-nav {
+      display: flex;
+      gap: 14px;
+      align-items: center
+    }
+
+    .search {
+      display: flex;
+      gap: 8px;
+      align-items: center
+    }
+
+    .search input {
+      padding: 8px 12px;
+      border: 1px solid #d1d5db;
+      border-radius: 6px;
+      width: 220px
+    }
+
+    /* Menu Hamburger para Mobile */
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 30px;
+      height: 21px;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      z-index: 10;
+    }
+
+    .menu-toggle span {
+      display: block;
+      height: 3px;
+      width: 100%;
+      background-color: var(--accent);
+      border-radius: 3px;
+      transition: all 0.3s ease;
+    }
+
+    .menu-toggle.active span:nth-child(1) {
+      transform: translateY(9px) rotate(45deg);
+    }
+
+    .menu-toggle.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .menu-toggle.active span:nth-child(3) {
+      transform: translateY(-9px) rotate(-45deg);
+    }
+
+    /* Categorias */
+    .category {
+      display: inline-block;
+      padding: 4px 10px;
+      background: #e6f2ff;
+      color: var(--accent);
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+    }
+
+    .category.tributario {
+      background: #e6f7ff;
+      color: #1890ff;
+    }
+
+    .category.trabalho {
+      background: #e6f7ff;
+      color: #1890ff;
+    }
+
+    .category.constitucional {
+      background: #e6f7ff;
+      color: #1890ff;
+    }
+
+    .category.procedural {
+      background: #e6f7ff;
+      color: #1890ff;
+    }
+
+    .category.civil {
+      background: #e6f7ff;
+      color: #1890ff;
+    }
+
+    .category.reflexoes {
+      background: #f0e6ff;
+      color: #7c3aed;
+    }
+
+    /* Hero */
+    .hero {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 18px;
+      padding: 18px 0
+    }
+
+    .lead-article {
+      background: var(--card);
+      padding: 18px;
+      border-radius: 12px;
+      box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06)
+    }
+
+    .lead-article img {
+      width: 100%;
+      height: 320px;
+      object-fit: cover;
+      border-radius: 8px
+    }
+
+    .lead-article h1 {
+      margin: 12px 0 6px;
+      font-size: 22px
+    }
+
+    .meta {
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 5px;
+    }
+
+    /* Sidebar hero cards */
+    .side-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 12px
+    }
+
+    .card-small {
+      background: var(--card);
+      padding: 12px;
+      border-radius: 10px
+    }
+
+    .card-small img {
+      width: 100%;
+      height: 96px;
+      object-fit: cover;
+      border-radius: 6px
+    }
+
+    /* Main grid */
+    .main {
+      display: grid;
+      grid-template-columns: 3fr 1fr;
+      gap: 18px;
+      padding: 18px 0
+    }
+
+    .posts {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px
+    }
+
+    .post {
+      background: var(--card);
+      padding: 14px;
+      border-radius: 10px;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start
+    }
+
+    .post img {
+      width: 160px;
+      height: 110px;
+      object-fit: cover;
+      border-radius: 8px
+    }
+
+    .post h3 {
+      margin: 0 0 6px;
+      font-size: 16px
+    }
+
+    .excerpt {
+      color: var(--muted);
+      font-size: 14px
+    }
+
+    /* Sidebar */
+    aside .widget {
+      background: var(--card);
+      padding: 14px;
+      border-radius: 10px;
+      margin-bottom: 12px
+    }
+
+    .widget h4 {
+      margin: 0 0 10px
+    }
+
+    .list-compact {
+      display: flex;
+      flex-direction: column;
+      gap: 10px
+    }
+
+    .list-compact a {
+      font-size: 14px;
+      color: #0f172a
+    }
+
+    /* Pagination */
+    .pagination {
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      margin: 18px 0
+    }
+
+    .btn {
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-block;
+      padding: 8px 12px;
+      border-radius: 8px;
+      border: 1px solid #e6e9ee;
+      background: #fff
+    }
+
+    .btn.primary {
+      background: var(--accent);
+      color: #fff;
+      border-color: transparent
+    }
+
+    .btn.active {
+      background: var(--accent);
+      color: #fff;
+      border-color: transparent
+    }
+
+    .btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed
+    }
+
+    /* Footer */
+    footer {
+      padding: 22px 0;
+      color: var(--muted);
+      font-size: 14px
+    }
+
+    /* Article page */
+    .article-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      display: none;
+      justify-content: center;
+      align-items: flex-start;
+      z-index: 1000;
+      overflow-y: auto;
+      overflow-x: hidden;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    /* Prevent body scroll when overlay is open */
+    body.overlay-open {
+      overflow: hidden;
+    }
+
+    .article-content {
+      background: var(--card);
+      width: 90%;
+      max-width: 800px;
+      border-radius: 12px;
+      padding: 30px;
+      position: relative;
+      margin: 20px auto;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      background: none;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+      color: var(--muted);
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      transition: all 0.2s;
+    }
+
+    .close-btn:hover {
+      background-color: #f0f0f0;
+      color: #333;
+    }
+
+    .article-header {
+      margin-bottom: 25px;
+      border-bottom: 1px solid #e6e9ee;
+      padding-bottom: 20px;
+    }
+
+    .article-hero-img {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+
+    .article-section {
+      margin-bottom: 30px;
+    }
+
+    .article-section h3 {
+      color: var(--accent);
+      margin-bottom: 15px;
+      font-size: 1.4rem;
+      border-left: 4px solid var(--accent);
+      padding-left: 12px;
+    }
+
+    .article-section p {
+      line-height: 1.7;
+      margin-bottom: 15px;
+      color: #333;
+    }
+
+    .article-tags {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 25px;
+      padding-top: 20px;
+      border-top: 1px solid #e6e9ee;
+    }
+
+    .tag {
+      padding: 6px 12px;
+      border-radius: 20px;
+      border: 1px solid #e6e9ee;
+      font-size: 13px;
+      background-color: #f8f9fa;
+    }
+
+    .article-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    /* Hero Section */
+    .hero-section {
+      padding: 0 0;
+      display: flex;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-image {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 500px;
+      position: relative;
+    }
+
+    /* Opção 1: Moldura Retangular */
+    .frame-rectangular {
+      background: linear-gradient(135deg, #ffffff, #f0f5ff);
+      border-radius: 20px;
+      box-shadow:
+        0 10px 30px rgba(11, 116, 218, 0.15),
+        inset 0 0 0 1px rgba(11, 116, 218, 0.1);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      max-width: 400px;
+      height: 450px;
+    }
+
+    .hero-image img {
+      max-height: 100%;
+      max-width: 100%;
+      object-fit: contain;
+      filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.1));
+    }
+
+    .hero-text {
+      padding: 20px;
+    }
+
+    .hero-text h2 {
+      font-size: 36px;
+      line-height: 1.2;
+      margin-bottom: 20px;
+      color: #111;
+    }
+
+    .hero-text p {
+      color: var(--muted);
+      margin-bottom: 25px;
+      font-size: 18px;
+      line-height: 1.6;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 30px;
+      margin-top: 30px;
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-number {
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--accent);
+      display: block;
+    }
+
+    .stat-label {
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    /* Estilos para artigos justificados */
+    .article-content {
+      text-align: justify;
+      line-height: 1.7;
+    }
+
+    .article-section p {
+      text-align: justify;
+      margin-bottom: 1.2em;
+      line-height: 1.7;
+    }
+
+    .article-section h3 {
+      color: var(--accent);
+      margin: 2em 0 1em 0;
+      border-left: 4px solid var(--accent);
+      padding-left: 12px;
+      text-align: left;
+    }
+
+    /* Estilos para citações de artigos */
+    .article-law-citation {
+      background: #f8f9fa;
+      border-left: 3px solid var(--accent);
+      padding: 15px;
+      margin: 1.5em 0;
+      font-family: 'Times New Roman', serif;
+    }
+
+    .article-law-citation strong {
+      display: block;
+      margin-bottom: 8px;
+      color: #2c3e50;
+    }
+
+    /* Listas formatadas */
+    .article-list {
+      margin: 1em 0;
+      padding-left: 1.5em;
+    }
+
+    .article-list li {
+      margin-bottom: 0.8em;
+      line-height: 1.6;
+    }
+
+    /* Destaques para incisos e parágrafos */
+    .article-inciso {
+      margin: 1em 0;
+      padding-left: 1em;
+    }
+
+    .article-paragrafo {
+      margin: 0.8em 0 0.8em 2em;
+      font-style: italic;
+    }
+
+    .artigo em {
+      color: darkgoldenrod;
+      font-style: italic;
+    }
+
+    /* Tabs para navegação entre Artigos e Reflexões */
+    .content-tabs {
+      display: flex;
+      margin-bottom: 20px;
+      border-bottom: 1px solid #e6e9ee;
+    }
+
+    .content-tab {
+      padding: 12px 24px;
+      cursor: pointer;
+      border: none;
+      background: none;
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--muted);
+      border-bottom: 2px solid transparent;
+      transition: all 0.3s ease;
+    }
+
+    .content-tab.active {
+      color: var(--accent);
+      border-bottom: 2px solid var(--accent);
+    }
+
+    .content-tab:hover {
+      color: var(--accent);
+    }
+
+    .content-section {
+      display: none;
+    }
+
+    .content-section.active {
+      display: block;
+    }
+
+    /* Responsive */
+    @media (max-width:900px) {
+      .hero {
+        grid-template-columns: 1fr
+      }
+
+      .main {
+        grid-template-columns: 1fr
+      }
+
+      .posts {
+        grid-template-columns: 1fr
+      }
+
+      .search input {
+        width: 120px
+      }
+
+      .lead-article img {
+        height: 220px
+      }
+
+      .post {
+        flex-direction: column
+      }
+
+      .post img {
+        width: 100%;
+        height: 180px
+      }
+
+      /* esconder cards laterais no mobile (apenas versão mobile) */
+      .side-cards {
+        display: none;
+      }
+
+      .article-content {
+        width: 95%;
+        padding: 20px;
+      }
+
+      .article-hero-img {
+        height: 250px;
+      }
+
+      /* Menu responsivo para mobile */
+      .menu-toggle {
+        display: flex;
+      }
+
+      nav.main-nav {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 80%;
+        max-width: 300px;
+        height: 100vh;
+        background: white;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 80px 20px 20px;
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+        transition: right 0.3s ease;
+        z-index: 9;
+        gap: 0;
+      }
+
+      nav.main-nav.active {
+        right: 0;
+      }
+
+      nav.main-nav a {
+        width: 100%;
+        padding: 12px 0;
+        border-bottom: 1px solid #f0f0f0;
+        font-size: 16px;
+      }
+
+      .search {
+        margin-top: 20px;
+        width: 100%;
+      }
+
+      .search input {
+        width: 100%;
+      }
+
+      .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        display: none;
+        z-index: 8;
+      }
+
+      .overlay.active {
+        display: block;
+      }
+
+      .content-tabs {
+        flex-direction: column;
+      }
+
+      .content-tab {
+        width: 100%;
+        text-align: center;
+      }
+    }
+
+    /* Responsividade para a seção Hero */
+    @media (max-width: 992px) {
+      .hero-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        text-align: center;
+      }
+
+      .hero-image {
+        height: 400px;
+        order: -1;
+      }
+
+      .frame-rectangular {
+        max-width: 350px;
+        height: 380px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero-text h2 {
+        font-size: 28px;
+      }
+
+      .hero-stats {
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .frame-rectangular {
+        max-width: 300px;
+        height: 320px;
+      }
+
+      /* Ajustes adicionais para mobile */
+      .topbar {
+        flex-wrap: wrap;
+      }
+
+      .brand {
+        flex: 1;
+      }
+
+      /* Fix para linhas longas de underscores */
+      .artigo p {
+        max-width: 100%;
+        overflow-x: hidden;
+        word-wrap: break-word;
+        white-space: pre-wrap;
+      }
+
+      .artigo {
+        padding: 0;
+      }
+
+      .artigo em {
+        color: darkgoldenrod;
+        font-style: italic;
+      }
+
+      .artigo ul,
+      .artigo ol {
+        padding-left: 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="container topbar">
+      <div class="brand">
+        <div class="logo">FF</div>
+        <div>
+          <div style="font-weight:700">Fatima Felippe</div>
+          <div style="font-size:13px;color:var(--muted)">Notícias, artigos e decisões</div>
+        </div>
+      </div>
+
+      <!-- Botão do menu hamburger -->
+      <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav class="main-nav" id="mainNav" aria-label="menu">
+        <a href="#">Home</a>
+        <a href="#">Notícias</a>
+        <a href="#">Jurisprudência</a>
+        <a href="#">Artigos</a>
+        <a href="#">Colunas</a>
+        <a href="#">Contato</a>
+
+        <div class="search">
+          <input type="search" placeholder="Pesquisar" id="searchBox" />
+          <button class="btn" onclick="doSearch()">Ir</button>
+        </div>
+      </nav>
+
+      <!-- Overlay para fechar o menu ao clicar fora -->
+      <div class="overlay" id="overlay"></div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-image">
+          <div id="frame-rectangular" class="frame-rectangular">
+            <img
+              src="https://res.cloudinary.com/dqewxdbfx/image/upload/v1758832833/WhatsApp_Image_2025-09-25_at_17.37.40-Photoroom_noiqhc.png"
+              alt="Mulher representando o Direito">
+          </div>
+        </div>
+        <div class="hero-text">
+          <h2>Bem-vindo ao Portal Jurídico</h2>
+          <p>Este é um espaço online para escrever, publicar e compartilhar conhecimentos na área do direito e matérias
+            afins, com pessoas interessadas e conectadas a grande rede.</p>
+          <p>Esperamos que você tenha acesso a informações precisas e relevantes para sua prática profissional ou
+            estudos.</p>
+
+          <div class="hero-stats">
+            <!-- As estatísticas serão preenchidas dinamicamente -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main class="container">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="lead-article">
+        <!-- Conteúdo será preenchido dinamicamente -->
+      </div>
+
+      <aside class="side-cards">
+        <!-- Cards laterais serão preenchidos dinamicamente -->
+      </aside>
+    </section>
+
+    <!-- TABS PARA NAVEGAÇÃO ENTRE ARTIGOS E REFLEXÕES -->
+    <div class="content-tabs" id="contentTabs">
+      <button class="content-tab active" data-tab="artigos">Artigos</button>
+      
+    </div>
+
+    <!-- SEÇÃO DE ARTIGOS -->
+    <section class="content-section active" id="artigosSection">
+      <!-- MAIN GRID -->
+      <section class="main">
+        <section class="posts" id="postsContainer" aria-label="lista de posts">
+          <!-- Postagens serão carregadas aqui pelo JavaScript -->
+        </section>
+
+        <aside>
+          <div class="widget">
+            <h4>Mais lidos</h4>
+            <ol style="padding-left:18px;margin:0">
+              <!-- Conteúdo será preenchido dinamicamente -->
+            </ol>
+          </div>
+        </aside>
+      </section>
+
+      <!-- Pagination -->
+      <div class="pagination" id="paginationContainer">
+        <!-- Paginação será gerada aqui pelo JavaScript -->
+      </div>
+
+      
+    </section>
+     <div class="content-tabs" id="contentTabs">
+      <button class="content-tab active" data-tab="artigos">REFLEXOES</button>
+      
+      
+    </div>
+
+
+    <!-- SEÇÃO DE REFLEXÕES -->
+    <section class="content-section" id="reflexoesSection">
+      <!-- MAIN GRID -->
+      <section class="main">
+        <section class="posts" id="reflexoesContainer" aria-label="lista de reflexões">
+          <!-- Reflexões serão carregadas aqui pelo JavaScript -->
+        </section>
+
+        <aside>
+          <div class="widget">
+            <h4>Reflexões Recentes</h4>
+            <ol style="padding-left:18px;margin:0">
+              <!-- Conteúdo será preenchido dinamicamente -->
+            </ol>
+          </div>
+        </aside>
+      </section>
+
+      <!-- Pagination -->
+      <div class="pagination" id="reflexoesPaginationContainer">
+        <!-- Paginação será gerada aqui pelo JavaScript -->
+      </div>
+    </section>
+  </main>
+
+  <!-- Article Overlay -->
+  <div class="article-overlay" id="articleOverlay">
+    <div class="article-content" id="articleContent">
+      <!-- Conteúdo do artigo será carregado aqui dinamicamente -->
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+        <div>
+          <strong>Portal Jurídico</strong><br>
+          <small>© 2025 — Todos os direitos reservados.</small>
+        </div>
+        <div style="color:var(--muted)">
+          <a href="#">Política de Privacidade</a> • <a href="#">Termos</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Array de postagens com HTML formatado
+    const posts = [
+      {
+        "id": 1,
+        "category": "civil",
+        "categoryName": "Direito Civil",
+        "date": "25 de agosto de 2025",
+        "readTime": "10 min de leitura",
+        "title": "Curatela: Instrumento de Proteção e Cuidado no Ordenamento Jurídico Brasileiro",
+        "excerpt": "Análise completa da curatela como medida de proteção para pessoas com incapacidade, abrangendo aspectos do Código Civil, Processo Civil e Estatuto da Pessoa com Deficiência.",
+        "image": "https://res.cloudinary.com/dqewxdbfx/image/upload/v1761936183/pexels-vidalbalielojrfotografia-1682497_1_iyr1og.jpg",
+        "author": "Redação",
+        "content": `
+          <p><strong>CURATELA</strong></p>
+          <p>Conteúdo completo sobre curatela...</p>
+          <!-- Restante do conteúdo -->
+        `,
+        "tags": ["Curatela", "Direito Civil", "Interdição", "Estatuto Pessoa com Deficiência", "Código Civil", "Código Processo Civil", "Proteção Incapazes", "Curador"]
+      },
+           {
+        "id": 1,
+        "category": "civil",
+        "categoryName": "Direito Civil",
+        "date": "25 de agosto de 2025",
+        "readTime": "10 min de leitura",
+        "title": "Curatela: Instrumento de Proteção e Cuidado no Ordenamento Jurídico Brasileiro",
+        "excerpt": "Análise completa da curatela como medida de proteção para pessoas com incapacidade, abrangendo aspectos do Código Civil, Processo Civil e Estatuto da Pessoa com Deficiência.",
+        "image": "https://res.cloudinary.com/dqewxdbfx/image/upload/v1761936183/pexels-vidalbalielojrfotografia-1682497_1_iyr1og.jpg",
+        "author": "Redação",
+        "content": `
+          <p><strong>CURATELA</strong></p>
+          <p>Conteúdo completo sobre curatela...</p>
+          <!-- Restante do conteúdo -->
+        `,
+        "tags": ["Curatela", "Direito Civil", "Interdição", "Estatuto Pessoa com Deficiência", "Código Civil", "Código Processo Civil", "Proteção Incapazes", "Curador"]
+      },
+           {
+        "id": 1,
+        "category": "civil",
+        "categoryName": "Direito Civil",
+        "date": "25 de agosto de 2025",
+        "readTime": "10 min de leitura",
+        "title": "Curatela: Instrumento de Proteção e Cuidado no Ordenamento Jurídico Brasileiro",
+        "excerpt": "Análise completa da curatela como medida de proteção para pessoas com incapacidade, abrangendo aspectos do Código Civil, Processo Civil e Estatuto da Pessoa com Deficiência.",
+        "image": "https://res.cloudinary.com/dqewxdbfx/image/upload/v1761936183/pexels-vidalbalielojrfotografia-1682497_1_iyr1og.jpg",
+        "author": "Redação",
+        "content": `
+          <p><strong>CURATELA</strong></p>
+          <p>Conteúdo completo sobre curatela...</p>
+          <!-- Restante do conteúdo -->
+        `,
+        "tags": ["Curatela", "Direito Civil", "Interdição", "Estatuto Pessoa com Deficiência", "Código Civil", "Código Processo Civil", "Proteção Incapazes", "Curador"]
+      },
+      {
+        "id": 2,
+        "category": "civil",
+        "categoryName": "Direito Civil",
+        "date": "02 de setembro de 2025",
+        "readTime": "30 min de leitura",
+        "title": "Tutela: Proteção Integral de Menores no Ordenamento Jurídico Brasileiro",
+        "excerpt": "Análise completa do instituto da tutela de menores no Brasil, abrangendo fundamentos constitucionais, disposições do Código Civil, Estatuto da Criança e do Adolescente e procedimentos do Código de Processo Civil.",
+        "image": "https://images.unsplash.com/photo-1485546246426-74dc88dec4d9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80",
+        "author": "Redação",
+        "content": `
+          <p><strong>TUTELA</strong></p>
+          <p>Conteúdo completo sobre tutela...</p>
+          <!-- Restante do conteúdo -->
+        `,
+        "tags": ["Tutela", "Menores", "Código Civil", "Estatuto da Criança e do Adolescente", "ECA", "Poder Familiar", "Tutor", "Proteção Integral", "Direito Civil"]
+      }
+    ];
+
+    // Array de reflexões
+    const reflexoes = [
+      {
+        "id": 101,
+        "category": "reflexoes",
+        "categoryName": "Reflexões",
+        "date": "15 de setembro de 2025",
+        "readTime": "5 min de leitura",
+        "title": "A Ética na Advocacia Contemporânea",
+        "excerpt": "Reflexão sobre os desafios éticos enfrentados pelos advogados no mundo moderno e a importância da conduta profissional.",
+        "image": "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80",
+        "author": "Fátima Felippe",
+        "content": `
+          <p><strong>A ÉTICA NA ADVOCACIA CONTEMPORÂNEA</strong></p>
+          <p>Em um mundo cada vez mais complexo e interconectado, a advocacia enfrenta desafios éticos sem precedentes. A velocidade das transformações tecnológicas, a globalização dos mercados e as novas formas de relação profissional exigem do advogado contemporâneo uma reflexão constante sobre sua conduta.</p>
+          
+          <p>O advogado moderno não é apenas um técnico do direito, mas um agente transformador da sociedade. Sua atuação deve estar pautada não apenas na lei, mas nos valores fundamentais da dignidade humana, da justiça e do bem comum.</p>
+          
+          <p>A tecnologia trouxe benefícios inegáveis para o exercício da advocacia, mas também criou novas tentações e desafios éticos. A facilidade de comunicação pode levar à quebra de confidencialidade, a pressão por resultados pode incentivar condutas antiéticas, e a competição acirrada pode fazer com que alguns profissionais se esqueçam de seus deveres fundamentais.</p>
+          
+          <p>Neste contexto, mais do que nunca, é fundamental que o advogado mantenha-se fiel aos princípios éticos que sempre nortearam a profissão. A honestidade, a lealdade, a confidencialidade e o zelo pela justiça devem ser os pilares de toda atuação profissional.</p>
+          
+          <p>A verdadeira excelência na advocacia não se mede apenas pelo sucesso nos tribunais ou pelo volume de honorários, mas pela capacidade de exercer a profissão com integridade e contribuir para a construção de uma sociedade mais justa e ética.</p>
+        `,
+        "tags": ["Ética", "Advocacia", "Conduta Profissional", "Valores", "Tecnologia"]
+      },
+      {
+        "id": 102,
+        "category": "reflexoes",
+        "categoryName": "Reflexões",
+        "date": "10 de setembro de 2025",
+        "readTime": "7 min de leitura",
+        "title": "O Direito como Instrumento de Transformação Social",
+        "excerpt": "Uma reflexão sobre o papel do direito na construção de uma sociedade mais justa e igualitária.",
+        "image": "https://images.unsplash.com/photo-1589391886645-d51941baf7fb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80",
+        "author": "Fátima Felippe",
+        "content": `
+          <p><strong>O DIREITO COMO INSTRUMENTO DE TRANSFORMAÇÃO SOCIAL</strong></p>
+          <p>O direito não é apenas um conjunto de normas que regula a vida em sociedade. Ele é, antes de tudo, um poderoso instrumento de transformação social. Através do direito, podemos combater desigualdades, proteger os vulneráveis e construir uma sociedade mais justa.</p>
+          
+          <p>Historicamente, o direito tem sido utilizado tanto para manter privilégios quanto para promover mudanças progressistas. A abolição da escravatura, o reconhecimento dos direitos das mulheres, a proteção dos direitos das crianças e idosos - todos esses avanços foram conquistados através da transformação do ordenamento jurídico.</p>
+          
+          <p>No Brasil contemporâneo, enfrentamos desafios significativos na realização da justiça social. A desigualdade econômica, o acesso desigual à justiça, a violência estrutural e a discriminação são problemas que exigem respostas do sistema jurídico.</p>
+          
+          <p>Como operadores do direito, temos a responsabilidade de utilizar nosso conhecimento técnico não apenas para defender interesses individuais, mas para contribuir com a construção de uma sociedade mais equânime. Isso significa atuar com sensibilidade social, compreender as realidades diversas que coexistem em nosso país e buscar sempre soluções que promovam a dignidade humana.</p>
+          
+          <p>A verdadeira efetividade do direito não se mede pela quantidade de leis produzidas, mas pela sua capacidade de transformar positivamente a vida das pessoas, especialmente daquelas que historicamente foram marginalizadas.</p>
+        `,
+        "tags": ["Transformação Social", "Justiça", "Igualdade", "Direitos Humanos", "Cidadania"]
+      },
+      {
+        "id": 103,
+        "category": "reflexoes",
+        "categoryName": "Reflexões",
+        "date": "05 de setembro de 2025",
+        "readTime": "6 min de leitura",
+        "title": "A Importância da Humanização na Justiça",
+        "excerpt": "Reflexão sobre a necessidade de humanizar o sistema de justiça e colocar as pessoas no centro das decisões jurídicas.",
+        "image": "https://images.unsplash.com/photo-1553877522-43269d4ea984?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80",
+        "author": "Fátima Felippe",
+        "content": `
+          <p><strong>A IMPORTÂNCIA DA HUMANIZAÇÃO NA JUSTIÇA</strong></p>
+          <p>Em meio a prazos, processos, recursos e trâmites burocráticos, é fácil esquecer que por trás de cada processo judicial há pessoas com histórias, dores, esperanças e sonhos. A humanização da justiça é um imperativo ético e uma necessidade prática para um sistema que verdadeiramente sirva à sociedade.</p>
+          
+          <p>A justiça humanizada reconhece que cada caso é único e que as soluções jurídicas devem considerar as particularidades de cada situação. Não se trata de abandonar a técnica ou a segurança jurídica, mas de compreender que o direito existe para servir às pessoas, e não o contrário.</p>
+          
+          <p>Práticas como a escuta atenta, a comunicação clara e acessível, a empatia com as partes e a busca por soluções que considerem o contexto social e emocional dos envolvidos são essenciais para uma justiça que realmente funcione.</p>
+          
+          <p>A humanização também passa pela democratização do acesso à justiça. Um sistema que é incompreensível para a maioria da população, que exige custos proibitivos ou que funciona de forma excessivamente lenta não está cumprindo seu papel social.</p>
+          
+          <p>Como profissionais do direito, temos o dever de trabalhar por uma justiça mais humana, acessível e eficaz. Isso significa não apenas dominar a técnica jurídica, mas desenvolver também competências socioemocionais e uma visão ampla do papel social da justiça.</p>
+        `,
+        "tags": ["Humanização", "Justiça", "Empatia", "Acesso à Justiça", "Direito Humanizado"]
+      },
+      {
+        "id": 104,
+        "category": "reflexoes",
+        "categoryName": "Reflexões",
+        "date": "01 de setembro de 2025",
+        "readTime": "8 min de leitura",
+        "title": "O Futuro da Advocacia na Era Digital",
+        "excerpt": "Reflexões sobre os desafios e oportunidades que a transformação digital traz para a profissão de advogado.",
+        "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80",
+        "author": "Fátima Felippe",
+        "content": `
+          <p><strong>O FUTURO DA ADVOCACIA NA ERA DIGITAL</strong></p>
+          <p>A transformação digital está revolucionando todas as profissões, e a advocacia não é exceção. Inteligência artificial, blockchain, processos digitais e plataformas online estão mudando radicalmente a forma como o direito é praticado.</p>
+          
+          <p>Essas mudanças trazem tanto oportunidades quanto desafios. Por um lado, a tecnologia pode tornar o trabalho do advogado mais eficiente, reduzir custos e ampliar o acesso à justiça. Por outro lado, exige adaptação constante e pode ameaçar modelos tradicionais de atuação.</p>
+          
+          <p>A inteligência artificial, por exemplo, já é capaz de realizar tarefas que antes exigiam horas de trabalho humano, como revisão de documentos, pesquisa jurisprudencial e análise de contratos. Isso não significa que os advogados serão substituídos, mas que seu papel está se transformando.</p>
+          
+          <p>O advogado do futuro precisará dominar não apenas o conhecimento jurídico, mas também competências digitais. Além disso, habilidades como criatividade, pensamento crítico, negociação e empatia - que são difíceis de automatizar - se tornarão ainda mais valiosas.</p>
+          
+          <p>Mais do que nunca, é fundamental que os profissionais do direito encarem a transformação digital não como uma ameaça, mas como uma oportunidade de evoluir e oferecer serviços de maior qualidade e acessibilidade.</p>
+        `,
+        "tags": ["Tecnologia", "Digital", "Inovação", "Futuro", "Advocacia 4.0"]
+      },
+      
+    ];
+
+    // Configurações de paginação
+    const postsPerPage = 4;
+    const reflexoesPerPage = 4;
+    let currentPage = 1;
+    let currentReflexoesPage = 1;
+    let currentSection = 'artigos'; // 'artigos' ou 'reflexoes'
+
+    // Helper para escapar HTML (segurança)
+    function escapeHtml(unsafe) {
+      if (!unsafe) return '';
+      return String(unsafe)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    // Helper: retornar o post mais recente e a lista filtrada (sem o mais recente)
+    function getLatestPost() {
+      return posts.reduce((latest, post) => {
+        return !latest || new Date(post.date) > new Date(latest.date) ? post : latest;
+      }, null);
+    }
+
+    function getFilteredPosts() {
+      const latest = getLatestPost();
+      if (!latest) return [...posts];
+      return posts.filter(post => post.id !== latest.id);
+    }
+
+    // Helper: retornar a reflexão mais recente
+    function getLatestReflexao() {
+      return reflexoes.reduce((latest, reflexao) => {
+        return !latest || new Date(reflexao.date) > new Date(latest.date) ? reflexao : latest;
+      }, null);
+    }
+
+    function getFilteredReflexoes() {
+      const latest = getLatestReflexao();
+      if (!latest) return [...reflexoes];
+      return reflexoes.filter(reflexao => reflexao.id !== latest.id);
+    }
+
+    function renderMainContent() {
+      // Encontrar o artigo mais recente para o hero
+      const latestPost = getLatestPost();
+
+      // Atualizar o hero section
+      const leadArticle = document.querySelector('.lead-article');
+      if (latestPost && leadArticle) {
+        leadArticle.innerHTML = `
+          <div class="category ${latestPost.category}">${latestPost.categoryName}</div>
+          <div class="meta">${latestPost.date} • ${latestPost.readTime}</div>
+          <img src="${latestPost.image}" alt="${latestPost.title}">
+          <h1>${latestPost.title}</h1>
+          <p class="excerpt">${latestPost.excerpt}</p>
+          <div style="margin-top:12px"><a href="#" class="btn primary" onclick="openArticle(${latestPost.id})">Leia na íntegra</a></div>
+        `;
+      }
+
+      // Atualizar side-cards com os próximos 2 artigos mais recentes
+      const sideCards = document.querySelector('.side-cards');
+      if (sideCards) {
+        // Ordenar posts por data e pegar os próximos 2 após o mais recente
+        const sortedPosts = [...posts].sort((a, b) => new Date(b.date) - new Date(a.date));
+        const sidePosts = sortedPosts.slice(1, 3); // Pega os posts 2 e 3 mais recentes
+
+        sideCards.innerHTML = sidePosts.map(post => `
+          <div class="card-small">
+            <div class="category ${post.category}">${post.categoryName}</div>
+            <img src="${post.image}" alt="${post.title}">
+            <h4 style="margin:10px 0 6px">${post.title}</h4>
+            <div class="meta">por ${post.author} • ${post.date}</div>
+          </div>
+        `).join('');
+      }
+
+      // Atualizar hero-stats se necessário
+      const heroStats = document.querySelector('.hero-stats');
+      if (heroStats) {
+        heroStats.innerHTML = `
+          <div class="stat-item">
+            <span class="stat-number">${posts.length}+</span>
+            <span class="stat-label">Artigos Publicados</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">${reflexoes.length}+</span>
+            <span class="stat-label">Reflexões</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">${new Set([...posts, ...reflexoes].flatMap(item => item.tags)).size}+</span>
+            <span class="stat-label">Tópicos Abordados</span>
+          </div>
+        `;
+      }
+
+      // Atualizar widget "Mais lidos" (pode ser baseado em visualizações futuras)
+      const maisLidosWidget = document.querySelector('#artigosSection .widget:last-child ol');
+      if (maisLidosWidget) {
+        // Ordenar por algum critério (por enquanto por data)
+        const popularPosts = [...posts].sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 3);
+
+        maisLidosWidget.innerHTML = popularPosts.map((post, index) => `
+          <li><a href="#" onclick="openArticle(${post.id})">
+            <span class="category ${post.category}" style="font-size:10px;padding:2px 6px">${post.categoryName.split(' ')[0]}</span> 
+            ${post.title}
+          </a></li>
+        `).join('');
+      }
+
+      // Atualizar widget "Reflexões Recentes"
+      const reflexoesWidget = document.querySelector('#reflexoesSection .widget:last-child ol');
+      if (reflexoesWidget) {
+        const recentReflexoes = [...reflexoes].sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 3);
+
+        reflexoesWidget.innerHTML = recentReflexoes.map((reflexao, index) => `
+          <li><a href="#" onclick="openReflexao(${reflexao.id})">
+            <span class="category ${reflexao.category}" style="font-size:10px;padding:2px 6px">${reflexao.categoryName.split(' ')[0]}</span> 
+            ${reflexao.title}
+          </a></li>
+        `).join('');
+      }
+    }
+
+    // Função para renderizar as postagens
+    function renderPosts() {
+      const postsContainer = document.getElementById('postsContainer');
+      postsContainer.innerHTML = '';
+
+      // Calcular índices das postagens para a página atual
+      const startIndex = (currentPage - 1) * postsPerPage;
+      const endIndex = startIndex + postsPerPage;
+      const filtered = getFilteredPosts();
+      const postsToShow = filtered.slice(startIndex, endIndex);
+
+      // Gerar HTML para cada postagem
+      postsToShow.forEach(post => {
+        const postElement = document.createElement('article');
+        postElement.className = 'post';
+        postElement.innerHTML = `
+          <div>
+            <div class="category ${post.category}">${post.categoryName}</div>
+            <div class="meta">${post.date} • ${post.readTime}</div>
+            <img src="${post.image}" alt="post">
+            <h3><a href="#" onclick="openArticle(${post.id})">${post.title}</a></h3>
+            <p class="excerpt">${post.excerpt}</p>
+          </div>
+        `;
+        postsContainer.appendChild(postElement);
+      });
+    }
+
+    // Função para renderizar as reflexões
+    function renderReflexoes() {
+      const reflexoesContainer = document.getElementById('reflexoesContainer');
+      reflexoesContainer.innerHTML = '';
+
+      // Calcular índices das reflexões para a página atual
+      const startIndex = (currentReflexoesPage - 1) * reflexoesPerPage;
+      const endIndex = startIndex + reflexoesPerPage;
+      const filtered = getFilteredReflexoes();
+      const reflexoesToShow = filtered.slice(startIndex, endIndex);
+
+      // Gerar HTML para cada reflexão
+      reflexoesToShow.forEach(reflexao => {
+        const reflexaoElement = document.createElement('article');
+        reflexaoElement.className = 'post';
+        reflexaoElement.innerHTML = `
+          <div>
+            <div class="category ${reflexao.category}">${reflexao.categoryName}</div>
+            <div class="meta">${reflexao.date} • ${reflexao.readTime}</div>
+            <img src="${reflexao.image}" alt="reflexao">
+            <h3><a href="#" onclick="openReflexao(${reflexao.id})">${reflexao.title}</a></h3>
+            <p class="excerpt">${reflexao.excerpt}</p>
+          </div>
+        `;
+        reflexoesContainer.appendChild(reflexaoElement);
+      });
+    }
+
+    // Função para renderizar a paginação de artigos
+    function renderPagination() {
+      const paginationContainer = document.getElementById('paginationContainer');
+      paginationContainer.innerHTML = '';
+
+      const filteredPosts = getFilteredPosts();
+      const totalPages = Math.ceil(filteredPosts.length / postsPerPage);
+
+      // Botão Anterior
+      const prevButton = document.createElement('a');
+      prevButton.className = 'btn';
+      prevButton.textContent = '« Anterior';
+      prevButton.disabled = currentPage === 1;
+      if (currentPage > 1) {
+        prevButton.addEventListener('click', () => {
+          currentPage--;
+          renderPosts();
+          renderPagination();
+        });
+      }
+      paginationContainer.appendChild(prevButton);
+
+      // Números das páginas
+      for (let i = 1; i <= totalPages; i++) {
+        const pageButton = document.createElement('a');
+        pageButton.className = i === currentPage ? 'btn active' : 'btn';
+        pageButton.textContent = i;
+        pageButton.addEventListener('click', () => {
+          currentPage = i;
+          renderPosts();
+          renderPagination();
+        });
+        paginationContainer.appendChild(pageButton);
+      }
+
+      // Botão Próxima
+      const nextButton = document.createElement('a');
+      nextButton.className = 'btn';
+      nextButton.textContent = 'Próxima »';
+      nextButton.disabled = currentPage === totalPages;
+      if (currentPage < totalPages) {
+        nextButton.addEventListener('click', () => {
+          currentPage++;
+          renderPosts();
+          renderPagination();
+        });
+      }
+      paginationContainer.appendChild(nextButton);
+    }
+
+    // Função para renderizar a paginação de reflexões
+    function renderReflexoesPagination() {
+      const paginationContainer = document.getElementById('reflexoesPaginationContainer');
+      paginationContainer.innerHTML = '';
+
+      const filteredReflexoes = getFilteredReflexoes();
+      const totalPages = Math.ceil(filteredReflexoes.length / reflexoesPerPage);
+
+      // Botão Anterior
+      const prevButton = document.createElement('a');
+      prevButton.className = 'btn';
+      prevButton.textContent = '« Anterior';
+      prevButton.disabled = currentReflexoesPage === 1;
+      if (currentReflexoesPage > 1) {
+        prevButton.addEventListener('click', () => {
+          currentReflexoesPage--;
+          renderReflexoes();
+          renderReflexoesPagination();
+        });
+      }
+      paginationContainer.appendChild(prevButton);
+
+      // Números das páginas
+      for (let i = 1; i <= totalPages; i++) {
+        const pageButton = document.createElement('a');
+        pageButton.className = i === currentReflexoesPage ? 'btn active' : 'btn';
+        pageButton.textContent = i;
+        pageButton.addEventListener('click', () => {
+          currentReflexoesPage = i;
+          renderReflexoes();
+          renderReflexoesPagination();
+        });
+        paginationContainer.appendChild(pageButton);
+      }
+
+      // Botão Próxima
+      const nextButton = document.createElement('a');
+      nextButton.className = 'btn';
+      nextButton.textContent = 'Próxima »';
+      nextButton.disabled = currentReflexoesPage === totalPages;
+      if (currentReflexoesPage < totalPages) {
+        nextButton.addEventListener('click', () => {
+          currentReflexoesPage++;
+          renderReflexoes();
+          renderReflexoesPagination();
+        });
+      }
+      paginationContainer.appendChild(nextButton);
+    }
+
+    // Função para abrir o artigo
+    function openArticle(id) {
+      const post = posts.find(p => p.id === id);
+      if (!post) {
+        console.error('Post not found for id=', id);
+        alert('Artigo não encontrado (id=' + id + '). Verifique o console para mais detalhes.');
+        return;
+      }
+
+      const articleContent = document.getElementById('articleContent');
+
+      // Renderizar o conteúdo HTML diretamente
+      articleContent.innerHTML = `
+        <button class="close-btn" onclick="closeArticle()">×</button>
+        
+        <div class="article-header">
+          <div class="category ${post.category}">${post.categoryName}</div>
+          <div class="article-meta">
+            <div class="meta">${post.date} • por ${post.author} • ${post.readTime}</div>
+            <div class="meta">Compartilhar: 
+              <a href="#" style="margin-left: 5px;">📱</a>
+              <a href="#" style="margin-left: 5px;">📧</a>
+              <a href="#" style="margin-left: 5px;">🔗</a>
+            </div>
+          </div>
+          <h2>${post.title}</h2>
+          <div class="article-tags">
+            ${post.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+          </div>
+        </div>
+        
+        <img class="article-hero-img" src="${post.image}" alt="Imagem principal da notícia">
+        
+        <div class="artigo">
+          ${post.content}
+        </div>
+      `;
+
+      const articleOverlay = document.getElementById('articleOverlay');
+      articleOverlay.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+
+      // Fechar menu mobile se estiver aberto
+      toggleMobileMenu(false);
+    }
+
+    // Função para abrir a reflexão
+    function openReflexao(id) {
+      const reflexao = reflexoes.find(r => r.id === id);
+      if (!reflexao) {
+        console.error('Reflexão not found for id=', id);
+        alert('Reflexão não encontrada (id=' + id + '). Verifique o console para mais detalhes.');
+        return;
+      }
+
+      const articleContent = document.getElementById('articleContent');
+
+      // Renderizar o conteúdo HTML diretamente
+      articleContent.innerHTML = `
+        <button class="close-btn" onclick="closeArticle()">×</button>
+        
+        <div class="article-header">
+          <div class="category ">ARTIGOS</div>
+          <div class="article-meta">
+            <div class="meta">${reflexao.date} • por ${reflexao.author} • ${reflexao.readTime}</div>
+            <div class="meta">Compartilhar: 
+              <a href="#" style="margin-left: 5px;">📱</a>
+              <a href="#" style="margin-left: 5px;">📧</a>
+              <a href="#" style="margin-left: 5px;">🔗</a>
+            </div>
+          </div>
+          <h2>${reflexao.title}</h2>
+          <div class="article-tags">
+            ${reflexao.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+          </div>
+        </div>
+        
+        <img class="article-hero-img" src="${reflexao.image}" alt="Imagem principal da reflexão">
+        
+        <div class="artigo">
+          ${reflexao.content}
+        </div>
+      `;
+
+      const articleOverlay = document.getElementById('articleOverlay');
+      articleOverlay.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+
+      // Fechar menu mobile se estiver aberto
+      toggleMobileMenu(false);
+    }
+
+    // Função para fechar o artigo
+    function closeArticle() {
+      const articleOverlay = document.getElementById('articleOverlay');
+      articleOverlay.style.display = 'none';
+      document.body.style.overflow = 'auto';
+    }
+
+    // Fechar o artigo ao clicar fora do conteúdo
+    document.getElementById('articleOverlay').addEventListener('click', function (e) {
+      if (e.target === this) {
+        closeArticle();
+      }
+    });
+
+    // Fechar o artigo com a tecla ESC
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') {
+        closeArticle();
+      }
+    });
+
+    // Função para alternar entre abas
+    function switchTab(tabName) {
+      // Atualizar tabs
+      document.querySelectorAll('.content-tab').forEach(tab => {
+        tab.classList.remove('active');
+      });
+      document.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
+
+      // Atualizar seções
+      document.querySelectorAll('.content-section').forEach(section => {
+        section.classList.remove('active');
+      });
+      document.getElementById(`${tabName}Section`).classList.add('active');
+
+      currentSection = tabName;
+    }
+
+    // Funções para menu mobile
+    function toggleMobileMenu(show) {
+      const menuToggle = document.getElementById('menuToggle');
+      const mainNav = document.getElementById('mainNav');
+      const overlay = document.getElementById('overlay');
+
+      if (show === undefined) {
+        show = !mainNav.classList.contains('active');
+      }
+
+      if (show) {
+        mainNav.classList.add('active');
+        menuToggle.classList.add('active');
+        overlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      } else {
+        mainNav.classList.remove('active');
+        menuToggle.classList.remove('active');
+        overlay.classList.remove('active');
+        document.body.style.overflow = 'auto';
+      }
+    }
+
+    // Funções auxiliares
+    function doSearch() {
+      const q = document.getElementById('searchBox').value.trim();
+      if (!q) { alert('Digite algo para pesquisar'); return }
+      alert('Pesquisa simulada: "' + q + '" — implementar busca no backend.');
+
+      // Fechar menu mobile após pesquisa
+      toggleMobileMenu(false);
+    }
+
+    function subscribe() {
+      const em = document.getElementById('email').value.trim();
+      if (!em) { alert('Digite um email válido'); return }
+      alert('Inscrição simulada para: ' + em);
+    }
+
+    // Inicializar a página
+    document.addEventListener('DOMContentLoaded', () => {
+      renderMainContent(); // Renderizar conteúdo principal
+      renderPosts();       // Renderizar lista de posts
+      renderPagination();  // Renderizar paginação de artigos
+      renderReflexoes();   // Renderizar lista de reflexões
+      renderReflexoesPagination(); // Renderizar paginação de reflexões
+
+      // Adicionar event listeners para o menu mobile
+      const menuToggle = document.getElementById('menuToggle');
+      const overlay = document.getElementById('overlay');
+      const mainNav = document.getElementById('mainNav');
+
+      menuToggle.addEventListener('click', () => toggleMobileMenu());
+      overlay.addEventListener('click', () => toggleMobileMenu(false));
+
+      // Fechar menu ao clicar em um link
+      mainNav.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => toggleMobileMenu(false));
+      });
+
+      // Adicionar event listeners para as tabs
+      document.querySelectorAll('.content-tab').forEach(tab => {
+        tab.addEventListener('click', function() {
+          const tabName = this.getAttribute('data-tab');
+          switchTab(tabName);
+        });
+      });
+    });
+  </script>
+</body>
+
+</html>
