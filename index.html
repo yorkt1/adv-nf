@@ -26,7 +26,8 @@
       height: 100%;
       margin: 0;
       background: var(--bg);
-      color: #111
+      color: #111;
+      scroll-behavior: smooth;
     }
 
     a {
@@ -166,12 +167,17 @@
       color: #1890ff;
     }
 
+    .category.reflexoes {
+      background: #e6f7ff;
+      color: #1890ff;
+    }
+
     /* Hero */
     .hero {
       display: grid;
       grid-template-columns: 2fr 1fr;
       gap: 18px;
-      padding: 18px 0
+      padding: 10px 0
     }
 
     .lead-article {
@@ -224,7 +230,7 @@
       display: grid;
       grid-template-columns: 3fr 1fr;
       gap: 18px;
-      padding: 18px 0
+      padding: 5px 0
     }
 
     .posts {
@@ -595,6 +601,11 @@
       font-style: italic;
     }
 
+    .article-content em {
+      color: darkgoldenrod;
+      font-style: italic;
+    }
+
     /* Responsive */
     @media (max-width:900px) {
       .hero {
@@ -762,11 +773,134 @@
         font-style: italic;
       }
 
+      .article-content em {
+        color: darkgoldenrod;
+        font-style: italic;
+      }
+
       .artigo ul,
       .artigo ol {
         padding-left: 20px;
       }
     }
+
+    .excerpt {
+      text-align: justify;
+      text-justify: inter-word;
+      hyphens: auto;
+      margin-bottom: 12px;
+    }
+
+    /* Section title styling for Artigos / Reflexoes */
+    .titulo {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1890ff;
+      background: #e6f7ff;
+      margin: 28px 0 12px 0;
+      padding: 12px 24px;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      text-align: center;
+      border-radius: 6px;
+  
+      display: inline-block;
+      transition: all 0.3s ease;
+    }
+    
+    /* Scroll margin for anchor targets to account for header */
+    #postsContainer,
+    #noticiasContainer,
+    #reflexoesContainer {
+      scroll-margin-top: 100px;
+    }
+    
+    /* Cookie Banner */
+    .cookie-banner {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #fff;
+      border-top: 1px solid #e6e9ee;
+      padding: 16px 18px;
+      box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
+      display: none;
+      z-index: 999;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .cookie-banner.active {
+      display: flex;
+    }
+
+    .cookie-message {
+      flex: 1;
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .cookie-message a {
+      color: var(--accent);
+      text-decoration: underline;
+    }
+
+    .cookie-actions {
+      display: flex;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+
+    .cookie-btn {
+      padding: 8px 16px;
+      border-radius: 6px;
+      border: 1px solid #e6e9ee;
+      background: #fff;
+      color: #111;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 500;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .cookie-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .cookie-btn.accept {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+
+    .cookie-btn.accept:hover {
+      background: #0959a8;
+      border-color: #0959a8;
+    }
+
+    @media (max-width: 768px) {
+      .cookie-banner {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 12px 16px;
+      }
+
+      .cookie-actions {
+        width: 100%;
+        justify-content: flex-end;
+      }
+    }
+    
+    .titulo:hover {
+      background: #0d66cc;
+      box-shadow: 0 6px 16px rgba(24, 144, 255, 0.35);
+    }
+    .titulo { cursor: pointer; }
   </style>
 </head>
 
@@ -777,7 +911,7 @@
         <div class="logo">FF</div>
         <div>
           <div style="font-weight:700">Fatima Felippe</div>
-          <div style="font-size:13px;color:var(--muted)">Notícias, artigos e decisões</div>
+         <div style="font-size:13px;color:var(--muted)">Artigos, reflexões e notícias</div>
         </div>
       </div>
 
@@ -789,12 +923,12 @@
       </button>
 
       <nav class="main-nav" id="mainNav" aria-label="menu">
-        <a href="#">Home</a>
-        <a href="#">Notícias</a>
-        <a href="#">Jurisprudência</a>
-        <a href="#">Artigos</a>
-        <a href="#">Colunas</a>
-        <a href="#">Contato</a>
+        <a href="#" style="color:var(--accent);font-weight:600" >Home</a>
+        <a href="#postsContainer">Artigos</a>
+         <a href="#reflexoesContainer">Reflexões</a>
+        <a href="#noticiasContainer">Notícias</a>
+        <a href="contato.html">Contato</a>
+        <a href="sobre.html">Sobre</a>
 
         <div class="search">
           <input type="search" placeholder="Pesquisar" id="searchBox" />
@@ -835,6 +969,8 @@
 
   <main class="container">
     <!-- HERO -->
+
+   
     <section class="hero">
       <div class="lead-article">
         <!-- Conteúdo será preenchido dinamicamente -->
@@ -844,7 +980,7 @@
         <!-- Cards laterais serão preenchidos dinamicamente -->
       </aside>
     </section>
-
+ <div class="titulo">Artigos</div>
     <!-- MAIN GRID -->
     <section class="main">
       <section class="posts" id="postsContainer" aria-label="lista de posts">
@@ -865,7 +1001,65 @@
     <div class="pagination" id="paginationContainer">
       <!-- Paginação será gerada aqui pelo JavaScript -->
     </div>
+
+
+<div class="titulo">Reflexões</div>
+
+  <section class="main">
+    <section class="posts" id="reflexoesContainer" aria-label="lista de reflexões">
+      <!-- Reflexões serão carregadas aqui pelo JavaScript -->
+    </section>
+
+    <aside>
+      <div class="widget">
+        <h4>Mais lidos</h4>
+        <ol style="padding-left:18px;margin:0">
+          <li><a href="#" onclick="openArticle(101, event)">INTELIGÊNCIA</a></li>
+          <li><a href="#" onclick="openArticle(102, event)">ORGANIZAÇÃO</a></li>
+          <li><a href="#" onclick="openArticle(103, event)">PENSAMENTOS</a></li>
+          <li><a href="#" onclick="openArticle(104, event)">RECIPROCIDADE</a></li>
+          <li><a href="#" onclick="openArticle(105, event)">TOLERÂNCIA</a></li>
+        </ol>
+      </div>
+    </aside>
+  </section>
+
+     <!-- Pagination -->
+    <div class="pagination" id="reflexoesPaginationContainer">
+      <!-- Paginação será gerada aqui pelo JavaScript -->
+    </div>
+
+    <div class="titulo">Notícias</div>
+    <section class="main">
+      <section class="posts" id="noticiasContainer" aria-label="lista de notícias">
+        <!-- Notícias serão carregadas aqui pelo JavaScript -->
+      </section>
+
+      <aside>
+        <div class="widget">
+          <h4>Mais lidos</h4>
+          <ol style="padding-left:18px;margin:0">
+            <!-- Conteúdo será preenchido dinamicamente -->
+          </ol>
+        </div>
+      </aside>
+    </section>
+
+    <!-- Pagination -->
+    <div class="pagination" id="noticiasPaginationContainer">
+      <!-- Paginação será gerada aqui pelo JavaScript -->
+    </div>
+
+    
   </main>
+
+
+
+
+
+
+
+  
 
   <!-- Article Overlay -->
   <div class="article-overlay" id="articleOverlay">
@@ -874,15 +1068,21 @@
     </div>
   </div>
 
+
+
+  
+
   <footer>
     <div class="container">
       <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
         <div>
           <strong>Portal Jurídico</strong><br>
-          <small>© 2025 — Todos os direitos reservados.</small>
+          <small>© 2025 — Todos os direitos reservados.</small><br>
+          <small style="margin-top:8px;display:block">Desenvolvido por <a href="https://www.linkedin.com/in/guilherme-rocha-oliveira-3942481a2/" target="_blank" style="color:var(--accent);text-decoration:none">@Guilherme Rocha Oliveira</a></small>
+          <small style="margin-top:6px;display:block;color:var(--muted)">Imagens por <a href="https://www.freepik.com" target="_blank" style="color:var(--accent);text-decoration:none">Freepik</a></small>
         </div>
         <div style="color:var(--muted)">
-          <a href="#">Política de Privacidade</a> • <a href="#">Termos</a>
+          <a href="privacidade.html">Política de Privacidade</a>
         </div>
       </div>
     </div>
@@ -890,6 +1090,311 @@
 
   <script>
     // Array de postagens com HTML formatado
+
+    const reflexoes = [
+      {
+        "id": 101,
+        "category": "reflexoes",
+        "categoryName": "Reflexão",
+        "date": "10 de novembro de 2025",
+        "readTime": "5 min de leitura",
+        "title": "INTELIGÊNCIA",
+        "excerpt": "Reflexão sobre a inteligência como capacidade de aprender com os erros e recomeçar com mais sabedoria",
+        "image": "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=800",
+        "author": "Redação",
+        "tags": ["Inclusão", "Deficiência", "Direitos Sociais"],
+        "content": `<p><strong>INTELIG&Ecirc;NCIA</strong></p>
+<p>&nbsp;</p>
+<div style="margin: 20px 0; padding: 15px; background: #f0f0f0; border-radius: 8px;">
+  <p><strong>🎧 Áudio da Reflexão</strong></p>
+  <audio controls style="width: 100%; margin-top: 10px;">
+    <source src="inteligencia.mp3" type="audio/mpeg">
+    Seu navegador não suporta o elemento de áudio.
+  </audio>
+</div>
+<p>&nbsp;</p>
+<p><strong>&ldquo;O insucesso &eacute; apenas uma oportunidade para recome&ccedil;ar com mais intelig&ecirc;ncia&rdquo;. </strong></p>
+<p><strong style="color: DARKGOLDENROD">Henry Ford</strong></p>
+<p>&nbsp;</p>
+<p><span style="font-weight: 400;">Em outras palavras, &eacute; respeit&aacute;vel para si mesmo quando deparamos com o insucesso na obten&ccedil;&atilde;o de algo que desej&aacute;vamos muito em nossa jornada de vida, ou de um objetivo que n&atilde;o foi satisfeito naquele momento, digo porque n&atilde;o sabemos do dia seguinte, pois que no momento devemos parar, respirar e analisar analiticamente os poss&iacute;veis erros que foram cometidos na busca do objetivo e o que fazer para identificar os poss&iacute;veis acertos, assim se recome&ccedil;a a jornada.&nbsp;</span></p>
+<p><span style="font-weight: 400;">Todavia, ao delinear novas estrat&eacute;gias para a consecu&ccedil;&atilde;o dos objetivos propostos extinguindo os poss&iacute;veis erros e visando os poss&iacute;veis acertos, estaremos buscando mais c</span><span style="font-weight: 400;">hances de estudar e aprender, avaliar e ajustar as estrat&eacute;gias, e como consequ&ecirc;ncia melhorar os resultados.</span></p>
+<p><span style="font-weight: 400;">Em consequ&ecirc;ncia, estaremos utilizando a intelig&ecirc;ncia com a habilidade necess&aacute;ria para solucionar as adversidades e contornar os desafios, aceitando e entendendo que novas estrat&eacute;gias ser&atilde;o necess&aacute;rias para a conquista dos objetivos propostos.</span></p>
+<p><strong>Intelig&ecirc;ncia</strong><span style="font-weight: 400;">, segundo o dicion&aacute;rio</span><strong>,</strong><span style="font-weight: 400;"> significa: &ldquo;habilidade para entender e solucionar adversidades ou problemas, adaptando-se as circunst&acirc;ncias novas&rdquo;.&nbsp;</span></p>
+<p><span style="font-weight: 400;">A palavra </span><strong>intelig&ecirc;ncia</strong><span style="font-weight: 400;"> parece simplesmente algo corriqueiro e normal, porque estamos acostumados a falar sobre ela, sem muitas vezes nos atermos ao real significado e import&acirc;ncia da qual possui.&nbsp;</span></p>
+<p><span style="font-weight: 400;">J&aacute; paramos para pensar que precisamos de &aacute;gua para beber e fazer as demais necessidades, mas</span> <span style="font-weight: 400;">precisamos muito de</span><strong> intelig&ecirc;ncia</strong><span style="font-weight: 400;"> para compreender </span><span style="font-weight: 400;">o quanto a &aacute;gua &eacute; importante para o nosso organismo, bem como todo o bem que ela traz a nossa vida.</span></p>
+<p><span style="font-weight: 400;">E, para desenvolver a intelig&ecirc;ncia de forma eficaz, necessitamos dar a ela o verdadeiro valor, e para isso precisamos usar melhor o nosso c&eacute;rebro o qual &eacute; o maior e verdadeiro computador natural.</span></p>
+<p><span style="font-weight: 400;">Todavia, as faculdades de conhecer, compreender, raciocinar e pensar formam o bojo das caracter&iacute;sticas inerentes a intelig&ecirc;ncia. E por meio dos cinco sentidos tais como vis&atilde;o, olfato, audi&ccedil;&atilde;o, paladar e tato nos conectamos com o mundo e com as pessoas a nossa volta.&nbsp;</span></p>
+<p><span style="font-weight: 400;">Quando estamos estudando ou aprendendo algo, precisamos verdadeiramente conhecer, compreender, raciocinar e pensar usando nossos cinco sentidos com a finalidade de assimilar o conte&uacute;do.</span></p>
+<p><span style="font-weight: 400;">Como exemplo disso, n&atilde;o basta tirar notas boas na escola, primordial &eacute; entender o conte&uacute;do e estud&aacute;-lo, </span><strong>dando o real valor ao estudo e consequentemente a intelig&ecirc;ncia.</strong></p>
+<p><strong>No dicion&aacute;rio de psicologia</strong><span style="font-weight: 400;"> (Associa&ccedil;&atilde;o Psicol&oacute;gica Americana, 2010, p. 521), pode-se encontrar a defini&ccedil;&atilde;o de intelig&ecirc;ncia como sendo a </span><span style="font-weight: 400;">capacidade de:&nbsp;</span><span style="font-weight: 400;">&ldquo;extrair informa&ccedil;&otilde;es, aprender com a experi&ecirc;ncia, adaptar-se ao ambiente, compreender e utilizar corretamente o pensamento e a raz&atilde;o&rdquo;.</span></p>
+<p><span style="font-weight: 400;">Inclusive, na</span> <strong>B&iacute;blia</strong><span style="font-weight: 400;">, a intelig&ecirc;ncia </span><span style="font-weight: 400;">est&aacute; relacionada com a capacidade de compreender, processar informa&ccedil;&otilde;es e resolver problemas.&nbsp;</span></p>
+<p><span style="font-weight: 400;">&nbsp;</span></p>
+<p><strong>Vejamos</strong><strong>:</strong></p>
+<p>&nbsp;</p>
+<ul>
+<li><strong>Prov&eacute;rbios 2:6</strong><span style="font-weight: 400;">, afirma que a sabedoria vem da boca do Senhor, e que da&iacute; vem tamb&eacute;m a </span><strong>intelig&ecirc;ncia e o entendimento.</strong></li>
+<li><strong>Prov&eacute;rbios 24:3-6,</strong><span style="font-weight: 400;"> afirma que com a </span><strong>sabedoria se edifica a casa, e com a intelig&ecirc;ncia ela se firma, ou seja,</strong><span style="font-weight: 400;"> intelig&ecirc;ncia &eacute; o que firma a casa, mesmo que a sabedoria seja a base para edific&aacute;-la. A intelig&ecirc;ncia n&atilde;o &eacute; apenas o ac&uacute;mulo de conhecimento, mas tamb&eacute;m sua aplica&ccedil;&atilde;o pr&aacute;tica.</span></li>
+<li><strong>Prov&eacute;rbios 2:3-5,</strong><span style="font-weight: 400;"> afirma que &eacute; preciso clamar por intelig&ecirc;ncia, pedir por entendimento, buscar a sabedoria como a prata e cavar por ela como por um tesouro escondido.</span></li>
+<li><strong>O livro de J&oacute;, como exemplo, afirma que</strong><span style="font-weight: 400;"> "o temor do Senhor &eacute; a sabedoria, e apartar-se do mal &eacute; a intelig&ecirc;ncia" (J&oacute; 28:28). Isso indica que a intelig&ecirc;ncia verdadeira est&aacute; ligada ao respeito e obedi&ecirc;ncia a Deus e a uma vida que se afasta do mal.</span></li>
+</ul>
+<p>&nbsp;</p>
+<p><span style="font-weight: 400;">Jesus ensina os disc&iacute;pulos a agir com intelig&ecirc;ncia, a serem espertos no que diz respeito &agrave;s coisas do Reino. </span><span style="font-weight: 400;">(Marcos 4, Lucas 9</span><span style="font-weight: 400;">).</span></p>
+<p>&nbsp;</p>
+<p><span style="font-weight: 400;">Por&eacute;m &eacute; importante saber que a&nbsp;</span><span style="font-weight: 400;">intelig&ecirc;ncia</span><span style="font-weight: 400;">&nbsp;est&aacute; relacionada &agrave; capacidade de pensar e raciocinar de maneira eficiente (cognitiva e socioemocionalmente), enquanto a&nbsp;</span><span style="font-weight: 400;">sabedoria</span><span style="font-weight: 400;">&nbsp;envolve uma compreens&atilde;o e aplica&ccedil;&atilde;o sensata do conhecimento para viver bem e tomar decis&otilde;es ponderadas.</span></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: 400;">Haveria muito assunto para falar sobre o tema, mas no momento fico por aqui.</span></p>
+<p>&nbsp;</p>
+<p><span style="font-weight: 400;">At&eacute; breve!!!</span></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><strong>OBS</strong><strong>:</strong></p>
+<p><span style="font-weight: 400;">*Este artigo foi inspirado no conte&uacute;do do livro aprendendo intelig&ecirc;ncia </span><strong>(prof. PIER),</strong><span style="font-weight: 400;"> ou </span><strong>PIERLUIGI PIAZZI</strong><span style="font-weight: 400;">. Um Manual de instru&ccedil;&otilde;es do c&eacute;rebro para estudantes em geral.&nbsp; 3&ordf; ed. rev. S&atilde;o Paulo, Aleph, 2014.</span></p>
+<p>&nbsp;</p>
+<p><span style="font-weight: 400;">*Tamb&eacute;m inspirado em algumas passagens da B&iacute;blia.</span></p>`
+      },
+      {
+        "id": 102,
+        "category": "reflexoes",
+        "categoryName": "Reflexão",
+        "date": "5 de novembro de 2025",
+        "readTime": "7 min de leitura",
+        "title": "ORGANIZAÇÃO",
+        "excerpt": "Análise sobre como vivemos em uma sociedade organizacional e a importância da competência nos sistemas",
+        "image": "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800",
+        "author": "Redação",
+        "tags": ["Direitos Humanos", "Legislação", "Proteção Social"],
+        "content": `<p><strong>ORGANIZA&Ccedil;&Atilde;O</strong></p>
+<p>&nbsp;</p>
+<div style="margin: 20px 0; padding: 15px; background: #f0f0f0; border-radius: 8px;">
+  <p><strong>🎧 Áudio da Reflexão</strong></p>
+  <audio controls style="width: 100%; margin-top: 10px;">
+    <source src="organização.mp3" type="audio/mpeg">
+    Seu navegador não suporta o elemento de áudio.
+  </audio>
+</div>
+<p>&nbsp;</p>
+<p><strong>Breve coment&aacute;rio.</strong></p>
+<p>&nbsp;</p>
+<p><span style="font-weight: 400;">Voc&ecirc; se considera que vive dentro de uma sociedade eminentemente organizacional?</span></p>
+<p>&nbsp;</p>
+<p><span style="font-weight: 400;">Pois bem, podemos dizer que vivemos em um sistema controlado por uma sociedade organizacional onde o homem em todas as etapas de sua vida, desde a concep&ccedil;&atilde;o at&eacute; a morte, depende desse sistema organizacional.&nbsp;</span></p>
+<p><span style="font-weight: 400;">Depende porqu&ecirc;?</span></p>
+<p><span style="font-weight: 400;">Desde h&aacute; muitos anos o mundo &eacute; uma grande organiza&ccedil;&atilde;o constitu&iacute;do por territ&oacute;rios e popula&ccedil;&otilde;es, ou seja, pessoas, animais, minerais e vegetais.&nbsp; Dentro dessa organiza&ccedil;&atilde;o est&atilde;o segmentados alguns setores que a sociedade depende e da qual &eacute; controlada, para o seu desenvolvimento quer seja patrimonial, financeiro, afetivo, psicol&oacute;gico e espiritual, ou seja tamb&eacute;m para a sua divers&atilde;o e interesses inerentes a cada indiv&iacute;duo.</span></p>
+<p><span style="font-weight: 400;">H&aacute; exemplo disso, temos na Antiguidade os Estados e Imp&eacute;rios, que surgiram com os governos centralizados.&nbsp;</span></p>
+<p><span style="font-weight: 400;">Os Estados e Imp&eacute;rios,&nbsp;tais como os fara&oacute;s no Egito onde foram organizados grandes territ&oacute;rios e popula&ccedil;&otilde;es, bem como na Mesopot&acirc;mia, e tamb&eacute;m na Gr&eacute;cia onde os gregos e os romanos formaram as civiliza&ccedil;&otilde;es cl&aacute;ssicas, e por a&iacute; vai.</span></p>
+<p><span style="font-weight: 400;">E, assim foi constru&iacute;da e dividida a grande sociedade para se auto organizar a fim de atender aos anseios da sociedade, bem como daqueles que precisam dos seus servi&ccedil;os.</span></p>
+<p><span style="font-weight: 400;">A compet&ecirc;ncia e efic&aacute;cia s&atilde;o primordiais para o sucesso desses sistemas organizacionais, pois dentro de uma sociedade altamente exigente faz-se necess&aacute;rio desenvolver pessoas que apreendam e entendam como funcionam determinados segmentos de trabalho e como afetam os anseios daqueles que dependem desses segmentos.</span></p>
+<p><span style="font-weight: 400;">As a&ccedil;&otilde;es humanas s&atilde;o de suma import&acirc;ncia dentro de um segmento de trabalho, pois quando bem ensinadas e coordenadas elas se fundem aos recursos tecnol&oacute;gicos ou manuais colocados &agrave; disposi&ccedil;&atilde;o juntamente com os demais componentes da organiza&ccedil;&atilde;o que s&atilde;o os dirigentes, colaboradores, especialistas, bem como as m&aacute;quinas e insumos.&nbsp;</span></p>
+<p><span style="font-weight: 400;">Todavia, a divis&atilde;o do trabalho, do poder e das responsabilidades, bem como a presen&ccedil;a de um ou mais centros de poder concentrados dentro da organiza&ccedil;&atilde;o, faz com que haja uma transforma&ccedil;&atilde;o das for&ccedil;as de trabalho e da sua estrutura organizacional em busca do aprimoramento e resultados satisfat&oacute;rios, o que resulta no bom clima organizacional.</span></p>
+<p>&nbsp;</p>
+<p><span style="font-weight: 400;">Haveria muito assunto para falar sobre o tema, mas no momento fico por aqui.</span></p>
+<p>&nbsp;</p>
+<p><span style="font-weight: 400;">At&eacute; breve!!!</span></p>
+<p><br /><br /></p>
+<p><span style="font-weight: 400;">Esse texto foi inspirado no autor: Antonio Cury. &nbsp; - &nbsp; Cury, Antonio. Organiza&ccedil;&atilde;o e M&eacute;todos: uma vis&atilde;o hol&iacute;stica. 8. ed. Ver. e ampl. S&atilde;o Paulo: Atlas, 2009.</span></p>
+`},
+
+
+      {
+        "id": 103,
+        "category": "reflexoes",
+        "categoryName": "Reflexão",
+        "date": "1 de novembro de 2025",
+        "readTime": "6 min de leitura",
+        "title": "PENSAMENTOS",
+        "excerpt": "Reflexão sobre a relação entre pensamentos e sentimentos e a importância da auto-responsabilidade.",
+        "image": "https://images.unsplash.com/photo-1493612276216-ee3925520721?w=800",
+        "author": "Redação",
+        "tags": ["Legislação", "Evolução Legal", "Proteção"],
+        "content": `<p><strong>PENSAMENTOS</strong></p>
+<p>&nbsp;</p>
+<div style="margin: 20px 0; padding: 15px; background: #f0f0f0; border-radius: 8px;">
+  <p><strong>🎧 Áudio da Reflexão</strong></p>
+  <audio controls style="width: 100%; margin-top: 10px;">
+    <source src="pensamento.mp3" type="audio/mpeg">
+    Seu navegador não suporta o elemento de áudio.
+  </audio>
+</div>
+<p>&nbsp;</p>
+<p><strong>O que vem antes, o pensamento ou o sentimento?</strong></p>
+<p><strong>Quando voc&ecirc; pensa, sente e quando voc&ecirc; sente, pensa! Porque tudo isso, parece confuso?</strong></p>
+<p>&nbsp;</p>
+<p><span style="font-weight: 400;">Quando nascemos e at&eacute; certa idade somos educados e orientados por outra pessoa que escolhe o que vamos ver, comer, ouvir, vestir e muitas vezes sentir.&nbsp;</span></p>
+<p><span style="font-weight: 400;">Digo, sentir porque todas as informa&ccedil;&otilde;es que s&atilde;o transmitidas as pessoas geram pensamentos e consequentemente sentimentos bons ou ruins, os quais podem ser expressos por um sorriso, perplexidade, tristeza, alegria, f&uacute;ria e etc.</span></p>
+<p><span style="font-weight: 400;">Todavia, depois do corte do cord&atilde;o umbilical ainda h&aacute; depend&ecirc;ncia emocional, material psicol&oacute;gica, afetiva e financeira, de modo que at&eacute; que a pessoa possa decidir por si, os pensamentos em sua grande maioria s&atilde;o da pessoa que o educa, mesmo porque tais pensamentos servem de conforto e praticidade que o momento exige.</span></p>
+<p><span style="font-weight: 400;">N&atilde;o h&aacute; como perguntar a uma crian&ccedil;a rec&eacute;m-nascida se ela quer pensar, tampouco comer, vestir, caminhar, urinar, evacuar, brincar, e outros mais, pois precisa de uma dire&ccedil;&atilde;o.&nbsp;&nbsp;</span></p>
+<p><span style="font-weight: 400;">Durante o crescimento a crian&ccedil;a aprende as coisas mais importantes para desenvolver a sua caminhada, de modo que muitas e muitas vezes pensaria, sentiria e agiria como o seu tutor, mesmo porque naquele momento querendo ou n&atilde;o, ela o considera o porto seguro da sua vida.&nbsp;</span></p>
+<p><span style="font-weight: 400;">Eu consigo pensar coisas ruins e sentir coisas boas, ou eu consigo pensar coisas boas e sentir coisas ruins?&nbsp; Ent&atilde;o seria o &oacute;bvio em que eu penso coisas boas e sinto outras maravilhosas, a vibra&ccedil;&atilde;o se eleva e a sensa&ccedil;&atilde;o de conquistas pessoais se elevam.</span></p>
+<p><span style="font-weight: 400;">Entretanto, isso leva a crer que os pensamentos s&atilde;o formas de lidar com os sentimentos e vice-versa, porque ao pensar dependendo dos pensamentos v&atilde;o surgir sentimentos que ser&atilde;o necess&aacute;rios lapid&aacute;-los a fim de direcion&aacute;-los para a melhor consecu&ccedil;&atilde;o dos objetivos.</span></p>
+<p><span style="font-weight: 400;">Os pensamentos iniciam quando h&aacute; um est&iacute;mulo externo como sons, imagens, odores, vozes, ou aqueles que se fixaram na mente como mem&oacute;rias do passado ou atuais os quais podem ir e vir, sejam bons ou ruins.</span></p>
+<p><span style="font-weight: 400;">E ao atrair os pensamentos sejam bons ou ruis &eacute; importante lapid&aacute;-los, peneir&aacute;-los usando a auto reponsabilidade, e nesse momento a responsabilidade &eacute; de cada um, uma vez que a pessoa raciocina, pondera e analisa, assumindo inteiramente as consequ&ecirc;ncias boas ou ruins dos seus pensamentos.&nbsp;</span></p>
+<p><span style="font-weight: 400;">E, ao assumir inteiramente as consequ&ecirc;ncias boas ou ruins dos seus pensamentos, a</span><strong> pessoa n&atilde;o teria mais a vantagem</strong><span style="font-weight: 400;"> de dizer a si pr&oacute;pria: &ldquo;Ele, ela, isso ou eles me fizeram sentir ou agir desta ou daquela forma&rdquo;. (</span><span style="font-weight: 400;">ROSENBERG, Marshall B</span><span style="font-weight: 400;">, p. 50-60, 2006).</span></p>
+<p><span style="font-weight: 400;">Portanto ao dizer que se pensou e agiu pela mente do outro, ou por influ&ecirc;ncias do meio enfim, seria a defesa mais t&eacute;cnica para justificar os poss&iacute;veis erros e acertos, por&eacute;m em nada dessa justificativa contribuiria para o aprendizado na vida, e para a auto responsabilidade.&nbsp;</span></p>
+<p>&nbsp;</p>
+<p><span style="font-weight: 400;">Haveria muito assunto para falar sobre o tema, mas no momento fico por aqui.</span></p>
+<p>&nbsp;</p>
+<p><span style="font-weight: 400;">At&eacute; breve!!!</span></p>
+<p><br /><br /></p>
+<p><strong>REFER&Ecirc;NCIA</strong><span style="font-weight: 400;">:</span></p>
+<p>&nbsp;</p>
+<p><strong>ROSENBERG, Marshall B</strong><strong><em>.</em></strong><em><span style="font-weight: 400;">&nbsp;</span></em><span style="font-weight: 400;">Comunica&ccedil;&atilde;o N&atilde;o-Violenta: T&eacute;cnicas para aprimorar relacionamentos pessoais e profissionais. 3. ed. S&atilde;o Paulo: &Aacute;gora, 2006.</span></p>`},
+         {
+        "id": 104,
+        "category": "reflexoes",
+        "categoryName": "Reflexão",
+        "date": "1 de novembro de 2025",
+        "readTime": "6 min de leitura",
+        "title": "RECIPROCIDADE",
+        "excerpt": "Análise sobre reciprocidade nas relações humanas e seu significado na convivência em sociedade",
+        "image": "https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=800",
+        "author": "Redação",
+        "tags": ["Legislação", "Evolução Legal", "Proteção"],
+        "content": `RECIPROCIDADE
+<p>&nbsp;</p>
+<div style="margin: 20px 0; padding: 15px; background: #f0f0f0; border-radius: 8px;">
+  <p><strong>🎧 Áudio da Reflexão</strong></p>
+  <audio controls style="width: 100%; margin-top: 10px;">
+    <source src="reciprocidade.mp3" type="audio/mpeg">
+    Seu navegador não suporta o elemento de áudio.
+  </audio>
+</div>
+<p>&nbsp;</p>
+<p><strong>Algumas palavras sobre a reciprocidade.</strong></p>
+<p>&nbsp;</p>
+<p><strong>No D&iacute;cio on line: dicion&aacute;rio brasileiro de L&iacute;ngua Portuguesa, a palavra </strong><span style="font-weight: 400;">reciprocidade&nbsp;demonstra:</span></p>
+<p>&nbsp;</p>
+<p><span style="font-weight: 400;">Estado de rec&iacute;proco, do que se realiza ao mesmo tempo que outra coisa; mutualidade: acordos de coopera&ccedil;&atilde;o estabelecem uma rela&ccedil;&atilde;o de reciprocidade entre pa&iacute;ses. Troca de uma coisa por outra coisa id&ecirc;ntica; correspond&ecirc;ncia, coopera&ccedil;&atilde;o: uma amizade n&atilde;o existe sem reciprocidade de sentimentos.&nbsp;</span></p>
+<p><strong>[Pol&iacute;tica]</strong><span style="font-weight: 400;">&nbsp;Situa&ccedil;&atilde;o em que dois pa&iacute;ses firmam um acordo de coopera&ccedil;&atilde;o, fornecendo aux&iacute;lio ou trocando vantagens entre si: exemplo: o Brasil e o Chile assinaram contratos comerciais de reciprocidade.</span></p>
+<p><strong>[Filosofia]</strong><span style="font-weight: 400;">&nbsp;Capacidade intelectual que, segundo Kant, torna compreens&iacute;vel a rela&ccedil;&atilde;o entre dois ou mais componentes, mutuamente percebidos no espa&ccedil;o, de aspecto e forma integrantes.</span></p>
+<p><strong>[Gram&aacute;tica]</strong><span style="font-weight: 400;">&nbsp;Correspond&ecirc;ncia entre duas palavras de sentidos opostos, com uma rela&ccedil;&atilde;o de conformidade m&uacute;tua: alto e baixo.</span></p>
+<p><br /><br /><br /></p>
+<p><span style="font-weight: 400;">Reciprocidade &eacute; a &ldquo;caracter&iacute;stica de algo rec&iacute;proco, ou seja, m&uacute;tuo.&nbsp;&Eacute; a qualidade de dar e receber como sendo uma condi&ccedil;&atilde;o fundamental para a qualidade das rela&ccedil;&otilde;es entre as pessoas&rdquo;.&nbsp;</span></p>
+<p>&nbsp;</p>
+<p><span style="font-weight: 400;">Rec&iacute;proco&nbsp;significa algo presente numa rela&ccedil;&atilde;o entre duas partes, quando existindo de um lado, existe de igual modo no outro</span><span style="font-weight: 400;">. Ou seja, &eacute; algo m&uacute;tuo. Por exemplo, a express&atilde;o "&oacute;dio rec&iacute;proco" significa que &ldquo;&oacute;dio&rdquo; &eacute; o sentimento partilhado por ambas as partes, podendo ser duas pessoas ou dois grupos.</span></p>
+<p>&nbsp;</p>
+<p><span style="font-weight: 400;">A rela&ccedil;&atilde;o entre as pessoas sempre &eacute; uma grande prova de vida, um desafio, pois ela pode ser saud&aacute;vel quando unida por interesses afins, ou seja, entre pessoas com objetivos comuns e, portanto, consideradas boas, enquanto de outra maneira a rela&ccedil;&atilde;o pode ser constitu&iacute;da simplesmente pelo prazer e interesse.</span></p>
+<p><span style="font-weight: 400;">E, pelo prazer e interesse quer dizer que a rela&ccedil;&atilde;o de reciprocidade se constitui de pessoas ruins</span><span style="font-weight: 400;">?</span></p>
+<p>&nbsp;</p>
+<p><strong>Vejo que nem sempre</strong><span style="font-weight: 400;">. A rela&ccedil;&atilde;o de conviv&ecirc;ncia nesse caso pode se tornar superficial e as pessoas podem conviver certas vezes harmonicamente porque est&atilde;o imbu&iacute;das do mesmo objetivo, dos mesmos valores, inclusive pode ter havido uma conversa entre elas onde se estabeleceu esse modo de conviv&ecirc;ncia. Cada qual j&aacute; sabe o que deseja do outro.</span></p>
+<p>&nbsp;</p>
+<p><span style="font-weight: 400;">Na parte espiritual a reciprocidade&nbsp;</span><span style="font-weight: 400;">&eacute; um princ&iacute;pio b&iacute;blico que rege a rela&ccedil;&atilde;o entre Deus e as pessoas, e tamb&eacute;m entre as pr&oacute;prias pessoas.&nbsp;</span></p>
+<p>&nbsp;</p>
+<p><span style="font-weight: 400;">A reciprocidade com Deus, implica em cumplicidade e reciprocidade no relacionamento com o Pai.</span></p>
+<p>&nbsp;</p>
+<p><span style="font-weight: 400;">Inclusive, a B&iacute;blia cita que a reciprocidade deve ser temperada pela miseric&oacute;rdia </span><strong>(Mateus</strong> <strong>5:7 e Tiago 2:13).</strong></p>
+<p><strong>Em Mateus 5:7,&nbsp;"Bem-aventurados os misericordiosos, porque alcan&ccedil;ar&atilde;o miseric&oacute;rdia&rdquo;.</strong></p>
+<p><strong>Mateus 7:12, </strong><strong>Lei de ouro:&nbsp;O princ&iacute;pio mais conhecido &eacute; a "Lei de Ouro": "Fa&ccedil;am aos outros o que voc&ecirc;s querem que eles lhes fa&ccedil;am".</strong></p>
+<p><strong>Prov&eacute;rbios 3:27, "N&atilde;o ret&eacute;ns o bem de quem lho deve, quando est&aacute; em teu poder faz&ecirc;-lo".</strong></p>
+<p><strong>Prov&eacute;rbios 3:28. "N&atilde;o digas ao teu vizinho: &lsquo;Vai e volta; amanh&atilde; te darei', se hoje o podes fazer&rdquo;.</strong></p>
+<p>&nbsp;</p>
+<p><span style="font-weight: 400;">Por conseguinte, a reciprocidade &eacute; uma caracter&iacute;stica essencial nas rela&ccedil;&otilde;es afetivas, profissionais, pessoais ou de amizade entre as pessoas, inclusive com os animais. E, tamb&eacute;m n&atilde;o podemos esquecer a reciprocidade nas rela&ccedil;&otilde;es com o meio ambiente.</span></p>
+<p>&nbsp;</p>
+<p><span style="font-weight: 400;">Em um relacionamento saud&aacute;vel, a reciprocidade corresponde que a aten&ccedil;&atilde;o, o carinho e a dedica&ccedil;&atilde;o de uma pessoa s&atilde;o correspondidos pela outra pessoa, e a comunica&ccedil;&atilde;o aberta &eacute; essencial para analisar se h&aacute; sintonia e equil&iacute;brio.&nbsp;</span></p>
+<p><span style="font-weight: 400;">A aus&ecirc;ncia de reciprocidade pode levar ao sentimento de dor ou ao ressentimento de falta dela, levando a pessoa a ter uma sensa&ccedil;&atilde;o de estar "</span><span style="font-weight: 400;">caminhando sozinha</span><span style="font-weight: 400;">".&nbsp;</span></p>
+<p>&nbsp;</p>
+<p><span style="font-weight: 400;">Haveria muito assunto para falar sobre o tema, mas no momento fico por aqui.</span></p>
+<p>&nbsp;</p>
+<p><span style="font-weight: 400;">At&eacute; breve!!!</span></p>
+<p><span style="font-weight: 400;">&nbsp;</span></p>
+<p>&nbsp;</p>
+<p><span style="font-weight: 400;">Refer&ecirc;ncia</span></p>
+<p>&nbsp;</p>
+<p><strong>RECIPROCIDADE</strong><span style="font-weight: 400;">. </span><span style="font-weight: 400;">In: Dicio, </span><strong>Dicion&aacute;rio Online de Portugu&ecirc;s</strong><span style="font-weight: 400;">.&nbsp;Porto: 7Graus, 2025. Dispon&iacute;vel em [https://www.dicio.com.br/reciprocidade]. Acesso em 08 de nov. 2025.</span></p>
+<p><br /><br /></p>
+`},
+         {
+        "id": 105,
+        "category": "reflexoes",
+        "categoryName": "Reflexão",
+        "date": "1 de novembro de 2025",
+        "readTime": "6 min de leitura",
+        "title": "TOLERÂNCIA",
+        "excerpt": "Reflexão sobre o desafio da tolerância e como lidar com as diferenças no convívio social",
+        "image": "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=800",
+        "author": "Redação",
+        "tags": ["Legislação", "Evolução Legal", "Proteção"],
+        "content": `<p><strong>TOLER&Acirc;NCIA</strong></p>
+<p>&nbsp;</p>
+<div style="margin: 20px 0; padding: 15px; background: #f0f0f0; border-radius: 8px;">
+  <p><strong>🎧 Áudio da Reflexão</strong></p>
+  <audio controls style="width: 100%; margin-top: 10px;">
+    <source src="tolerancia.mp3" type="audio/mpeg">
+    Seu navegador não suporta o elemento de áudio.
+  </audio>
+</div>
+<p>&nbsp;</p>
+<p><strong>A toler&acirc;ncia torna a diferen&ccedil;a poss&iacute;vel; a diferen&ccedil;a torna a toler&acirc;ncia necess&aacute;ria.</strong></p>
+<p><strong>MICHAEL WALZER</strong></p>
+<p>&nbsp;</p>
+<p><strong>Porque &eacute; t&atilde;o dif&iacute;cil ser tolerante?</strong></p>
+<p><strong>A quem a toler&acirc;ncia sustenta? E como ela funciona?</strong></p>
+<p>&nbsp;</p>
+<p><span style="font-weight: 400;">Segundo o </span><strong>dicion&aacute;rio Aur&eacute;lio</strong><span style="font-weight: 400;">, </span><span style="font-weight: 400;">"toler&acirc;ncia" de modo geral &eacute; definida como:</span></p>
+<p><span style="font-weight: 400;">A disposi&ccedil;&atilde;o ou tend&ecirc;ncia a admitir ou aceitar modos de pensar, agir e sentir que diferem dos pr&oacute;prios, ou dos de um grupo determinado.&nbsp;&Eacute;, portanto, uma forma de respeito e compreens&atilde;o, mesmo em rela&ccedil;&atilde;o a ideias ou comportamentos com os quais n&atilde;o concordamos.</span></p>
+<p><br /><br /></p>
+<p><strong>Por conseguinte</strong><strong>:</strong></p>
+<p>&nbsp;</p>
+<p><strong>Admitir ou aceitar: </strong><span style="font-weight: 400;">Reconhecer, admitir e aceitar que as pessoas s&atilde;o diferentes &eacute; fundamental para entender que elas possuem o direito de expor ideias pr&oacute;prias, opini&otilde;es, valores e modos de pensar, agir, sentir e ouvir, desde que o conv&iacute;vio social e a liberdade das pessoas n&atilde;o sejam prejudicados.</span></p>
+<p>&nbsp;</p>
+<p><span style="font-weight: 400;">Quando se fala em toler&acirc;ncia, refere-se as diferen&ccedil;as individuais, quer sejam de natureza religiosa, social, comportamental, patrimonial, financeira, &eacute;tnica entre outras ainda que n&atilde;o se concorde com elas, mesmo porque cada pessoa &eacute; um ser &uacute;nico, e por mais dif&iacute;cil que seja aceitar e admitir as diferen&ccedil;as, fato &eacute; que existem e n&atilde;o h&aacute; muito o que fazer.</span></p>
+<p>&nbsp;</p>
+<p><strong>No entanto, n&atilde;o quer dizer que temos que aceitar e admitir a </strong><span style="font-weight: 400;">maldade, a criminalidade as impurezas, o &oacute;dio e tantos sentimentos e emo&ccedil;&otilde;es que exterminam as rela&ccedil;&otilde;es pessoais, profissionais, patrimoniais, afetivas e psicol&oacute;gicas</span><strong>, pois estas podem restringir a liberdade de ir e vir.</strong></p>
+<p>&nbsp;</p>
+<p><span style="font-weight: 400;">A toler&acirc;ncia tamb&eacute;m n&atilde;o representa que temos que ser passivos a tudo, mas sim estabelecer limites, quando comportamentos estranhos de algu&eacute;m ferem valores fundamentais ou prejudiquem pessoas.&nbsp;</span></p>
+<p>&nbsp;</p>
+<p><span style="font-weight: 400;">O que podemos fazer &eacute; contribuir com boas a&ccedil;&otilde;es evitando que tais comportamentos abusivos permane&ccedil;am e prossigam, e assim nos mantemos vigilantes a tudo a nossa volta, e caso seja necess&aacute;rio buscaremos a ajuda de profissional habilitado para que nos auxilie na solu&ccedil;&atilde;o do problema.</span></p>
+<p>&nbsp;</p>
+<p><span style="font-weight: 400;">Todavia, cada ser humano &eacute; um universo diferente do outro, e cuja </span><strong>diferen&ccedil;a traz a grande aprendizagem na caminhada da vida.</strong></p>
+<p>&nbsp;</p>
+<p><span style="font-weight: 400;">Admitir ou aceitar ser tolerante na vida, n&atilde;o quer dizer ser igual aquela pessoa da qual se tolera quando as opini&otilde;es e comportamentos s&atilde;o diferentes dos nossos, mas admitir que existem e que podemos decidir aceitar ou nos afastar.</span></p>
+<p>&nbsp;</p>
+<p><strong>►PORTANTO, &Eacute; DIF&Iacute;CIL TOLERAR?&nbsp;&nbsp;</strong></p>
+<p>&nbsp;</p>
+<p><strong>Sim</strong><span style="font-weight: 400;">. A toler&acirc;ncia &eacute; uma escolha, deixa de ser uma obriga&ccedil;&atilde;o, poderia ser um dever do ser humano, mas &eacute; uma atitude que envolve apre&ccedil;o, respeito, aceita&ccedil;&atilde;o pelo diferente. E, aceitar o diferente n&atilde;o</span><strong> significa aceitar as maldades</strong><span style="font-weight: 400;">.</span></p>
+<p>&nbsp;</p>
+<p><span style="font-weight: 400;">Por&eacute;m, muitas vezes a toler&acirc;ncia incomoda, pois pode afetar a auto estima ou o ego das pessoas porque desafia sentimentos e emo&ccedil;&otilde;es boas ou ruins, as quais podem estar escondidas e represadas dentro do universo de cada um.&nbsp;</span></p>
+<p><strong>Entretanto</strong><span style="font-weight: 400;">, esse universo &eacute; enigm&aacute;tico, muitas vezes podemos sentir o &oacute;dio deliberado de pessoas as quais nem conhecemos o suficiente, por&eacute;m num pequeno olhar j&aacute; nos sentimos mal, algo estranho que n&atilde;o se consegue explicar.&nbsp;</span></p>
+<p>&nbsp;</p>
+<p><strong>E, ao mesmo tempo</strong><span style="font-weight: 400;"> em que podemos olhar para uma pessoa desconhecida e sentir o amor, ou um carinho inexplic&aacute;vel.</span></p>
+<p>&nbsp;</p>
+<p><strong>►</strong><strong>Portanto, a toler&acirc;ncia pode ser sustentada para evitar o caos, como diz o autor </strong><strong>MICHAEL WALZER</strong><span style="font-weight: 400;">:</span></p>
+<p>&nbsp;</p>
+<p><strong>Vejamos:</strong></p>
+<p>&nbsp;</p>
+<p><strong>&ldquo;A toler&acirc;ncia sustenta a pr&oacute;pria vida, porque a persegui&ccedil;&atilde;o muitas vezes visa a morte, e tamb&eacute;m sustenta as vidas comuns, as diferentes comunidades em que vivemos&rdquo;.</strong></p>
+<p>&nbsp;</p>
+<p><strong>Para ilustrar o texto, cito alguns trechos da B&iacute;blia</strong><span style="font-weight: 400;">:&nbsp;</span></p>
+<p>&nbsp;</p>
+<p><a href="https://www.jw.org/pt/biblioteca/biblia/biblia-de-estudo/livros/filipenses/4/#v50004005"><strong>Filipenses 4:5</strong></a><strong>: </strong><span style="font-weight: 400;">"Que a vossa razoabilidade seja conhecida por todos os homens."</span></p>
+<p><strong>Prov&eacute;rbios 25:17 (NVI):</strong><span style="font-weight: 400;">&nbsp;"N&atilde;o fa&ccedil;a visitas frequentes &agrave; casa do seu vizinho, para que ele n&atilde;o se canse de voc&ecirc; e o passe a odiar".&nbsp;</span></p>
+<p><strong>Prov&eacute;rbios 19:11 (NVI):</strong><span style="font-weight: 400;">&nbsp;"O discernimento do homem lhe d&aacute; paci&ecirc;ncia; a sua gl&oacute;ria &eacute; ignorar as ofensas."</span></p>
+<p><a href="https://www.jw.org/pt/biblioteca/biblia/biblia-de-estudo/livros/hebreus/12/#v58012014"><strong>Hebreus 12:14</strong></a><span style="font-weight: 400;">: &ldquo;Devemos nos esfor&ccedil;ar para viver em paz com todos.&rdquo;</span></p>
+<p><a href="https://www.jw.org/pt/biblioteca/biblia/biblia-de-estudo/livros/tiago/4/#v59004012"><strong>Tiago 4:12</strong></a><strong>:</strong><span style="font-weight: 400;"> &ldquo;Quem &eacute; voc&ecirc; para julgar o seu pr&oacute;ximo?&rdquo;</span></p>
+<p><a href="https://www.jw.org/pt/biblioteca/biblia/biblia-de-estudo/livros/habacuque/1/#v35001012-v35001013"><strong>Habacuque 1:12, 13</strong></a><span style="font-weight: 400;"> &ldquo;Deus n&atilde;o pode tolerar a maldade.&rdquo;</span></p>
+<p><strong>Romanos 12:18</strong><span style="font-weight: 400;">: "Se poss&iacute;vel, quanto depender de v&oacute;s, tende paz com todos os homens."</span></p>
+<p><a href="https://www.google.com/search?q=Romanos+14%3A1&amp;sca_esv=9beffc660237a68f&amp;rlz=1C1GCEA_enBR958BR958&amp;sxsrf=AE3TifMP5yTxb8M_kvlimxByHQYDsc6gnQ%3A1762608865920&amp;ei=4UYPaYn7N_jX5OUPrLHz8Qs&amp;ved=2ahUKEwj6u7Le2OKQAxVCr5UCHSdiNF0QgK4QegQIAxAJ&amp;uact=5&amp;oq=trechos+da+bulia+que+fala+sobre+tolerancia&amp;gs_lp=Egxnd3Mtd2l6LXNlcnAiKnRyZWNob3MgZGEgYnVsaWEgcXVlIGZhbGEgc29icmUgdG9sZXJhbmNpYTIHECEYoAEYCjIHECEYoAEYCjIHECEYoAEYCkjVRFAAWPlCcAB4AZABAJgBowOgAZBQqgEKMC45LjI1LjUuMrgBA8gBAPgBAZgCKaACnVXCAgQQIxgnwgIKEAAYgAQYQxiKBcICCxAAGIAEGLEDGIMBwgIOEAAYgAQYsQMYgwEYigXCAhAQABiABBixAxhDGIMBGIoFwgIOEC4YgAQYsQMYgwEYigXCAgsQLhiABBixAxiDAcICCBAAGIAEGLEDwgIQEAAYgAQYsQMYQxjJAxiKBcICCxAAGIAEGJIDGIoFwgIOEC4YgAQYxwEYjgUYrwHCAgwQABiABBhDGIoFGArCAgUQABiABMICChAAGIAEGBQYhwLCAgYQABgWGB7CAggQABiABBiiBMICBRAhGKABwgIHECMYsAIYJ8ICBxAAGIAEGA3CAgYQABgNGB7CAggQABiiBBiJBcICBRAAGO8FwgIFECEYnwWYAwCSBwowLjMuMjcuOS4yoAfK7wKyBwowLjMuMjcuOS4yuAedVcIHCDItOC4zMC4zyAf0Aw&amp;sclient=gws-wiz-serp&amp;mstk=AUtExfCtsYVM2O8GnbdQxQuz_waXg-YcFamgh9CjgaTN89vfZbKCREaar-mLhcw75BnBupVcnh9tuX9eP_0YHH_IWBhMqkZeUo9_NV-WuXpOedawrseUurfc_dwPf_H48QqBShjM7fq4IXn8fDiydXngqcKBITu7O4SKVM2c25QzpZPyL4ms6ilT_N8MBCry7dArb5tyP8FLSQ-0kp9lsELVU_42qajRMMM6VaZGtOjHOyIb2uHP0gmN1ISQ0XEGEelUcyjDurn7uTNNzJFB-ZH7EnKr&amp;csui=3"><strong>Romanos 14:1</strong></a><strong>:</strong><span style="font-weight: 400;">&nbsp;"Aceitem o que &eacute; fraco na f&eacute;, sem discutir assuntos controvertidos."</span></p>
+<p>&nbsp;</p>
+<p><span style="font-weight: 400;">Todavia, tolerar n&atilde;o significa aturar todas as atribula&ccedil;&otilde;es do outro, isso n&atilde;o seria poss&iacute;vel e nem saud&aacute;vel tendo em vista que as diferen&ccedil;as existem para que as opini&otilde;es sejam expostas, discutidas e afinadas entre todos que nos rodeiam at&eacute; para que se possa </span><span style="font-weight: 400;">decidir nos afastar ou aceitar, e vice-versa.</span></p>
+<p>&nbsp;</p>
+<p><span style="font-weight: 400;">A toler&acirc;ncia n&atilde;o representa que temos que ser passivos a tudo, mas sim estabelecer limites, quando comportamentos estranhos de algu&eacute;m ferem valores fundamentais ou prejudiquem pessoas.&nbsp;</span></p>
+<p>&nbsp;</p>
+<p><span style="font-weight: 400;">Diante do exposto, o tema foi inspirado nos diversos momentos, os quais: das experi&ecirc;ncias percept&iacute;veis e extra&iacute;das da vida cotidiana de cada um; do livro chamado: </span><strong>DA TOLER&Acirc;NCIA, </strong><span style="font-weight: 400;">escrito por </span><span style="font-weight: 400;">MICHAEL WALZE</span><strong>, </strong><span style="font-weight: 400;">e de cita&ccedil;&otilde;es da </span><strong>B&Iacute;BLIA</strong><span style="font-weight: 400;">.</span></p>
+<p>&nbsp;</p>
+<p><span style="font-weight: 400;">Haveria muito assunto para falar sobre o tema, mas no momento fico por aqui.</span></p>
+<p>&nbsp;</p>
+<p><span style="font-weight: 400;">At&eacute; breve!!!</span></p>
+<p><br /><br /></p>
+<p><strong>REFER&Ecirc;NCIAS</strong><strong>:</strong></p>
+<p>&nbsp;</p>
+<p><span style="font-weight: 400;">Walzer Michel. </span><strong>DA TOLERANCIA</strong><span style="font-weight: 400;">/Michel Walzer: tradu&ccedil;&atilde;o Almiro Pisetta. &ndash; S&atilde;o Paulo: Martins Fontes, 1999.</span></p>
+<p>&nbsp;</p>
+<p><strong>TOLER&Acirc;NCIA</strong><span style="font-weight: 400;">. In: DICION&Aacute;RIO Aur&eacute;lio online. [S.l.]: UOL, [entre 2001 e 2025]. Dispon&iacute;vel em:&nbsp;[http://www.dicionariodoaurelio.com/br/toler&acirc;ncia]. Acesso em: 8 nov. 2025.</span></p>`},
+    ]
+
+
+
+
     const posts = [
       {
         "id": 1,
@@ -902,7 +1407,6 @@
         "image": "https://res.cloudinary.com/dqewxdbfx/image/upload/v1762624801/maos-dadas-umas-as-outras-para-apoio_page-0001_n0v2bn.jpg",
         "author": "Redação",
         "content": `
-        <p style="text-align: left;">&nbsp;</p>
 <ul>
 <li><strong>Breve Introdu&ccedil;&atilde;o</strong></li>
 </ul>
@@ -2589,7 +3093,7 @@
 <p>BRASIL.&nbsp;<a class="cite" title="CONSTITUI&Ccedil;&Atilde;O FEDERAL, DE 1988" href="https://www.jusbrasil.com.br/legislacao/1503907193/constituicao-federal-constituicao-da-republica-federativa-do-brasil-1988" rel="302754">Constitui&ccedil;&atilde;o Federal</a>&nbsp;(1988).&nbsp;<strong>Vade mecum</strong>. 6. Ed. Revista dos Tribunais, 2015.</p>
 <p>______.&nbsp;<strong>EC n&ordm;&nbsp;<a class="cite" title="EMENDA CONSTITUCIONAL N&ordm; 3, DE 17 DE MAR&Ccedil;O DE 1993" href="https://www.jusbrasil.com.br/legislacao/1767919984/emenda-constitucional-3-17-marco-1993" rel="11293076">3</a>&nbsp;de 17.03.1993</strong>. Altera os arts.&nbsp;<a class="cite" title="Art. 40 da Constitui&ccedil;&atilde;o Federal, de 1988" href="https://www.jusbrasil.com.br/topicos/431394/artigo-40-da-constituicao-federal-de-1988" rel="431394">40</a>,&nbsp;<a class="cite" title="Art. 42 da Constitui&ccedil;&atilde;o Federal, de 1988" href="https://www.jusbrasil.com.br/topicos/10636015/artigo-42-da-constituicao-federal-de-1988" rel="10636015">42</a>,&nbsp;<a class="cite" title="Art. 102 da Constitui&ccedil;&atilde;o Federal, de 1988" href="https://www.jusbrasil.com.br/topicos/10688723/artigo-102-da-constituicao-federal-de-1988" rel="10688723">102</a>,&nbsp;<a class="cite" title="Art. 103 da Constitui&ccedil;&atilde;o Federal, de 1988" href="https://www.jusbrasil.com.br/topicos/10686845/artigo-103-da-constituicao-federal-de-1988" rel="10686845">103</a>,&nbsp;<a class="cite" title="Art. 155 da Constitui&ccedil;&atilde;o Federal, de 1988" href="https://www.jusbrasil.com.br/topicos/10668550/artigo-155-da-constituicao-federal-de-1988" rel="10668550">155</a>,&nbsp;<a class="cite" title="Art. 156 da Constitui&ccedil;&atilde;o Federal, de 1988" href="https://www.jusbrasil.com.br/topicos/10666279/artigo-156-da-constituicao-federal-de-1988" rel="10666279">156</a>,&nbsp;<a class="cite" title="Art. 160 da Constitui&ccedil;&atilde;o Federal, de 1988" href="https://www.jusbrasil.com.br/topicos/10664580/artigo-160-da-constituicao-federal-de-1988" rel="10664580">160</a>,&nbsp;<a class="cite" title="Art. 167 da Constitui&ccedil;&atilde;o Federal, de 1988" href="https://www.jusbrasil.com.br/topicos/10662220/artigo-167-da-constituicao-federal-de-1988" rel="10662220">167</a>&nbsp;da&nbsp;<a class="cite" title="CONSTITUI&Ccedil;&Atilde;O FEDERAL, DE 1988" href="https://www.jusbrasil.com.br/legislacao/1503907193/constituicao-federal-constituicao-da-republica-federativa-do-brasil-1988" rel="302754">Constitui&ccedil;&atilde;o Federal</a>. Dispon&iacute;vel em:&nbsp;<a href="http://www.planalto.gov.br/ccivil_03/Constituicao/Emendas/Emc/emc03.htm%3E%3E" target="_blank" rel="nofollow">http://www.planalto.gov.br/ccivil_03</a>&nbsp;<a class="cite" title="CONSTITUI&Ccedil;&Atilde;O FEDERAL, DE 1988" href="https://www.jusbrasil.com.br/legislacao/1503907193/constituicao-federal-constituicao-da-republica-federativa-do-brasil-1988" rel="302754">/Constitui&ccedil;&atilde;o</a>/Emendas/Emc/emc03. Htm&gt;&gt;. Acesso em: 25 ago.2015.</p>
 <p>______.&nbsp;<strong>Lei n&ordm;&nbsp;<a class="cite" title="LEI N&ordm; 9.868, DE 10 DE NOVEMBRO DE 1999" href="https://www.jusbrasil.com.br/legislacao/103459/lei-da-acao-direta-de-inconstitucionalidade-lei-9868-99" rel="11267153">9.868</a>, de 10.11.1999</strong>. Disp&otilde;e sobre o processo e julgamento da a&ccedil;&atilde;o direta de inconstitucionalidade e da a&ccedil;&atilde;o declarat&oacute;ria de constitucionalidade perante o Supremo Tribunal Federal. Dispon&iacute;vel em:. Acesso em: 25 ago.2015.</p>
-<p>______.&nbsp;<strong>EC n&ordm;&nbsp;<a class="cite" title="Emenda Constitucional n&ordm; 45, de 8 de dezembro de 2004" href="https://www.jusbrasil.com.br/legislacao/91040/emenda-constitucional-45-04" rel="10544312">45</a>, de 08.12.2004</strong>. Altera dispositivos dos artigos&nbsp;<a class="cite" title="Art. 5&ordm; da Constitui&ccedil;&atilde;o Federal, de 1988" href="https://www.jusbrasil.com.br/topicos/10641516/artigo-5-da-constituicao-federal-de-1988" rel="10641516">5&ordm;</a>,&nbsp;<a class="cite" title="Art. 36 da Constitui&ccedil;&atilde;o Federal, de 1988" href="https://www.jusbrasil.com.br/topicos/10636450/artigo-36-da-constituicao-federal-de-1988" rel="10636450">36</a>,&nbsp;<a class="cite" title="Art. 52 da Constitui&ccedil;&atilde;o Federal, de 1988" href="https://www.jusbrasil.com.br/topicos/10634428/artigo-52-da-constituicao-federal-de-1988" rel="10634428">52</a>,&nbsp;<a class="cite" title="Art. 92 da Constitui&ccedil;&atilde;o Federal, de 1988" href="https://www.jusbrasil.com.br/topicos/10626562/artigo-92-da-constituicao-federal-de-1988" rel="10626562">92</a>,&nbsp;<a class="cite" title="Art. 93 da Constitui&ccedil;&atilde;o Federal, de 1988" href="https://www.jusbrasil.com.br/topicos/10626510/artigo-93-da-constituicao-federal-de-1988" rel="10626510">93</a>,&nbsp;<a class="cite" title="Art. 95 da Constitui&ccedil;&atilde;o Federal, de 1988" href="https://www.jusbrasil.com.br/topicos/10626437/artigo-95-da-constituicao-federal-de-1988" rel="10626437">95</a>,&nbsp;<a class="cite" title="Art. 98 da Constitui&ccedil;&atilde;o Federal, de 1988" href="https://www.jusbrasil.com.br/topicos/10690119/artigo-98-da-constituicao-federal-de-1988" rel="10690119">98</a>,&nbsp;<a class="cite" title="Art. 99 da Constitui&ccedil;&atilde;o Federal, de 1988" href="https://www.jusbrasil.com.br/topicos/3573049/artigo-99-da-constituicao-federal-de-1988" rel="3573049">99</a>,&nbsp;<a class="cite" title="Art. 102 da Constitui&ccedil;&atilde;o Federal, de 1988" href="https://www.jusbrasil.com.br/topicos/10688723/artigo-102-da-constituicao-federal-de-1988" rel="10688723">102</a>,&nbsp;<a class="cite" title="Art. 103 da Constitui&ccedil;&atilde;o Federal, de 1988" href="https://www.jusbrasil.com.br/topicos/10686845/artigo-103-da-constituicao-federal-de-1988" rel="10686845">103</a>,&nbsp;<a class="cite" title="Art. 104 da Constitui&ccedil;&atilde;o Federal, de 1988" href="https://www.jusbrasil.com.br/topicos/10685537/artigo-104-da-constituicao-federal-de-1988" rel="10685537">104</a>,&nbsp;<a class="cite" title="Art. 105 da Constitui&ccedil;&atilde;o Federal, de 1988" href="https://www.jusbrasil.com.br/topicos/10685354/artigo-105-da-constituicao-federal-de-1988" rel="10685354">105</a>,&nbsp;<a class="cite" title="Art. 107 da Constitui&ccedil;&atilde;o Federal, de 1988" href="https://www.jusbrasil.com.br/topicos/10684241/artigo-107-da-constituicao-federal-de-1988" rel="10684241">107</a>,&nbsp;<a class="cite" title="Art. 109 da Constitui&ccedil;&atilde;o Federal, de 1988" href="https://www.jusbrasil.com.br/topicos/1148741/artigo-109-da-constituicao-federal-de-1988" rel="1148741">109</a>,&nbsp;<a class="cite" title="Art. 111 da Constitui&ccedil;&atilde;o Federal, de 1988" href="https://www.jusbrasil.com.br/topicos/10682470/artigo-111-da-constituicao-federal-de-1988" rel="10682470">111</a>,&nbsp;<a class="cite" title="Art. 112 da Constitui&ccedil;&atilde;o Federal, de 1988" href="https://www.jusbrasil.com.br/topicos/10682148/artigo-112-da-constituicao-federal-de-1988" rel="10682148">112</a>,&nbsp;<a class="cite" title="Art. 114 da Constitui&ccedil;&atilde;o Federal, de 1988" href="https://www.jusbrasil.com.br/topicos/1029685/artigo-114-da-constituicao-federal-de-1988" rel="1029685">114</a>,&nbsp;<a class="cite" title="Art. 115 da Constitui&ccedil;&atilde;o Federal, de 1988" href="https://www.jusbrasil.com.br/topicos/10681299/artigo-115-da-constituicao-federal-de-1988" rel="10681299">115</a>,&nbsp;<a class="cite" title="Art. 125 da Constitui&ccedil;&atilde;o Federal, de 1988" href="https://www.jusbrasil.com.br/topicos/10679327/artigo-125-da-constituicao-federal-de-1988" rel="10679327">125</a>,&nbsp;<a class="cite" title="Art. 126 da Constitui&ccedil;&atilde;o Federal, de 1988" href="https://www.jusbrasil.com.br/topicos/10678962/artigo-126-da-constituicao-federal-de-1988" rel="10678962">126</a>,&nbsp;<a class="cite" title="Art. 127 da Constitui&ccedil;&atilde;o Federal, de 1988" href="https://www.jusbrasil.com.br/topicos/10678873/artigo-127-da-constituicao-federal-de-1988" rel="10678873">127</a>,&nbsp;<a class="cite" title="Art. 128 da Constitui&ccedil;&atilde;o Federal, de 1988" href="https://www.jusbrasil.com.br/topicos/10678529/artigo-128-da-constituicao-federal-de-1988" rel="10678529">128</a>,&nbsp;<a class="cite" title="Art. 129 da Constitui&ccedil;&atilde;o Federal, de 1988" href="https://www.jusbrasil.com.br/topicos/10677474/artigo-129-da-constituicao-federal-de-1988" rel="10677474">129</a>,&nbsp;<a class="cite" title="Art. 134 da Constitui&ccedil;&atilde;o Federal, de 1988" href="https://www.jusbrasil.com.br/topicos/10675588/artigo-134-da-constituicao-federal-de-1988" rel="10675588">134</a>&nbsp;e&nbsp;<a class="cite" title="Art. 168 da Constitui&ccedil;&atilde;o Federal, de 1988" href="https://www.jusbrasil.com.br/topicos/10661553/artigo-168-da-constituicao-federal-de-1988" rel="10661553">168</a>&nbsp;da&nbsp;<a class="cite" title="CONSTITUI&Ccedil;&Atilde;O FEDERAL, DE 1988" href="https://www.jusbrasil.com.br/legislacao/1503907193/constituicao-federal-constituicao-da-republica-federativa-do-brasil-1988" rel="302754">Constitui&ccedil;&atilde;o Federal</a>, e acrescenta os arts.&nbsp;<a class="cite notIndex" title="Art. 103A da Constitui&ccedil;&atilde;o Federal, de 1988" href="https://www.jusbrasil.com.br/topicos/27996984/artigo-103a-da-constituicao-federal-de-1988" rel="27996984">103-A</a>,&nbsp;<a class="cite notIndex" title="Art. 103B da Constitui&ccedil;&atilde;o Federal, de 1988" href="https://www.jusbrasil.com.br/topicos/27996975/artigo-103b-da-constituicao-federal-de-1988" rel="27996975">103-B</a>,&nbsp;<a class="cite notIndex" title="Art. 111A da Constitui&ccedil;&atilde;o Federal, de 1988" href="https://www.jusbrasil.com.br/topicos/27996900/artigo-111a-da-constituicao-federal-de-1988" rel="27996900">111-A</a>&nbsp;e&nbsp;<a class="cite notIndex" title="Art. 130A da Constitui&ccedil;&atilde;o Federal, de 1988" href="https://www.jusbrasil.com.br/topicos/27996787/artigo-130a-da-constituicao-federal-de-1988" rel="27996787">130-A</a>, e d&aacute; outras provid&ecirc;ncias. Dispon&iacute;vel em:. Acesso em: 25 ago.2015.</p>
+<p>______.&nbsp;<strong>EC n&ordm;&nbsp;<a class="cite" title="Emenda Constitucional n&ordm; 45, de 8 de dezembro de 2004" href="https://www.jusbrasil.com.br/legislacao/91040/emenda-constitucional-45-04" rel="10544312">45</a>, de 08.12.2004</strong>. Altera dispositivos dos artigos&nbsp;<a class="cite" title="Art. 5&ordm; da Constitui&ccedil;&atilde;o Federal, de 1988" href="https://www.jusbrasil.com.br/topicos/10641516/artigo-5-da-constituicao-federal-de-1988" rel="10641516">5&ordm;</a>,&nbsp;<a class="cite" title="Art. 36 da Constitui&ccedil;&atilde;o Federal, de 1988" href="https://www.jusbrasil.com.br/topicos/10636450/artigo-36-da-constituicao-federal-de-1988" rel="10636450">36</a>,&nbsp;<a class="cite" title="Art. 52 da Constitui&ccedil;&atilde;o Federal, de 1988" href="https://www.jusbrasil.com.br/topicos/10634428/artigo-52-da-constituicao-federal-de-1988" rel="10634428">52</a>,&nbsp;<a class="cite" title="Art. 92 da Constitui&ccedil;&atilde;o Federal, de 1988" href="https://www.jusbrasil.com.br/topicos/10626562/artigo-92-da-constituicao-federal-de-1988" rel="10626562">92</a>,&nbsp;<a class="cite" title="Art. 93 da Constitui&ccedil;&atilde;o Federal, de 1988" href="https://www.jusbrasil.com.br/topicos/10626510/artigo-93-da-constituicao-federal-de-1988" rel="10626510">93</a>,&nbsp;<a class="cite" title="Art. 95 da Constitui&ccedil;&atilde;o Federal, de 1988" href="https://www.jusbrasil.com.br/topicos/10626437/artigo-95-da-constituicao-federal-de-1988" rel="10626437">95</a>,&nbsp;<a class="cite" title="Art. 98 da Constitui&ccedil;&atilde;o Federal, de 1988" href="https://www.jusbrasil.com.br/topicos/10690119/artigo-98-da-constituicao-federal-de-1988" rel="10690119">98</a>,&nbsp;<a class="cite" title="Art. 99 da Constitui&ccedil;&atilde;o Federal, de 1988" href="https://www.jusbrasil.com.br/topicos/3573049/artigo-99-da-constituicao-federal-de-1988" rel="3573049">99</a>,&nbsp;<a class="cite" title="Art. 102 da Constitui&ccedil;&atilde;o Federal, de 1988" href="https://www.jusbrasil.com.br/topicos/10688723/artigo-102-da-constituicao-federal-de-1988" rel="10688723">102</a>,&nbsp;<a class="cite" title="Art. 103 da Constitui&ccedil;&atilde;o Federal, de 1988" href="https://www.jusbrasil.com.br/topicos/10686845/artigo-103-da-constituicao-federal-de-1988" rel="10686845">103</a>,&nbsp;<a class="cite" title="Art. 104 da Constitui&ccedil;&atilde;o Federal, de 1988" href="https://www.jusbrasil.com.br/topicos/10685537/artigo-104-da-constituicao-federal-de-1988" rel="10685537">104</a>,&nbsp;<a class="cite" title="Art. 105 da Constitui&ccedil;&atilde;o Federal, de 1988" href="https://www.jusbrasil.com.br/topicos/10685354/artigo-105-da-constituicao-federal-de-1988" rel="10685354">105</a>,&nbsp;<a class="cite" title="Art. 107 da Constitui&ccedil;&atilde;o Federal, de 1988" href="https://www.jusbrasil.com.br/topicos/10684241/artigo-107-da-constituicao-federal-de-1988" rel="10684241">107</a>,&nbsp;<a class="cite" title="Art. 109 da Constitui&ccedil;&atilde;o Federal, de 1988" href="https://www.jusbrasil.com.br/topicos/1148741/artigo-109-da-constituicao-federal-de-1988" rel="1148741">109</a>,&nbsp;<a class="cite" title="Art. 111 da Constitui&ccedil;&atilde;o Federal, de 1988" href="https://www.jusbrasil.com.br/topicos/10682470/artigo-111-da-constituicao-federal-de-1988" rel="10682470">111</a>,&nbsp;<a class="cite" title="Art. 112 da Constitui&ccedil;&atilde;o Federal, de 1988" href="https://www.jusbrasil.com.br/topicos/10682148/artigo-112-da-constituicao-federal-de-1988" rel="10682148">112</a>,&nbsp;<a class="cite" title="Art. 114 da Constitui&ccedil;&atilde;o Federal, de 1988" href="https://www.jusbrasil.com.br/topicos/1029685/artigo-114-da-constituicao-federal-de-1988" rel="1029685">114</a>,&nbsp;<a class="cite" title="Art. 115 da Constitui&ccedil;&atilde;o Federal, de 1988" href="https://www.jusbrasil.com.br/topicos/10681299/artigo-115-da-constituicao-federal-de-1988" rel="10681299">115</a>,&nbsp;<a class="cite" title="Art. 125 da Constitui&ccedil;&atilde;o Federal, de 1988" href="https://www.jusbrasil.com.br/topicos/10679327/artigo-125-da-constituicao-federal-de-1988" rel="10679327">125</a>,&nbsp;<a class="cite" title="Art. 126 da Constitui&ccedil;&atilde;o Federal, de 1988" href="https://www.jusbrasil.com.br/topicos/10678962/artigo-126-da-constituicao-federal-de-1988" rel="10678962">126</a>,&nbsp;<a class="cite" title="Art. 127 da Constitui&ccedil;&atilde;o Federal, de 1988" href="https://www.jusbrasil.com.br/topicos/10678873/artigo-127-da-constituicao-federal-de-1988" rel="10678873">127,</a>&nbsp;<a class="cite" title="Art. 128 da Constitui&ccedil;&atilde;o Federal, de 1988" href="https://www.jusbrasil.com.br/topicos/10678529/artigo-128-da-constituicao-federal-de-1988" rel="10678529">128</a>,&nbsp;<a class="cite" title="Art. 129 da Constitui&ccedil;&atilde;o Federal, de 1988" href="https://www.jusbrasil.com.br/topicos/10677474/artigo-129-da-constituicao-federal-de-1988" rel="10677474">129,<br></a>&nbsp;<a class="cite" title="Art. 134 da Constitui&ccedil;&atilde;o Federal, de 1988" href="https://www.jusbrasil.com.br/topicos/10675588/artigo-134-da-constituicao-federal-de-1988" rel="10675588">134</a>&nbsp;e&nbsp;<a class="cite" title="Art. 168 da Constitui&ccedil;&atilde;o Federal, de 1988" href="https://www.jusbrasil.com.br/topicos/10661553/artigo-168-da-constituicao-federal-de-1988" rel="10661553">168</a>&nbsp;da&nbsp;<a class="cite" title="CONSTITUI&Ccedil;&Atilde;O FEDERAL, DE 1988" href="https://www.jusbrasil.com.br/legislacao/1503907193/constituicao-federal-constituicao-da-republica-federativa-do-brasil-1988" rel="302754">Constitui&ccedil;&atilde;o Federal</a>, e acrescenta os arts.&nbsp;<a class="cite notIndex" title="Art. 103A da Constitui&ccedil;&atilde;o Federal, de 1988" href="https://www.jusbrasil.com.br/topicos/27996984/artigo-103a-da-constituicao-federal-de-1988" rel="27996984">103-A</a>,&nbsp;<a class="cite notIndex" title="Art. 103B da Constitui&ccedil;&atilde;o Federal, de 1988" href="https://www.jusbrasil.com.br/topicos/27996975/artigo-103b-da-constituicao-federal-de-1988" rel="27996975">103-B</a>,&nbsp;<a class="cite notIndex" title="Art. 111A da Constitui&ccedil;&atilde;o Federal, de 1988" href="https://www.jusbrasil.com.br/topicos/27996900/artigo-111a-da-constituicao-federal-de-1988" rel="27996900">111-A</a>&nbsp;e&nbsp;<a class="cite notIndex" title="Art. 130A da Constitui&ccedil;&atilde;o Federal, de 1988" href="https://www.jusbrasil.com.br/topicos/27996787/artigo-130a-da-constituicao-federal-de-1988" rel="27996787">130-A</a>, e d&aacute; outras provid&ecirc;ncias. Dispon&iacute;vel em:. Acesso em: 25 ago.2015.</p>
 <p>SARLET, Ingo Wolfgang; MARINONI, Luiz Guilherme; MITIDIEIRO Daniel<strong>. Curso de Direito Constitucional</strong>. 2 ed. S&atilde;o Paulo: Revista dos Tribunais, 2013.</p>
 <br /><br /></div>
 </div>
@@ -2890,8 +3394,7 @@
 <tbody>
 <tr>
 <td>
-<h2><strong><em><br />TCC - Especializa&ccedil;&atilde;o Processo civil<br /><br /><br /><br /><br />A&nbsp; &nbsp; CRIA&Ccedil;&Atilde;O&nbsp; &nbsp; DOS&nbsp; &nbsp; JUIZADOS&nbsp; &nbsp; ESPECIAIS&nbsp; &nbsp; COMO&nbsp; &nbsp; MODELO INOVADOR NO ACESSO &Agrave; JUSTI&Ccedil;A.</em></strong></h2>
-<br />
+<h2><strong><em><br />TCC - Especializa&ccedil;&atilde;o Processo civil<br /><br /><br />A&nbsp; &nbsp; CRIA&Ccedil;&Atilde;O&nbsp; &nbsp; DOS&nbsp; &nbsp; JUIZADOS&nbsp; &nbsp; ESPECIAIS&nbsp; &nbsp; COMO&nbsp; &MODELO INOVADOR NO ACESSO &Agrave; JUSTI&Ccedil;A.</em></strong></h2>
 <p><strong><em>THE CREATION OF SPECIAL COURTS AS AN INNOVATIVE MODEL IN &nbsp; ACCESS TO JUSTICE</em></strong></p>
 <br /><br />
 <p><strong>OBS: Classificada como&nbsp;</strong><span style="font-weight: 400;">B1&nbsp;pela&nbsp;</span><strong><em>Qualis</em></strong><span style="font-weight: 400;">&nbsp;(CAPES-Brasil)</span></p>
@@ -2900,7 +3403,6 @@
 <tr>
 <td>
 <ul>
-<li style="font-weight: 400;"></li>
 <li style="font-weight: 400;"><strong>Fatima Teresinha Felippe</strong></li>
 </ul>
 <p><strong>Resumo</strong></p>
@@ -2928,7 +3430,7 @@
         "categoryName": "Direito Constitucional",
         "date": "15 de junho de 2025",
         "readTime": "20 min de leitura",
-        "title": "GRATUIDADE  DE JUSTIÇA ",
+        "title": "GRATUIDADE  DE JUSTIÇA I",
         "excerpt": "Análise  de Gratuidade da Justiça, seus princípios, instrumentos constitucionais e a importância como um direito e garantia fundamental previsto na CF/88.",
         "image": "https://res.cloudinary.com/dqewxdbfx/image/upload/v1762626064/natureza-morta-de-moedas-de-dolar-em-escala_page-0001_dgbhfz.jpg",
         "author": "Redação",
@@ -3421,6 +3923,7 @@
 </ul>
 <p>&nbsp;</p>
 <p><span style="font-weight: 400;">►</span><em><span style="font-weight: 400;">Entretanto, as veda&ccedil;&otilde;es asseguram que </span></em><em><span style="font-weight: 400;">organiza&ccedil;&atilde;o pol&iacute;tico-administrativa s</span></em><em><span style="font-weight: 400;">eja aplicada da melhor maneira poss&iacute;vel de modo eficiente e transparente, colaborando com os preceitos, objetivos e princ&iacute;pios fundamentais da Constitui&ccedil;&atilde;o Federal/88.</span></em></p>
+<p>&nbsp;</p>
 <p><strong>REFER&Ecirc;NCIAS</strong></p>
 <p>&nbsp;</p>
 <p><span style="font-weight: 400;">BARROSO, Lu&iacute;s Roberto. </span><strong>O controle de constitucionalidade no direito brasileiro</strong><span style="font-weight: 400;">. 3ᵃ Edi&ccedil;&atilde;o. S&atilde;o Paulo: Saraiva, 2008.</span></p>
@@ -3927,12 +4430,11 @@
         "date": "15 de junho de 2025",
         "readTime": "20 min de leitura",
         "title": "ORDEM ECONÔMICA E FINANCEIRA",
-        "excerpt": "Análise completa do orçamento público brasileiro, seus princípios, instrumentos constitucionais e a importância na gestão das finanças públicas.",
+        "excerpt": "Análise da ordem econômica e financeira no contexto constitucional brasileiro.",
         "image": "https://res.cloudinary.com/dqewxdbfx/image/upload/v1762628140/calculadora-de-vista-superior-e-arranjo-de-dinheiro_fnryr8.jpg",
         "author": "Redação",
 
         "content": `
-
 
 <ul>
 <li><strong>Breve Introdu&ccedil;&atilde;o</strong></li>
@@ -4147,7 +4649,7 @@
 <p><span style="font-weight: 400;">ROCHA, Sampaio Rafael. </span><strong>A ordem econ&ocirc;mica brasileira a partir do paradigma do Estado democr&aacute;tico de direito</strong><span style="font-weight: 400;">. Revista da Academia Brasileira de Direito Constitucional. Curitiba. Publicado em 2020. Dispon&iacute;vel em </span><a href="https://abdconstojs.com.br/index.php/revista/issue/view/13"><span style="font-weight: 400;">https://abdconstojs.com.br/index.php/revista/issue/view/13</span></a><span style="font-weight: 400;">. Acesso em 07 jun 2025</span></p>
 <p><span style="font-weight: 400;">TAVARES, Andr&eacute; Ramos. </span><strong>Direito constitucional econ&ocirc;mico</strong><span style="font-weight: 400;">. 2. ed., rev. e atual. S&atilde;o Paulo: M&eacute;todo, 2006.</span></p>
 <p>&nbsp;</p>
-<p><br /><br /><br /><br /><br /></p>
+<p><br /></p>
 <p><strong>►</strong><strong>DESTACAM-SE AS EMENDAS CONSTITUCIONAIS CITADAS NOS&nbsp; &nbsp; &nbsp; ARTIGOS DA CONSTITUI&Ccedil;&Atilde;O FEDERAL/88.</strong></p>
 <table>
 <tbody>
@@ -4257,7 +4759,7 @@
 </table>
 <p><br /><br /></p>
     `,
-        "tags": ["Termo", "Importância", "Constituição Federal/88", "Emendas"]
+        "tags": ["Termo", "Importância", "Constituição Federal/88", "Emendas","Artigos 170 a 181 da Constituição Federal de 1988"]
       },
 
 
@@ -4275,12 +4777,16 @@
         "date": "15 de junho de 2025",
         "readTime": "20 min de leitura",
         "title": "COMPETÊNCIA TRIBUTÁRIA",
-        "excerpt": "Análise completa do orçamento público brasileiro, seus princípios, instrumentos constitucionais e a importância na gestão das finanças públicas.",
+        "excerpt": "Análise da competência tributária e sua repartição entre os entes federativos",
         "image": "https://res.cloudinary.com/dqewxdbfx/image/upload/v1762628259/pessoas-de-pe-encostadas-a-mesa-trabalhando_ifl7lf.jpg",
         "author": "Redação",
 
         "content": `
-        <h1 class="heading_root__J_K7z heading_sizemd__9vXjG publication-header_title__Vre9g publication-header_segmentedArticleTitle__l0qt6"><br /><br /><br /></h1>
+
+        <div class="toolbar_toolbar__RhVHI print_unprintable__KCAm2"><a href="https://www.jusbrasil.com.br/artigos/direito-tributario/2544357460">https://www.jusbrasil.com.br/artigos/direito-tributario/2544357460</a></div>
+          <p>&nbsp;</p>
+          <p><strong>Breve Introdu&ccedil;&atilde;o</strong></p>
+<p>&nbsp;</p>
 <p>A&nbsp;<a class="cite" title="CONSTITUI&Ccedil;&Atilde;O FEDERAL, DE 1988" href="https://www.jusbrasil.com.br/legislacao/1503907193/constituicao-federal-constituicao-da-republica-federativa-do-brasil-1988" rel="302754">Constitui&ccedil;&atilde;o Federal</a>&nbsp;&eacute; quem fixa o chamado poder de tributar. Embora esteja descrito na&nbsp;<a class="cite" title="CONSTITUI&Ccedil;&Atilde;O FEDERAL, DE 1988" href="https://www.jusbrasil.com.br/legislacao/1503907193/constituicao-federal-constituicao-da-republica-federativa-do-brasil-1988" rel="302754">Constitui&ccedil;&atilde;o Federal</a>/88, esse poder &eacute; entregue aos entes federados como a Uni&atilde;o, Estados Distrito Federal e Munic&iacute;pios.</p>
 <p>Entretanto, a compet&ecirc;ncia tribut&aacute;ria est&aacute; inclu&iacute;da na compet&ecirc;ncia legislativa plena de cada ente federado, ressalvadas as limita&ccedil;&otilde;es de tributar contidas na&nbsp;<a class="cite" title="CONSTITUI&Ccedil;&Atilde;O FEDERAL, DE 1988" href="https://www.jusbrasil.com.br/legislacao/1503907193/constituicao-federal-constituicao-da-republica-federativa-do-brasil-1988" rel="302754">Constitui&ccedil;&atilde;o Federal</a>, nas Constitui&ccedil;&otilde;es dos Estados e nas Leis Org&acirc;nicas do Distrito Federal e dos Munic&iacute;pios, e observado o disposto na Lei&nbsp;<strong>(art. 6&ordm; da lei 5.172, 05/10/1966).</strong></p>
 <p>Cabe a cada ente federado quando necess&aacute;rio instituir o tributo para uma finalidade espec&iacute;fica, a qual ter&aacute; uma destina&ccedil;&atilde;o espec&iacute;fica, bem como respeitar at&eacute; onde se limita a sua compet&ecirc;ncia tribut&aacute;ria&nbsp;<strong>(arts. 150/156, CF/88)</strong>.</p>
@@ -4311,7 +4817,12 @@
 <p>BRASIL. Lei nᵒ&nbsp;<a class="cite" title="LEI N&ordm; 5.172, DE 25 DE OUTUBRO DE 1966" href="https://www.jusbrasil.com.br/legislacao/91647/codigo-tributario-nacional-lei-5172-66" rel="3399667">5.172</a>, de 25.10.66. Disp&otilde;e sobre o Sistema Tribut&aacute;rio Nacional e institui normas gerais de direito tribut&aacute;rio aplic&aacute;veis a Uni&atilde;o, estados e Munic&iacute;pios. Dispon&iacute;vel em:&nbsp;<a href="https://www.planalto.gov.br/ccivil_03/leis/l5172compilado.htm" target="_blank" rel="nofollow">https://www.planalto.gov.br/ccivil_03/leis/l5172compilado.htm</a>,07.06.24.</p>
 <p><strong>&nbsp;</strong></p>
     `,
-        "tags": ["Estudos","jusBrasil"]
+        "tags": [
+  "Direito Tributário",
+  "Competência Tributária",
+  "Constituição Federal de 1988",
+  "Sistema Tributário Nacional"
+]
       },
 
 
@@ -4330,17 +4841,13 @@
         "date": "15 de junho de 2025",
         "readTime": "20 min de leitura",
         "title": "ORDEM SOCIAL - SAÚDE",
-        "excerpt": "Análise completa do orçamento público brasileiro, seus princípios, instrumentos constitucionais e a importância na gestão das finanças públicas.",
+        "excerpt": "Análise do direito à saúde como pilar da ordem social brasileira.",
         "image": "https://res.cloudinary.com/dqewxdbfx/image/upload/v1761963664/pexels-pixabay-40568_iul6q0.jpg",
         "author": "Redação",
 
         "content": `
-        <div class="publication-header_titleWrapper__BRm1q">
-<h1 class="heading_root__J_K7z heading_sizemd__9vXjG publication-header_title__Vre9g publication-header_segmentedArticleTitle__l0qt6">&nbsp;</h1>
-<p><strong>SA&Uacute;DE</strong></p>
-<p><strong>Conceito &ndash; Import&acirc;ncia - Constitui&ccedil;&atilde;o Federal/88 &ndash; Artigos 196 a 200.&nbsp;</strong></p>
-<p><strong>Breve Introdu&ccedil;&atilde;o</strong></p>
-<h1 class="heading_root__J_K7z heading_sizemd__9vXjG publication-header_title__Vre9g publication-header_segmentedArticleTitle__l0qt6">&nbsp;</h1>
+      <p><strong>Breve Introdu&ccedil;&atilde;o</strong></p>
+<p>&nbsp;</p>
 <p><strong>A Constitui&ccedil;&atilde;o Federal de 1988 estabelece</strong><strong> no T&Iacute;TULO</strong><strong> VIII </strong><strong>- CAP&Iacute;TULO II &ndash; SE&Ccedil;&Atilde;O II - DA SA&Uacute;DE, como um direito social precisamente previsto nos artigos 196 a 200.</strong></p>
 <p><strong>Ademais, a sa&uacute;de faz parte do trip&eacute; que comp&otilde;e a seguridade social, conforme prev&ecirc; o artigo 194, do texto constitucional, vejamos:</strong></p>
 <ul>
@@ -4387,10 +4894,10 @@
 <p><strong>Art. 197</strong><span style="font-weight: 400;">. S&atilde;o de relev&acirc;ncia p&uacute;blica as a&ccedil;&otilde;es e servi&ccedil;os de sa&uacute;de, cabendo ao Poder P&uacute;blico dispor, nos termos da lei, sobre sua regulamenta&ccedil;&atilde;o, fiscaliza&ccedil;&atilde;o e controle, devendo sua execu&ccedil;&atilde;o ser feita diretamente ou atrav&eacute;s de terceiros e, tamb&eacute;m, por pessoa f&iacute;sica ou jur&iacute;dica de direito privado.</span></p>
 <p><em><span style="font-weight: 400;">Os servi&ccedil;os de sa&uacute;de t&ecirc;m um destaque muito grande dentro do contexto social e pol&iacute;tico, por isso o Estado tem o dever de garantir esse direito a popula&ccedil;&atilde;o, al&eacute;m de fiscalizar e controlar os resultados desses servi&ccedil;os.</span></em></p>
 <p><em><span style="font-weight: 400;">Essa atua&ccedil;&atilde;o do Estado pode ser feita de forma direta, ou seja, por ele mesmo, ou de terceiros por meio de entidades privadas que s&atilde;o contratadas para essa finalidade. Assim como o Estado poder&aacute; contratar pessoa f&iacute;sica ou jur&iacute;dica de direito privado de acordo com os termos da lei.</span></em></p>
-<h1 class="heading_root__J_K7z heading_sizemd__9vXjG publication-header_title__Vre9g publication-header_segmentedArticleTitle__l0qt6">&nbsp;</h1>
+
 <p><strong>Art. 198</strong><span style="font-weight: 400;">. As a&ccedil;&otilde;es e servi&ccedil;os p&uacute;blicos de sa&uacute;de integram uma rede regionalizada e hierarquizada e constituem um sistema &uacute;nico, organizado de acordo com as seguintes diretrizes:&nbsp;&nbsp;&nbsp;&nbsp;</span><a href="http://www.stf.jus.br/portal/peticaoInicial/verPeticaoInicial.asp?base=ADPF&amp;documento=&amp;s1=672&amp;numProcesso=672"><span style="font-weight: 400;">(Vide ADPF 672)</span></a></p>
 <p><em><span style="font-weight: 400;">A rede regionalizada e hierarquizada constitui o Sistema &Uacute;nico de Sa&uacute;de (SUS), que possui a finalidade de assegurar a&ccedil;&otilde;es e servi&ccedil;os de sa&uacute;de a todos os cidad&atilde;os.&nbsp;A organiza&ccedil;&atilde;o do sistema &eacute; sustentado em tr&ecirc;s diretrizes quais s&atilde;o: a descentraliza&ccedil;&atilde;o, o atendimento integral e a participa&ccedil;&atilde;o da comunidade.&nbsp;</span></em></p>
-<h1 class="heading_root__J_K7z heading_sizemd__9vXjG publication-header_title__Vre9g publication-header_segmentedArticleTitle__l0qt6">&nbsp;</h1>
+
 <p><strong>I</strong><span style="font-weight: 400;"> - descentraliza&ccedil;&atilde;o, com dire&ccedil;&atilde;o &uacute;nica em cada esfera de governo;</span></p>
 <p><em><span style="font-weight: 400;">A forma de gest&atilde;o &eacute; repartida nas esferas de governo da Uni&atilde;o, Estados, Distrito Federal e munic&iacute;pios, mas cada esfera possui uma dire&ccedil;&atilde;o &uacute;nica, por&eacute;m todas trabalham em conjunto com a finalidade de promover a qualidade e a efici&ecirc;ncia do sistema.</span></em></p>
 <p><span style="font-weight: 400;">&nbsp;</span></p>
@@ -4412,7 +4919,7 @@
 <p><strong>II</strong><span style="font-weight: 400;"> - no caso dos Estados e do Distrito Federal, o produto da arrecada&ccedil;&atilde;o dos impostos a que se referem os arts. 155 e 156-A e dos recursos de que tratam os arts. 157 e 159, I, "a", e II, deduzidas as parcelas que forem transferidas aos respectivos Munic&iacute;pios;&nbsp;&nbsp;&nbsp;</span><a href="https://www.planalto.gov.br/ccivil_03/constituicao/Emendas/Emc/emc132.htm#art1"><span style="font-weight: 400;">(Reda&ccedil;&atilde;o dada pela Emenda Constitucional n&ordm; 132, de 2023)</span></a><span style="font-weight: 400;">.</span></p>
 <p><em><span style="font-weight: 400;">Quanto aos Estados e o Distrito Federal, estes dever&atilde;o aplicar nos servi&ccedil;os p&uacute;blicos de sa&uacute;de o produto da arrecada&ccedil;&atilde;o de impostos e outros recursos conforme previstos nos artigos do Inciso II, ap&oacute;s as devidas dedu&ccedil;&otilde;es dos valores que forem transmitidos aos munic&iacute;pios</span></em><span style="font-weight: 400;">.</span></p>
 <p><em><span style="font-weight: 400;">Os artigos especificados no </span></em><strong><em>Inciso II</em></strong><em><span style="font-weight: 400;">, dizem respeito ao </span></em><strong><em>art. 155, </em></strong><em><span style="font-weight: 400;">Impostos Estaduais (ICMS, IPVA, ITCMD); </span></em><strong><em>art. 156-A:</em></strong><em><span style="font-weight: 400;">&nbsp;Imposto sobre a propriedade de ve&iacute;culos automotores (IPVA); </span></em><strong><em>art. 157:</em></strong><em><span style="font-weight: 400;">&nbsp;Recursos provenientes de impostos da Uni&atilde;o, transferidos aos Estados; </span></em><strong><em>art. 159, I, "a": </em></strong><em><span style="font-weight: 400;">Transfer&ecirc;ncia pela Uni&atilde;o do produto da arrecada&ccedil;&atilde;o dos impostos sobre renda e proventos de qualquer natureza e sobre produtos industrializados e do imposto previsto no art. 153, VIII, 50% (cinquenta por cento), da forma de vinte e um inteiros e cinco d&eacute;cimos por cento ao Fundo de Participa&ccedil;&atilde;o dos Estados e do Distrito Federal (FPE);&nbsp;</span></em><strong><em>art. 159, II:</em></strong><em><span style="font-weight: 400;">&nbsp;Recursos da Uni&atilde;o referentes ao imposto </span></em><em><span style="font-weight: 400;">sobre produtos industrializados e do imposto previsto no art. 153, VIII, 10% (dez por cento) aos Estados e ao Distrito Federal.</span></em></p>
-<h1 class="heading_root__J_K7z heading_sizemd__9vXjG publication-header_title__Vre9g publication-header_segmentedArticleTitle__l0qt6">&nbsp;</h1>
+
 <p><strong>III</strong><span style="font-weight: 400;"> - no caso dos Munic&iacute;pios e do Distrito Federal, o produto da arrecada&ccedil;&atilde;o dos impostos a que se referem os arts. 156 e 156-A e dos recursos de que tratam os arts. 158 e 159, I, "b", e &sect; 3&ordm;.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><a href="https://www.planalto.gov.br/ccivil_03/constituicao/Emendas/Emc/emc132.htm#art1"><span style="font-weight: 400;">(Reda&ccedil;&atilde;o dada pela Emenda Constitucional n&ordm; 132, de 2023)</span></a><span style="font-weight: 400;">.</span></p>
 <p><em><span style="font-weight: 400;">O texto se refere a soma de dinheiro que &eacute; arrecadado por meio de impostos e outras receitas, o qual dever&aacute; ser transferido aos Munic&iacute;pios e ao Distrito Federal, cuja finalidade aplicar&aacute; nas atividades necess&aacute;rias e de servi&ccedil;o p&uacute;blico visando atender as necessidades da popula&ccedil;&atilde;o.</span></em></p>
 <ul>
@@ -4423,12 +4930,12 @@
 <p><em><span style="font-weight: 400;">O inciso </span></em><strong><em>I</em></strong><em><span style="font-weight: 400;">, trata dos crit&eacute;rios de rateio dos recursos da Uni&atilde;o vinculados &agrave; sa&uacute;de destinados aos Estados, ao Distrito Federal e aos Munic&iacute;pios, bem como os crit&eacute;rios de rateios dos Estados destinados a cada um dos respectivos munic&iacute;pios, com a finalidade de reduzir a disparidades regionais.</span></em></p>
 <p><strong>II</strong><span style="font-weight: 400;"> - os crit&eacute;rios de rateio dos recursos da Uni&atilde;o vinculados &agrave; sa&uacute;de destinados aos Estados, ao Distrito Federal e aos Munic&iacute;pios, e dos Estados destinados a seus respectivos Munic&iacute;pios, objetivando a progressiva redu&ccedil;&atilde;o das disparidades regionais;&nbsp;</span><a href="https://www.planalto.gov.br/ccivil_03/constituicao/Emendas/Emc/emc29.htm#art6"><span style="font-weight: 400;">(Inclu&iacute;do pela Emenda Constitucional n&ordm; 29, de 2000)</span></a></p>
 <p><em><span style="font-weight: 400;">O Inciso </span></em><strong><em>II</em></strong><em><span style="font-weight: 400;">, se refere aos crit&eacute;rios de rateio dos recursos da Uni&atilde;o previstos na Constitui&ccedil;&atilde;o Federal, os quais destinam que percentuais sejam aplicados nos servi&ccedil;os p&uacute;blicos de sa&uacute;de e em a&ccedil;&otilde;es voltadas a esse fim, de modo que os cidad&atilde;os tenham acesso aos servi&ccedil;os, principalmente nas &aacute;reas mais vulner&aacute;veis, ensejando a qualidade e a igualdade no sistema.&nbsp;</span></em></p>
-<h1 class="heading_root__J_K7z heading_sizemd__9vXjG publication-header_title__Vre9g publication-header_segmentedArticleTitle__l0qt6">&nbsp;</h1>
+
 <p><strong>III</strong><span style="font-weight: 400;"> - as normas de fiscaliza&ccedil;&atilde;o, avalia&ccedil;&atilde;o e controle das despesas com sa&uacute;de nas esferas federal, estadual, distrital e municipal;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><a href="https://www.planalto.gov.br/ccivil_03/constituicao/Emendas/Emc/emc29.htm#art6"><span style="font-weight: 400;">(Inclu&iacute;do pela Emenda Constitucional n&ordm; 29, de 2000)</span></a></p>
 <p><em><span style="font-weight: 400;">Os normativos orientam na fiscaliza&ccedil;&atilde;o, avalia&ccedil;&atilde;o e controle das despesas que envolvem a sa&uacute;de nas tr&ecirc;s esferas de governo, define quais valores e al&iacute;quotas ser&atilde;o aplicados em a&ccedil;&otilde;es e servi&ccedil;os p&uacute;blicos de cada esfera, visando garantir a efici&ecirc;ncia e transpar&ecirc;ncia de recursos aplicados</span></em><span style="font-weight: 400;">.</span></p>
-<h1 class="heading_root__J_K7z heading_sizemd__9vXjG publication-header_title__Vre9g publication-header_segmentedArticleTitle__l0qt6">&nbsp;</h1>
+
 <p><strong>IV</strong><span style="font-weight: 400;"> -&nbsp;</span><a href="https://www.planalto.gov.br/ccivil_03/constituicao/Emendas/Emc/emc86.htm#art5"><span style="font-weight: 400;">(revogado)&nbsp;</span></a><span style="font-weight: 400;">.&nbsp;</span><a href="https://www.planalto.gov.br/ccivil_03/constituicao/Emendas/Emc/emc86.htm#art1"><span style="font-weight: 400;">(Reda&ccedil;&atilde;o dada pela Emenda Constitucional n&ordm; 86, de 2015)</span></a></p>
-<h1 class="heading_root__J_K7z heading_sizemd__9vXjG publication-header_title__Vre9g publication-header_segmentedArticleTitle__l0qt6">&nbsp;</h1>
+
 <ul>
 <li><strong> 4&ordm;</strong><span style="font-weight: 400;"> Os gestores locais do sistema &uacute;nico de sa&uacute;de poder&atilde;o admitir agentes comunit&aacute;rios de sa&uacute;de e agentes de combate &agrave;s endemias por meio de processo seletivo p&uacute;blico, de acordo com a natureza e complexidade de suas atribui&ccedil;&otilde;es e requisitos espec&iacute;ficos para sua atua&ccedil;&atilde;o.&nbsp;</span><a href="https://www.planalto.gov.br/ccivil_03/constituicao/Emendas/Emc/emc51.htm#art1"><span style="font-weight: 400;">(Inclu&iacute;do pela Emenda Constitucional n&ordm; 51, de 2006)</span></a></li>
 </ul>
@@ -4453,7 +4960,7 @@
 </ul>
 <p><em><span style="font-weight: 400;">Isso significa que o governo federal &eacute; respons&aacute;vel por garantir o financiamento desses profissionais, repassando os valores aos Estados, Munic&iacute;pios e Distrito Federal.&nbsp;</span></em></p>
 <p><strong><em>A Emenda Constitucional n&ordm; 120/2022 (art. 1&ordm;, &sect; 8&ordm;</em></strong><em><span style="font-weight: 400;">) estabelece que os recursos para efetuar os pagamentos dos agentes comunit&aacute;rios e dos agentes de combate &agrave;s endemias sejam inclu&iacute;dos no or&ccedil;amento geral da Uni&atilde;o, com dota&ccedil;&atilde;o &uacute;nica para essa finalidade.</span></em><em><span style="font-weight: 400;">&nbsp;</span></em></p>
-<h1 class="heading_root__J_K7z heading_sizemd__9vXjG publication-header_title__Vre9g publication-header_segmentedArticleTitle__l0qt6">&nbsp;</h1>
+<P></P>
 <ul>
 <li><strong> 9&ordm;</strong><span style="font-weight: 400;"> O vencimento dos agentes comunit&aacute;rios de sa&uacute;de e dos agentes de combate &agrave;s endemias n&atilde;o ser&aacute; inferior a 2 (dois) sal&aacute;rios m&iacute;nimos, repassados pela Uni&atilde;o aos Munic&iacute;pios, aos Estados e ao Distrito Federal.&nbsp;&nbsp;</span><a href="https://www.planalto.gov.br/ccivil_03/constituicao/Emendas/Emc/emc120.htm#art1"><span style="font-weight: 400;">(Inclu&iacute;do pela Emenda Constitucional n&ordm; 120, de 2022)</span></a><span style="font-weight: 400;">.</span></li>
 </ul>
@@ -4462,7 +4969,7 @@
 <li><strong> 10</strong><span style="font-weight: 400;"> Os agentes comunit&aacute;rios de sa&uacute;de e os agentes de combate &agrave;s endemias ter&atilde;o tamb&eacute;m, em raz&atilde;o dos riscos inerentes &agrave;s fun&ccedil;&otilde;es desempenhadas, aposentadoria especial e, somado aos seus vencimentos, adicional de insalubridade.&nbsp;&nbsp;&nbsp;&nbsp;</span><a href="https://www.planalto.gov.br/ccivil_03/constituicao/Emendas/Emc/emc120.htm#art1"><span style="font-weight: 400;">(Inclu&iacute;do pela Emenda Constitucional n&ordm; 120, de 2022)</span></a></li>
 </ul>
 <p><em><span style="font-weight: 400;">A Emenda Constitucional 120/2022, assegurou aos profissionais aposentadoria especial, mais o adicional de insalubridade, somados ao vencimento, em raz&atilde;o dos riscos relacionados &agrave;s fun&ccedil;&otilde;es desempenhadas.</span></em></p>
-<h1 class="heading_root__J_K7z heading_sizemd__9vXjG publication-header_title__Vre9g publication-header_segmentedArticleTitle__l0qt6">&nbsp;</h1>
+<P></P>
 <ul>
 <li><strong> 11.</strong><span style="font-weight: 400;"> Os recursos financeiros repassados pela Uni&atilde;o aos Estados, ao Distrito Federal e aos Munic&iacute;pios para pagamento do vencimento ou de qualquer outra vantagem dos agentes comunit&aacute;rios de sa&uacute;de e dos agentes de combate &agrave;s endemias n&atilde;o ser&atilde;o objeto de inclus&atilde;o no c&aacute;lculo para fins do limite de despesa com pessoal.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><a href="https://www.planalto.gov.br/ccivil_03/constituicao/Emendas/Emc/emc120.htm#art1"><span style="font-weight: 400;">(Inclu&iacute;do pela Emenda Constitucional n&ordm; 120, de 2022)</span></a></li>
 </ul>
@@ -4527,17 +5034,20 @@
 <p><strong>DESTACAM-SE ABAIXO AS EMENDAS CITADAS NO TEXTO</strong><span style="font-weight: 400;">:</span></p>
 <h1 class="heading_root__J_K7z heading_sizemd__9vXjG publication-header_title__Vre9g publication-header_segmentedArticleTitle__l0qt6">&nbsp;</h1>
 <p><a href="http://legislacao.planalto.gov.br/legisla/legislacao.nsf/Viw_Identificacao/emc%2029-2000?OpenDocument"><strong>EMENDA CONSTITUCIONAL N&ordm; 29, DE 13 DE SETEMBRO DE 2000</strong></a></p>
+
+
+
 <p><span style="font-weight: 400;">Altera os arts. 34, 35, 156, 160, 167 e 198 da Constitui&ccedil;&atilde;o Federal e acrescenta artigo ao Ato das Disposi&ccedil;&otilde;es Constitucionais Transit&oacute;rias, para assegurar os recursos m&iacute;nimos para o financiamento das a&ccedil;&otilde;es e servi&ccedil;os p&uacute;blicos de sa&uacute;de.</span></p>
 <table>
 <tbody>
 <tr>
-<td>&nbsp;</td>
+
 </tr>
 </tbody>
 </table>
 <p><a href="http://legislacao.planalto.gov.br/legisla/legislacao.nsf/Viw_Identificacao/emc%2085-2015?OpenDocument"><strong>EMENDA CONSTITUCIONAL N&ordm; 85, DE 26 DE FEVEREIRO DE 2015</strong></a></p>
 <p><span style="font-weight: 400;"><br /></span><span style="font-weight: 400;">Altera e adiciona dispositivos na Constitui&ccedil;&atilde;o Federal para atualizar o tratamento das atividades de ci&ecirc;ncia, tecnologia e inova&ccedil;&atilde;o.</span></p>
-<h1 class="heading_root__J_K7z heading_sizemd__9vXjG publication-header_title__Vre9g publication-header_segmentedArticleTitle__l0qt6">&nbsp;</h1>
+
 <p><a href="http://legislacao.planalto.gov.br/legisla/legislacao.nsf/Viw_Identificacao/emc%2086-2015?OpenDocument"><strong>EMENDA CONSTITUCIONAL N&ordm; 86, DE 17 DE MAR&Ccedil;O DE 2015</strong></a></p>
 <table>
 <tbody>
@@ -4549,30 +5059,30 @@
 </tr>
 </tbody>
 </table>
-<h1 class="heading_root__J_K7z heading_sizemd__9vXjG publication-header_title__Vre9g publication-header_segmentedArticleTitle__l0qt6">&nbsp;</h1>
+
 <p><a href="http://legislacao.planalto.gov.br/legisla/legislacao.nsf/Viw_Identificacao/emc%2051-2006?OpenDocument"><strong>EMENDA CONSTITUCIONAL N&ordm; 51, DE 14 DE FEVEREIRO DE 2006</strong></a></p>
 <p><span style="font-weight: 400;">Acrescenta os &sect;&sect; 4&ordm;, 5&ordm; e 6&ordm; ao art. 198 da Constitui&ccedil;&atilde;o Federal.</span></p>
-<h1 class="heading_root__J_K7z heading_sizemd__9vXjG publication-header_title__Vre9g publication-header_segmentedArticleTitle__l0qt6">&nbsp;</h1>
+
 <p><a href="http://legislacao.planalto.gov.br/legisla/legislacao.nsf/Viw_Identificacao/emc%20132-2023?OpenDocument"><strong>EMENDA CONSTITUCIONAL N&ordm; 132, DE 20 DE DEZEMBRO DE 2023</strong></a></p>
 <p><span style="font-weight: 400;">Altera o Sistema Tribut&aacute;rio Nacional</span><span style="font-weight: 400;">.</span></p>
-<h1 class="heading_root__J_K7z heading_sizemd__9vXjG publication-header_title__Vre9g publication-header_segmentedArticleTitle__l0qt6">&nbsp;</h1>
+
 <p><a href="http://legislacao.planalto.gov.br/legisla/legislacao.nsf/Viw_Identificacao/emc%20120-2022?OpenDocument"><strong>EMENDA CONSTITUCIONAL N&ordm; 120, DE 5 DE MAIO DE 2022</strong></a></p>
 <p><span style="font-weight: 400;">Acrescenta &sect;&sect; 7&ordm;, 8&ordm;, 9&ordm;, 10 e 11 ao art. 198 da Constitui&ccedil;&atilde;o Federal, para dispor sobre a responsabilidade financeira da Uni&atilde;o, correspons&aacute;vel pelo Sistema &Uacute;nico de Sa&uacute;de (SUS), na pol&iacute;tica remunerat&oacute;ria e na valoriza&ccedil;&atilde;o dos profissionais que exercem atividades de agente comunit&aacute;rio de sa&uacute;de e de agente de combate &agrave;s endemias.</span></p>
-<h1 class="heading_root__J_K7z heading_sizemd__9vXjG publication-header_title__Vre9g publication-header_segmentedArticleTitle__l0qt6">&nbsp;</h1>
+
 <p><a href="http://legislacao.planalto.gov.br/legisla/legislacao.nsf/Viw_Identificacao/emc%20124-2022?OpenDocument"><strong>EMENDA CONSTITUCIONAL N&ordm; 124, DE 14 DE JULHO DE 2022</strong></a></p>
 <p><span style="font-weight: 400;"><br /></span><span style="font-weight: 400;">Institui o piso salarial nacional do enfermeiro, do t&eacute;cnico de enfermagem, do auxiliar de enfermagem e da parteira.</span></p>
-<h1 class="heading_root__J_K7z heading_sizemd__9vXjG publication-header_title__Vre9g publication-header_segmentedArticleTitle__l0qt6"><br /><br /></h1>
+
 <p><a href="http://legislacao.planalto.gov.br/legisla/legislacao.nsf/Viw_Identificacao/emc%20127-2022?OpenDocument"><strong>EMENDA CONSTITUCIONAL N&ordm; 127, DE 22 DE DEZEMBRO DE 2022</strong></a></p>
 <p><span style="font-weight: 400;">Altera a Constitui&ccedil;&atilde;o Federal e o Ato das Disposi&ccedil;&otilde;es Constitucionais Transit&oacute;rias para estabelecer que compete &agrave; Uni&atilde;o prestar assist&ecirc;ncia financeira complementar aos Estados, ao Distrito Federal e aos Munic&iacute;pios e &agrave;s entidades filantr&oacute;picas, para o cumprimento dos pisos salariais profissionais nacionais para o enfermeiro, o t&eacute;cnico de enfermagem, o auxiliar de enfermagem e a parteira; altera a Emenda Constitucional n&ordm; 109, de 15 de mar&ccedil;o de 2021, para estabelecer o super&aacute;vit financeiro dos fundos p&uacute;blicos do Poder Executivo como fonte de recursos para o cumprimento dos pisos salariais profissionais nacionais para o enfermeiro, o t&eacute;cnico de enfermagem, o auxiliar de enfermagem e a parteira; e d&aacute; outras provid&ecirc;ncias.</span></p>
-<h1 class="heading_root__J_K7z heading_sizemd__9vXjG publication-header_title__Vre9g publication-header_segmentedArticleTitle__l0qt6"><br /><br /></h1>
+
 <p><strong>REFER&Ecirc;NCIAS</strong></p>
-<h1 class="heading_root__J_K7z heading_sizemd__9vXjG publication-header_title__Vre9g publication-header_segmentedArticleTitle__l0qt6">&nbsp;</h1>
+
 <p><span style="font-weight: 400;">BRASIL. [Constitui&ccedil;&atilde;o (1988)]&nbsp;</span><a href="https://www.jusbrasil.com.br/legislacao/1503907193/constituicao-federal-constituicao-da-republica-federativa-do-brasil-1988"><strong>Constitui&ccedil;&atilde;o da Republica Federativa do Brasil</strong></a><strong>, 1988</strong><span style="font-weight: 400;">. Bras&iacute;lia, DF: Presid&ecirc;ncia da Rep&uacute;blica, [2025]. Dispon&iacute;vel em:&nbsp;https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm.&nbsp; Acesso em: 27 jul 2025.</span></p>
-<h1 class="heading_root__J_K7z heading_sizemd__9vXjG publication-header_title__Vre9g publication-header_segmentedArticleTitle__l0qt6">&nbsp;</h1>
+
 <p><strong>_____.</strong><span style="font-weight: 400;">LEI N&ordm; 8.080, DE 19 DE SETEMBRO DE 1990</span><strong>.</strong> <strong>Disp&otilde;e sobre as condi&ccedil;&otilde;es para a promo&ccedil;&atilde;o, prote&ccedil;&atilde;o e recupera&ccedil;&atilde;o da sa&uacute;de, a organiza&ccedil;&atilde;o e o funcionamento dos servi&ccedil;os correspondentes e d&aacute; outras provid&ecirc;ncias</strong><span style="font-weight: 400;">.</span><span style="font-weight: 400;"> Dispon&iacute;vel em </span><a href="https://www.planalto.gov.br/ccivil_03/leis/l8080.htm"><span style="font-weight: 400;">https://www.planalto.gov.br/ccivil_03/leis/l8080.htm</span></a><span style="font-weight: 400;">. Acesso em 27 jul 2025.</span></p>
-<h1 class="heading_root__J_K7z heading_sizemd__9vXjG publication-header_title__Vre9g publication-header_segmentedArticleTitle__l0qt6"><br /><br /></h1>
+
 <p><strong>_____.</strong><span style="font-weight: 400;">LEI N&ordm; 8.213</span><strong>, </strong><a href="http://legislacao.planalto.gov.br/legisla/legislacao.nsf/Viw_Identificacao/lei%208.213-1991?OpenDocument"><span style="font-weight: 400;">DE 24 DE JULHO DE 1991</span></a><strong>.</strong> <strong>Disp&otilde;e sobre os Planos de Benef&iacute;cios da Previd&ecirc;ncia Social e d&aacute; outras provid&ecirc;ncias</strong><span style="font-weight: 400;">.</span><span style="font-weight: 400;"> Dispon&iacute;vel em </span><a href="https://www.planalto.gov.br/ccivil_03/leis/l8080.htm"><span style="font-weight: 400;">https://www.planalto.gov.br/ccivil_03/leis/l8080.htm</span></a><span style="font-weight: 400;">. Acesso em 27 jul 2025.</span></p>
-<h1 class="heading_root__J_K7z heading_sizemd__9vXjG publication-header_title__Vre9g publication-header_segmentedArticleTitle__l0qt6"><br /><br /></h1>
+
 <p><span style="font-weight: 400;">_____. ORGANIZA&Ccedil;&Atilde;O MUNDIAL DA SA&Uacute;DE.&nbsp;</span><strong>In: WIKIP&Eacute;DIA</strong><span style="font-weight: 400;">. A enciclop&eacute;dia livre. </span><strong>Conceito de Organiza&ccedil;&atilde;o Mundial de Sa&uacute;de.</strong><span style="font-weight: 400;">&nbsp;Wikimedia,2025. Dispon&iacute;vel em: Https://pt.wikipedia.org/wiki/Organiza%C3%A7%C3%A3o_Mundial_da_Sa%C3%BAde.Acesso em: 27 jul 2025.</span></p>
 <h1 class="heading_root__J_K7z heading_sizemd__9vXjG publication-header_title__Vre9g publication-header_segmentedArticleTitle__l0qt6"><br /><br /></h1>
 </div>
@@ -4598,7 +5108,7 @@
         "date": "15 de junho de 2025",
         "readTime": "20 min de leitura",
         "title": "AUXÍLIO RECLUSÃO",
-        "excerpt": "Análise completa do orçamento público brasileiro, seus princípios, instrumentos constitucionais e a importância na gestão das finanças públicas.",
+        "excerpt": "Análise jurídica e social do benefício de auxílio-reclusão no Brasil.",
         "image": "https://res.cloudinary.com/dqewxdbfx/image/upload/v1762628689/close-up-disponivel-usando-algemas-na-prisao_tzo0sj.jpg",
         "author": "Redação",
 
@@ -4606,13 +5116,10 @@
         <div class="publication-header_titleWrapper__BRm1q">
 <div class="publication-header_titleWrapper__BRm1q">
 </div>
-<div class="toolbar_toolbar__RhVHI print_unprintable__KCAm2"><br /><br /><a href="https://www.jusbrasil.com.br/">https://www.jusbrasil.com.br/</a></div>
-<div class="toolbar_toolbar__RhVHI print_unprintable__KCAm2">&nbsp;</div>
 <div class="toolbar_toolbar__RhVHI print_unprintable__KCAm2"><a href="https://www.jusbrasil.com.br/artigos/auxilio-reclusao/5038668779?_gl=1*ufoy99*_gcl_au*MTA0MzIzNDYyMy4xNzYwMDQwODY0LjMzMTk1ODEyMi4xNzYxODY1NTEwLjE3NjE4NjU1MTA.*_ga*MzMzNzAxODg2LjE3NjAwNDA4NjQ.*_ga_QCSXBQ8XPZ*czE3NjE4NjQyNzYkbzckZzEkdDE3NjE4NjU1MzckajI4JGwwJGgw">https://www.jusbrasil.com.br/topicos/10641860</a></div>
-<div class="toolbar_toolbar__RhVHI print_unprintable__KCAm2">&nbsp;</div>
-<div class="toolbar_toolbar__RhVHI print_unprintable__KCAm2"><br /><br />
 
 <p><strong>Breve Introdu&ccedil;&atilde;o</strong></p>
+<p>&nbsp;</p>
 <p>O&nbsp;<strong>inciso&nbsp;</strong><strong><a class="cite" title="Inciso III, art. 1&ordm; da Constitui&ccedil;&atilde;o Federal, de 1988" href="https://www.jusbrasil.com.br/topicos/10731879/inciso-iii-do-artigo-1-da-constituicao-federal-de-1988" rel="10731879">III</a></strong>, do artigo&nbsp;<a class="cite" title="Artigo 1 da Constitui&ccedil;&atilde;o Federal de 1988" href="https://www.jusbrasil.com.br/topicos/10641860/artigo-1-da-constituicao-federal-de-1988" rel="10641860">primeiro</a>&nbsp;da&nbsp;<a class="cite" title="CONSTITUI&Ccedil;&Atilde;O FEDERAL, DE 1988" href="https://www.jusbrasil.com.br/legislacao/1503907193/constituicao-federal-constituicao-da-republica-federativa-do-brasil-1988" rel="302754">constitui&ccedil;&atilde;o Federal</a>/88 diz que entre os fundamentos da Rep&uacute;blica Federativa do Brasil est&aacute; &agrave; dignidade da pessoa humana. Em complemento ao&nbsp;<strong>inciso III da CF/88, o artigo 5&ordm;</strong>, determina que todos s&atilde;o iguais perante a Lei, sem distin&ccedil;&atilde;o de qualquer natureza, e garantindo entre outras coisas o direito &agrave; vida.</p>
 <p><strong>Vejamos</strong><strong>:</strong></p>
 <p><strong>Art. 1&ordm;</strong>&nbsp;A Rep&uacute;blica Federativa do Brasil, formada pela uni&atilde;o indissol&uacute;vel dos Estados e Munic&iacute;pios e do Distrito Federal, constitui-se em Estado Democr&aacute;tico de Direito e tem como fundamentos:</p>
@@ -4706,12 +5213,200 @@
         "tags": ["O que é o auxílio-reclusão","Fato gerador","Dependentes","Valores","Quantidade de contribuições necessárias","Tipo de regime de cumprimento pena","Início e término do auxílio-reclusão","Leis","entre outros"]
       },
 
+{
+  "id": 16,
+  "category": "profissional",
+  "categoryName": "Advocacia",
+  "date": "16 de dezembro de 2025",
+  "readTime": "15 min de leitura",
+  "title": "Dia do Advogado: A Importância e História da Advocacia no Brasil",
+  "excerpt": "Análise sobre a essencialidade do advogado na administração da justiça e a origem histórica da data comemorativa.",
+  "image": "https://res.cloudinary.com/dqewxdbfx/image/upload/v1766013427/business-lawyers-discussing-contract-papers-with-brass-scale-desk-office-law-legal-services-advice-justice-law-concept-picture-with-film-grain-effect_265022-1386_dqw1mj.avif",
+  "author": "Redação",
+   "tags": ["O que é o auxílio-reclusão","Fato gerador","Dependentes","Valores","Quantidade de contribuições necessárias","Tipo de regime de cumprimento pena","Início e término do auxílio-reclusão","Leis","entre outros"],
+  "content": `  <p><strong>O ADVOGADO (A) &Eacute; UM PROFISSIONAL ESSENCIAL E INDISPENS&Aacute;VEL &Agrave; ADMINISTRA&Ccedil;AO DA JUSTI&Ccedil;A.</strong></p>
+<p>&nbsp;</p>
+<p><span style="font-weight: 400;">O dia </span><strong>11 do m&ecirc;s de agosto</strong> <span style="font-weight: 400;">&eacute; comemorado em especial </span><strong>o dia do advogado</strong><span style="font-weight: 400;">, por&eacute;m todos os dias &eacute; dia do advogado e advogada, eis que est&atilde;o atentos e zelosos de forma constante para que n&atilde;o haja injusti&ccedil;a e arbitrariedade no direito dos cidad&atilde;os.</span></p>
+<p>&nbsp;</p>
+<p><strong>De acordo com o art. 133, Constitui&ccedil;&atilde;o Federal/88:</strong><span style="font-weight: 400;">&nbsp;"O advogado &eacute; indispens&aacute;vel &agrave; administra&ccedil;&atilde;o da justi&ccedil;a, sendo inviol&aacute;vel por seus atos e manifesta&ccedil;&otilde;es no exerc&iacute;cio da profiss&atilde;o, nos limites da lei&rdquo;.&nbsp;</span></p>
+<p>&nbsp;</p>
+<p><strong>O Estatuto da Advocacia, a Lei Federal n&ordm; 8.906, de 04 de julho de 1994, estabelece:&nbsp;</strong></p>
+<p>&nbsp;</p>
+<p><strong>Art. 2&ordm;</strong><span style="font-weight: 400;"> O advogado &eacute; indispens&aacute;vel &agrave; administra&ccedil;&atilde;o da justi&ccedil;a.</span></p>
+<ul>
+<li><strong> 3&ordm; </strong><span style="font-weight: 400;">No exerc&iacute;cio da profiss&atilde;o, o advogado &eacute; inviol&aacute;vel por seus atos e manifesta&ccedil;&otilde;es, nos limites desta lei.</span></li>
+</ul>
+<p><br /><br /></p>
+<p><strong>O C&oacute;digo de &Eacute;tica e Disciplina da </strong><strong>Ordem dos Advogados do Brasil</strong><strong> (OAB),</strong><span style="font-weight: 400;">&nbsp;de acordo com a </span><strong>Resolu&ccedil;&atilde;o CFOAB</strong> <strong>n&ordm; 02/2015 (Conselho Federal da OAB), </strong><span style="font-weight: 400;">no</span><strong> T&iacute;tulo I</strong><span style="font-weight: 400;"> - </span><strong>cap&iacute;tulo I</strong><span style="font-weight: 400;"> -&nbsp; </span><strong>Dos Princ&iacute;pios Fundamentais</strong> <span style="font-weight: 400;">tamb&eacute;m estabelece a import&acirc;ncia do papel do advogado (a):</span></p>
+<p>&nbsp;</p>
+<p><strong>Art. 2&deg;</strong><span style="font-weight: 400;"> O advogado, indispens&aacute;vel &agrave; administra&ccedil;&atilde;o da Justi&ccedil;a, &eacute; defensor do Estado Democr&aacute;tico de Direito, da cidadania, da moralidade p&uacute;blica, da Justi&ccedil;a e da paz social, cumprindo-lhe exercer o seu minist&eacute;rio em conson&acirc;ncia com a sua elevada fun&ccedil;&atilde;o p&uacute;blica e com os valores que lhe s&atilde;o inerentes.</span></p>
+<p>&nbsp;</p>
+<p><span style="font-weight: 400;">Todavia, segue o </span><span style="font-weight: 400;">art. 2&deg;, discorrendo sobre os deveres do advogado (a) e demais informa&ccedil;&otilde;es &uacute;teis e necess&aacute;rias ao exerc&iacute;cio da profiss&atilde;o</span><strong>, por&eacute;m</strong><span style="font-weight: 400;">, </span><strong>n&atilde;o ser&atilde;o destacadas</strong><span style="font-weight: 400;"> as demais informa&ccedil;&otilde;es neste artigo pois ficaria um texto muito longo e cansativo. O assunto poderia ser difundido em outro post.</span></p>
+<p>&nbsp;</p>
+<p><span style="font-weight: 400;">No entanto, a import&acirc;ncia e responsabilidade do trabalho desse profissional </span><span style="font-weight: 400;">transcende</span><span style="font-weight: 400;"> a &uacute;nica data de anivers&aacute;rio, pois diariamente seus olhos, ouvidos e bocas se entrela&ccedil;am no entendimento e trabalho &agrave; causa do seu cliente, &agrave; defesa do seu direito com justi&ccedil;a, bem como na resolu&ccedil;&atilde;o do problema.&nbsp;</span></p>
+<p>&nbsp;</p>
+<p><span style="font-weight: 400;">Todavia, o reconhecimento de uma data espec&iacute;fica para sua homenagem, remete a import&acirc;ncia social da advocacia e ao papel fundamental da qual exerce na manuten&ccedil;&atilde;o da justi&ccedil;a e do Estado de Direito.</span></p>
+<p>&nbsp;</p>
+<p><span style="font-weight: 400;">H&aacute; informa&ccedil;&otilde;es que antes da cria&ccedil;&atilde;o das Faculdades de Direito no Brasil, os interessados em seguir a carreira jur&iacute;dica precisavam estudar na Europa (Universidade de Coimbra). H&aacute; &eacute;poca inexistia cursos jur&iacute;dicos no Brasil, pois se vivia</span> <strong>a </strong><strong>Constitui&ccedil;&atilde;o Pol&iacute;tica do Imp&eacute;rio do Brasil, de 1824, outorgada por Dom Pedro I, em 25 de mar&ccedil;o de 1824</strong><span style="font-weight: 400;">.</span> <strong>(</strong><strong>BRASIL, Legisla&ccedil;&atilde;o informatizada</strong><span style="font-weight: 400;"> - </span><span style="font-weight: 400;">Cole&ccedil;&atilde;o de Leis do Imp&eacute;rio do Brasil - 1824, P&aacute;gina 7 Vol. 1 (Publica&ccedil;&atilde;o Original) </span><span style="font-weight: 400;">apud C&Acirc;MARA DOS DEPUTADOS, [s.d.].&nbsp;</span></p>
+<p>&nbsp;</p>
+<p><span style="font-weight: 400;">Segundo, a legisla&ccedil;&atilde;o as primeiras Faculdades de Direito no Brasil nasceram em Olinda (PE) e S&atilde;o Paulo (SP), denominadas </span><strong>Faculdade de Direito de Olinda</strong><span style="font-weight: 400;">&nbsp;(em Pernambuco, que mais tarde se transferiu para o Recife) e a&nbsp;</span><strong>Faculdade de Direito do Largo de S&atilde;o Francisco</strong><span style="font-weight: 400;">&nbsp;(em S&atilde;o Paulo)</span><span style="font-weight: 400;">, ambas foram criadas por Dom Pedro I, mediante uma </span><span style="font-weight: 400;">lei Imperial </span><strong>(LIM)</strong><span style="font-weight: 400;"> sancionada em 11 de agosto de 1827</span><span style="font-weight: 400;">, representando </span><span style="font-weight: 400;">um marco fundamental para a consolida&ccedil;&atilde;o do ensino jur&iacute;dico nacional.</span> <strong>(</strong><strong>BRASIL, LIM [1827]</strong><span style="font-weight: 400;">, apud C&Acirc;MARA DOS DEPUTADOS, [s.d.]. &nbsp;art. 1&ordm;).&nbsp;</span><span style="font-weight: 400;">Cole&ccedil;&atilde;o de Leis do Imp&eacute;rio do Brasil - 1827, P&aacute;gina 5 Vol. 1 pt. I (Publica&ccedil;&atilde;o Original).</span></p>
+<p><span style="font-weight: 400;">&nbsp;</span></p>
+<p><strong><em>Por conseguinte, exemplificam-se alguns trechos iniciais e importantes que ensejaram a cria&ccedil;&atilde;o da Lei Imperial (LIM), por Dom Pedro I, em 11 de agosto de 1827.</em></strong></p>
+<h2>&nbsp;</h2>
+<h2><span style="font-weight: 400;">►</span><strong>LEGISLA&Ccedil;&Atilde;O</strong> <strong>(C&acirc;mara dos Deputados)</strong></h2>
+<h2>&nbsp;</h2>
+<h2><strong>Legisla&ccedil;&atilde;o Informatizada - LEI DE 11 DE AGOSTO DE 1827 - </strong><strong>Publica&ccedil;&atilde;o Original&nbsp;</strong></h2>
+<p><span style="font-weight: 400;">Veja tamb&eacute;m: </span><a href="https://www2.camara.leg.br/legin/fed/lei_sn/1824-1899/lei-38401-11-agosto-1827-566698-norma-pl.html"><strong>Dados da Norma</strong></a></p>
+<h1><strong>LEI DE 11 DE AGOSTO DE 1827</strong></h1>
+<h1>&nbsp;</h1>
+<p><span style="font-weight: 400;">Cr&ecirc;a dous Cursos de sciencias juridicas e sociaes, um na cidade de S. Paulo e outro na de Olinda.</span></p>
+<p><span style="font-weight: 400;">&nbsp;&nbsp;&nbsp;&nbsp; Dom Pedro Primeiro, por Gra&ccedil;as de Deus e unanime acclama&ccedil;&atilde;o dos povos, Imperador Constitucional e Defensor Perpetuo do Brazil: Fazemos saber a todos os nosso subditos que a Assembl&eacute;a Geral decretou, e n&oacute;s queremos a Lei seguinte:</span></p>
+<p><strong>&nbsp;&nbsp;&nbsp;&nbsp; Art. 1&deg;</strong><span style="font-weight: 400;"> Crear-se-h&atilde;o dous Cursos de sciencias juridicas, e sociaes, um na cidade de S. Paulo, e outro na de Olinda, e nelles no espa&ccedil;o de cinco annos, e em nove cadeiras, se ensinar&atilde;o as materias seguintes:</span></p>
+<p><strong>1&deg; ANO</strong></p>
+<p><span style="font-weight: 400;">&nbsp;&nbsp;&nbsp;&nbsp; 1&ordf; Cadeira. Direito natural, publico, analyse de Constitui&ccedil;&atilde;o do Imperio, direito das gentes, e diplomacia.</span></p>
+<p><strong>2&deg; ANO</strong></p>
+<p><span style="font-weight: 400;">&nbsp;&nbsp;&nbsp;&nbsp; 1&ordf; Cadeira. Continua&ccedil;&atilde;o das materias do anno antecedente.</span></p>
+<p><span style="font-weight: 400;">&nbsp;&nbsp;&nbsp;&nbsp; 2&ordf; Cadeira. Direito publico ecclesiastico.</span></p>
+<p><strong>3&deg; ANO</strong></p>
+<p><span style="font-weight: 400;">&nbsp;&nbsp;&nbsp;&nbsp; 1&ordf; Cadeira. Direito patrio civil.</span></p>
+<p><span style="font-weight: 400;">&nbsp;&nbsp;&nbsp;&nbsp; 2&ordf; Cadeira. Direito patrio criminal com a theoria do processo criminal.</span></p>
+<p><strong>4&deg; ANO</strong></p>
+<p><span style="font-weight: 400;">&nbsp;&nbsp;&nbsp;&nbsp; 1&ordf; Cadeira. Continua&ccedil;&atilde;o do direito patrio civil.</span></p>
+<p><span style="font-weight: 400;">&nbsp;&nbsp;&nbsp;&nbsp; 2&ordf; Cadeira. Direito mercantil e maritimo.</span></p>
+<p><strong>5&deg; ANO</strong></p>
+<p><span style="font-weight: 400;">&nbsp;&nbsp;&nbsp;&nbsp; 1&ordf; Cadeira. Economia politica.</span></p>
+<p><span style="font-weight: 400;">&nbsp;&nbsp;&nbsp;&nbsp; 2&ordf; Cadeira. Theoria e pratica do proceso adoptado pelas leis do Imperio.</span></p>
+<p><strong>&nbsp;&nbsp;&nbsp;&nbsp; Art 2&ordm;</strong><span style="font-weight: 400;"> Para a regencia destas cadeiras o Governo nomear&aacute; nove Lentes proprietarios, e cinco substitutos.</span></p>
+<p><strong>&nbsp;&nbsp;&nbsp;&nbsp; Art 3&ordm;</strong><span style="font-weight: 400;"> Os Lentes proprietarios vencer&atilde;o o ordenado que tiverem os Desembargadores das Rela&ccedil;&otilde;es, e gozar&atilde;o das mesmas honras. Poder&atilde;o jubilar-se com o ordenado por inteiro, findos vinte annos de servi&ccedil;os.</span></p>
+<p><span style="font-weight: 400;">&nbsp;&nbsp;&nbsp;&nbsp; </span><strong>Art 4&ordm;</strong><span style="font-weight: 400;"> Cada um dos Lentes substitutos vencer&aacute; o ordenado annual de 800$000.</span></p>
+<p><span style="font-weight: 400;">&nbsp;&nbsp;&nbsp;&nbsp; </span><strong>Art 5&ordm;</strong><span style="font-weight: 400;"> Haver&aacute; um Secretario, cujo officio ser&aacute; encarregados a um dos Lentes substitutos com a gratifica&ccedil;&atilde;o mensal de 20$000.</span></p>
+<p><span style="font-weight: 400;">&nbsp;&nbsp;&nbsp;&nbsp; </span><strong>Art 6&ordm;</strong><span style="font-weight: 400;"> Haver&aacute; um Porteiro com o ordenado de 400$000 annuaes, e para o servi&ccedil;o haver&atilde;o os mais empregados que se julagarem necessarios.</span></p>
+<p><span style="font-weight: 400;">&nbsp;&nbsp;&nbsp;&nbsp; </span><strong>Art 7&ordm;</strong><span style="font-weight: 400;"> Os Lentes far&atilde;o a escolha dos compendios da sua profiss&atilde;o, ou os arranjar&atilde;o, n&atilde;o existindo j&aacute; feitos, com tanto que as doutrinas estejam de accordo com o systema furado pela na&ccedil;&atilde;o. Estes compedio, depois de approvados pela Congrega&ccedil;&atilde;o, servir&atilde;o inteiramente; submettendo- se por&eacute;m &aacute; approva&ccedil;&atilde;o da Assembl&eacute;a Geral, e o Governo os far&aacute; imprimir e fonercer &aacute;s escolas, competindo aos seus autores o privilegios exclusivos da obra, por dez annos.</span></p>
+<p><span style="font-weight: 400;">&nbsp;&nbsp;&nbsp; </span><strong>Art 8&ordm;</strong><span style="font-weight: 400;"> Os estudantes, que se quizerem matricular nos Cursos Juridicos, devem apresentar as certid&atilde;o de idade, por que mostrem ter a quinze annos completos, e de approva&ccedil;&atilde;o da lingua franceza, grammatica latina, rhetorica philosophia racional e moral,e geometria.</span></p>
+<p><strong>&nbsp;&nbsp;&nbsp; Art 9&ordm;</strong><span style="font-weight: 400;"> Os que frequentarem os cincos annos de qualquer dos Cursos, com approva&ccedil;&atilde;o, coseguir&atilde;o o gr&atilde;o de Bachareis formados. Haver&aacute; tambem os Gr&atilde;o de Doutor, que ser&aacute; conferido &aacute;quelles, que se o obtiverem, poder&atilde;o ser escolhidos para Lentes.</span></p>
+<p><strong>&nbsp;&nbsp;&nbsp;&nbsp; Art 10&ordm;</strong><span style="font-weight: 400;"> Os estatutos do Visconde da Cachoeira ficar&atilde;o regulando por ora naquillo em que forem applicaveis, e se n&atilde;o oppozerem &aacute; presente lei. A Congrega&ccedil;&atilde;o dos Lentes formar&aacute; quanto antes uns estatutos completos, que ser&atilde;o submetidos &aacute; delibera&ccedil;&atilde;o da Assembl&eacute;a Geral.</span></p>
+<p><span style="font-weight: 400;">&nbsp;&nbsp;&nbsp;&nbsp; </span><strong>Art 11&ordm;</strong><span style="font-weight: 400;"> O Governo crear&aacute; nas cidades de S. Paulo, e Olinda as cadeiras necessarias para os estudos preparatorios declarados no art 8&ordm;.</span></p>
+<p><span style="font-weight: 400;">&nbsp;&nbsp;&nbsp;&nbsp; Mandamos portanto a todas as autoridades, a quem o conhecimento a execu&ccedil;&atilde;o da referida lei pertencer, que cumparm e fa&ccedil;am cumprir e guardar t&atilde;o inteiramente, como nella se cont&eacute;m. O Secretario de Estado dos Negocios do Imperio a fa&ccedil;a, imprimir, publicar e correr. Dada no Palacio do&nbsp;Rio de Janeiro aos 11 dias do mez de Agosto de 1827, 6&ordm; da Independencia e do Imperio.</span></p>
+<p><span style="font-weight: 400;">IMPERADOR com rubrica e guarda.</span></p>
+<p><span style="font-weight: 400;">Visconde de S. Leopoldo.</span></p>
+<p><span style="font-weight: 400;">&nbsp;&nbsp;&nbsp;&nbsp; Carta de lei pela qual Vossa Magestade Imperial manda executar o decreto da Assembl&eacute;a Geral Legislativa que Houve por bem sanccionar, sobre a crea&ccedil;&atilde;o de dous Cursos Juridicos, um na cidade de S. Paulo, e outro na&nbsp;de Olinda, como acima se declara.</span></p>
+<p><span style="font-weight: 400;">Para Vossa Magestade Imperial ver.</span></p>
+<p><span style="font-weight: 400;">Albino dos Santos Pereira a fez.</span></p>
+<p><span style="font-weight: 400;">&nbsp;&nbsp;&nbsp;&nbsp; Registrada a fl. 175 do livro 4 &ordm; do registro de cartas, leis, e alvar&aacute;s.-Secretaria de Estados&nbsp;dos Negocios do Imperio em 17 de Agosto de 1827.-Epifanio Jos&eacute;&nbsp;Pedrozo.</span></p>
+<p><span style="font-weight: 400;">Pedro Machado de Miranda Malheiro.</span></p>
+<p><span style="font-weight: 400;">&nbsp;&nbsp;&nbsp;&nbsp; Foi publicada esta carta de lei nesta Chancellaria-m&oacute;r do Imperio do Brazil.-Rio de Janeiro, 21 de Agosto de 1827.-Francisco Xavier Raposo de Albuquerque.</span></p>
+<p><span style="font-weight: 400;">&nbsp;&nbsp;&nbsp;&nbsp; Registrada na Chancellaria-m&oacute;r do Imperio do Brazil a fl. 83 do livro 1&ordm; de cartas, leis, e alvar&aacute;s.-Rio de Janeiro, 21 de Agosto de 1827.-Demetrio Jos&eacute; da Cruz.&nbsp;</span></p>
+<p><strong>Projeto de regulamento ou estatuto para o Curso Juridico pelo Decreto de 9 de Janeiro de 1825, organizado pelo Conselheiro de Estado Visconde da cachoeira, e mandado observar provisoriamente nos Cursos Juridicos de S. Paulo e Olinda pelo art 10&ordm; desta lei.</strong></p>
+<p>&nbsp;</p>
+<p><span style="font-weight: 400;">[...] Existe continua&ccedil;&atilde;o, anexada ao artigo.</span></p>
+<p>&nbsp;</p>
+<p><span style="font-weight: 400;">Rio de Janeiro em 2 de Mar&ccedil;o de 1825.</span></p>
+<p><span style="font-weight: 400;">Este texto n&atilde;o substitui o original publicado no Cole&ccedil;&atilde;o de Leis do Imp&eacute;rio do Brasil de 1827</span></p>
+<p><span style="font-weight: 400;"><br /><br /></span></p>
+<p>&nbsp;</p>
+<p><strong>Publica&ccedil;&atilde;o:</strong></p>
+<p>&nbsp;</p>
+<p><span style="font-weight: 400;">Cole&ccedil;&atilde;o de Leis do Imp&eacute;rio do Brasil - 1827, P&aacute;gina 5 Vol. 1 pt. I (Publica&ccedil;&atilde;o Original)</span></p>
+<table>
+<tbody>
+<tr>
+<td><br />
+<p><a href="https://www.planalto.gov.br/ccivil_03/decreto/1851-1899/D1036A.htm"><strong>Vide Decreto n&ordm; 1.036A, de 1890</strong></a><strong>&nbsp; - (</strong><span style="font-weight: 400;">Suprime a cadeira de direito eclesi&aacute;stico dos cursos jur&iacute;dicos do Recife e S. Paulo).</span></p>
+<p><a href="https://www.planalto.gov.br/ccivil_03/leis/L9394.htm"><strong>Vide Lei n&ordm; 9.394, de 1996</strong></a><strong> &nbsp; - (</strong><span style="font-weight: 400;">Estabelece as diretrizes e bases da educa&ccedil;&atilde;o nacional).</span></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;</p>
+<p><strong>________________________________________________________________</strong></p>
+<p><strong>►</strong><strong>Em resumo</strong></p>
+<p>&nbsp;</p>
+<p><strong>Vejamos</strong><span style="font-weight: 400;">:</span></p>
+<p><span style="font-weight: 400;">A Lei Imperial (LIM) criada em 11 de agosto de 1827, sancionada por Dom Pedro I, foi a&nbsp;</span><strong>Lei que criou os dois primeiros Cursos de Ci&ecirc;ncias Jur&iacute;dicas e Sociais no Brasil, uma em S&atilde;o Paulo (SP) e outra em Olinda (PE)</strong><span style="font-weight: 400;">, bem como seu conte&uacute;do program&aacute;tico marcando o in&iacute;cio do ensino superior jur&iacute;dico no pa&iacute;s e a base para a tradi&ccedil;&atilde;o dos advogados a serem chamados de "doutores", mesmo ap&oacute;s a gradua&ccedil;&atilde;o. Essa lei estabeleceu as nove cadeiras (disciplinas) a serem ensinadas, com a dura&ccedil;&atilde;o de cinco anos, e definiu as mat&eacute;rias dos cursos, consolidando a forma&ccedil;&atilde;o de jurisconsultos brasileiros.&nbsp;</span></p>
+<p>&nbsp;</p>
+<p><strong>►</strong><strong>Principais pontos da Lei de 11 de agosto de 1827</strong><strong>:</strong></p>
+<ul>
+<li style="font-weight: 400;"><strong>Cria&ccedil;&atilde;o dos Cursos:</strong><span style="font-weight: 400;">&nbsp;Instituiu as faculdades de Direito em S&atilde;o Paulo (SP) e em Olinda (Pernambuco).</span></li>
+<li style="font-weight: 400;"><strong>Curr&iacute;culo:</strong><span style="font-weight: 400;">&nbsp;Detalhou as nove cadeiras, abrangendo Direito Natural, P&uacute;blico, Constitucional, Eclesi&aacute;stico, P&aacute;trio (Civil e Criminal), Mercantil, Mar&iacute;timo, Economia Pol&iacute;tica e Teoria do Processo.</span></li>
+<li style="font-weight: 400;"><strong>Forma&ccedil;&atilde;o:</strong><span style="font-weight: 400;">&nbsp;Os estudantes deveriam cursar cinco anos para obter o grau de bacharel, preparando-os para a pr&aacute;tica jur&iacute;dica.</span></li>
+<li style="font-weight: 400;"><strong>Import&acirc;ncia Hist&oacute;rica:</strong><span style="font-weight: 400;">&nbsp;Foi um marco fundamental para a educa&ccedil;&atilde;o jur&iacute;dica no Brasil, substituindo a necessidade de ir estudar na Europa para se formar em Direito, e estabeleceu a base para a figura do advogado como "doutor" no pa&iacute;s.&nbsp;</span></li>
+</ul>
+<p><span style="font-weight: 400;">Esta lei &eacute; a raz&atilde;o pela qual o </span><strong>dia 11 de agosto &eacute; comemorado como o&nbsp;</strong><a href="https://www.oab.org.br/historiaoab/links_internos/ant_leiago.htm"><strong>dia do Advogado</strong></a><strong>&nbsp;no Brasil</strong><strong>.</strong></p>
+<p><strong>OBS: Mais detalhes sobre a Lei Imperial, est&aacute; anexada ao artigo com a publica&ccedil;&atilde;o extra&iacute;da do Portal Planalto - C&acirc;mara dos Deputados.</strong></p>
+<p>&nbsp;</p>
+<p><strong>Refer&ecirc;ncias</strong></p>
+<p>&nbsp;</p>
+<p><span style="font-weight: 400;">BRASIL. A Lei Imperial de 11 de agosto de 1827. </span><strong>Disp&otilde;e sobre dois cursos de Ci&ecirc;ncias Jur&iacute;dicas e sociais, um na cidade de S&atilde;o Paulo e outro na de Olinda, [2025]</strong><span style="font-weight: 400;">.&nbsp; Dispon&iacute;vel em: </span><a href="https://www2.camara.leg.br/legin/fed/lei_sn/1824-1899/lei-38401-11-agosto-1827-566698-publicacaooriginal-90225-pl.html"><span style="font-weight: 400;">https://www2.camara.leg.br/legin/fed/lei_sn/1824-1899/lei-38401-11-agosto-1827-566698-publicacaooriginal-90225-pl.html</span></a><span style="font-weight: 400;">. Acesso em: 16 dez. 2025.</span></p>
+<p>&nbsp;</p>
+<p><span style="font-weight: 400;">BRASIL. [Constitui&ccedil;&atilde;o].&nbsp;</span><a href="https://www.jusbrasil.com.br/legislacao/1503907193/constituicao-federal-constituicao-da-republica-federativa-do-brasil-1988"><strong>Constitui&ccedil;&atilde;o da Republica Federativa do Brasil</strong></a><span style="font-weight: 400;">, 1988. Bras&iacute;lia, DF: Presid&ecirc;ncia da Rep&uacute;blica, [2025]. Dispon&iacute;vel em:&nbsp;</span><a href="https://www.planalto.gov.br/ccivil_03/constituicao/constituicaocompilado.htm"><span style="font-weight: 400;">https://www.planalto.gov.br/ccivil_03/constituicao/constituicaocompilado.htm</span></a><span style="font-weight: 400;">. Acesso em: 16 dez. 2025.</span></p>
+<p>&nbsp;</p>
+<p><span style="font-weight: 400;">BRASIL. Lei n&ordm; 8.906, de 4 de julho de 1994. </span><strong>Disp&otilde;e sobre o Estatuto da Advocacia e a Ordem dos Advogados do Brasil (OAB)</strong><span style="font-weight: 400;">. Bras&iacute;lia, DF: Presid&ecirc;ncia da Rep&uacute;blica, 1994. Dispon&iacute;vel em </span><a href="https://www.planalto.gov.br/ccivil_03/leis/l8906.htm"><span style="font-weight: 400;">https://www.planalto.gov.br/ccivil_03/leis/l8906.htm</span></a><span style="font-weight: 400;">. Acesso em 16 dez. 2025.</span></p>
+<p>&nbsp;</p>
+<p><span style="font-weight: 400;">BRASIL. Legisla&ccedil;&atilde;o Informatizada. </span><strong>Constitui&ccedil;&atilde;o de 1824</strong><span style="font-weight: 400;">. Dispon&iacute;vel em:&nbsp; </span><a href="https://www2.camara.leg.br/legin/fed/consti/1824-1899/constituicao-35041-25-marco-1824-532540-norma-pl.html"><span style="font-weight: 400;">https://www2.camara.leg.br/legin/fed/consti/1824-1899/constituicao-35041-25-marco-1824-532540-norma-pl.html</span></a><span style="font-weight: 400;">. Acesso em: 16 dez. 2025.</span></p>
+<p>&nbsp;</p>
+<p><span style="font-weight: 400;">BRASIL.&nbsp;</span><strong>Lei n&ordm; 8.906, de 4 de julho de 1994</strong><span style="font-weight: 400;">. Disp&otilde;e sobre o Estatuto da Advocacia e a Ordem dos Advogados do Brasil (OAB).&nbsp;Dispon&iacute;vel em</span> <a href="https://www.planalto.gov.br/ccivil_03/leis/l8906.htm"><span style="font-weight: 400;">https://www.planalto.gov.br/ccivil_03/leis/l8906.htm</span></a><span style="font-weight: 400;">. Acesso em 16 dez. 2025.</span></p>
+<p>&nbsp;</p>` 
+},
+{
+  "id": 18,
+  "category": "profissional",
+  "categoryName": "Advocacia",
+  "date": "16 de dezembro de 2025",
+  "readTime": "15 min de leitura",
+  "title": "DOM PEDRO I",
+  "excerpt": "Análise sobre a essencialidade do advogado na administração da justiça e a origem histórica da data comemorativa.",
+  "image": "https://res.cloudinary.com/dqewxdbfx/image/upload/v1766095040/download_zfs4pb.jpg",
+  "author": "Redação",
+   "tags": ["O que é o auxílio-reclusão","Fato gerador","Dependentes","Valores","Quantidade de contribuições necessárias","Tipo de regime de cumprimento pena","Início e término do auxílio-reclusão","Leis","entre outros"],
+  "content": ` ` }
+    ];
 
+
+    // Array de notícias (exemplo)
+    const noticias = [
+      {
+        "id": 80,
+        "category": "noticias",
+        "categoryName": "Notícias",
+        "date": "17 de dezembro de 2025",
+        "readTime": "1 min de leitura",
+        "title": "ISENÇÃO DO IPVA",
+        "excerpt": "Congresso Nacional promulga emenda constitucional que concede imunidade do IPVA para veículos com mais de duas décadas de fabricação.",
+        "image": "https://res.cloudinary.com/dqewxdbfx/image/upload/v1766010595/car-model-calculator-coins-white-table_dug4hd.jpg",
+        "author": "Redação",
+        "tags": ["IPVA", "Isenção Fiscal", "Veículos Antigos", "Legislação Tributária", "Congresso Nacional", "Emenda Constitucional"],
+        "content": `<p><strong>PROMULGADA EMENDA QUE ISENTA IPVA DE VE&Iacute;CULOS COM 20 ANOS OU MAIS DE FABRICA&Ccedil;&Atilde;O.</strong></p>
+<p>&nbsp;</p>
+<p><span style="font-weight: 400;">O Congresso Nacional promulgou a </span><strong>Emenda Constitucional n&deg; 137, de 09/12/2025</strong><span style="font-weight: 400;">, a qual </span><span style="font-weight: 400;">altera o </span><strong>art. 155 da Constitui&ccedil;&atilde;o Federal</strong><span style="font-weight: 400;"> para conceder </span><strong>imunidade do Imposto sobre a Propriedade de Ve&iacute;culos Automotores (IPVA) aos ve&iacute;culos </strong><strong>com 20 anos ou mais de fabrica&ccedil;&atilde;o.</strong></p>
+<p><strong>OBS: </strong><span style="font-weight: 400;">carros de passeio, caminhonetes e ve&iacute;culos de uso misto com mais de duas d&eacute;cadas de uso. O texto tamb&eacute;m estende a imunidade a&nbsp;micro-&ocirc;nibus, &ocirc;nibus, reboques e semirreboques.</span></p>
+<p><span style="font-weight: 400;">A Emenda Constitucional </span><strong>n&deg; 137, de 09/12/2025</strong><span style="font-weight: 400;">, tem origem na </span><a href="https://www25.senado.leg.br/web/atividade/materias/-/materia/161820"><strong>PEC 72/2023</strong></a><span style="font-weight: 400;">.</span></p>
+<p>&nbsp;</p>
+<p><strong>Todavia, os propriet&aacute;rios&nbsp;</strong><span style="font-weight: 400;">de v</span><span style="font-weight: 400;">e&iacute;culos a&eacute;reos e aqu&aacute;ticos, como helic&oacute;pteros, avi&otilde;es, lanchas e iates, </span><strong>continuam sujeitos ao IPVA </strong><strong>(Imposto sobre a Propriedade de Ve&iacute;culos Automotores), desde a Reforma Tribut&aacute;ria - Emenda Constitucional </strong><strong>n&deg; </strong><strong>132/2023.</strong></p>
+<p>&nbsp;</p>
+<p><strong>Fonte: Ag&ecirc;ncia Senado</strong></p>
+<p>&nbsp;</p>
+<p><strong>Leia na &iacute;ntegra.</strong></p>
+<p>&nbsp;</p>
+<p><strong>Refer&ecirc;ncia</strong></p>
+<p><span style="font-weight: 400;">BRASIL.</span><strong> Isen&ccedil;&atilde;o sobre a Propriedade de Ve&iacute;culos Automotores (IPVA).</strong><span style="font-weight: 400;"> Dispon&iacute;vel em: &lt;</span><a href="https://www12.senado.leg.br/noticias/materias/2025/12/09/promulgada-emenda-que-isenta-ipva-de-veiculos-com-mais-de-20-anos"><span style="font-weight: 400;">https://www12.senado.leg.br/noticias/materias/2025/12/09/promulgada-emenda-que-isenta-ipva-de-veiculos-com-mais-de-20-anos</span></a><span style="font-weight: 400;">, (2025)</span><span style="font-weight: 400;">&gt; Acesso em: 10 dez 2025.</span></p>
+<p>&nbsp;</p>
+<p><img src="https://res.cloudinary.com/dqewxdbfx/image/upload/v1766011769/70ae5be0-0379-4bf7-be87-43fd61afef30.png" alt="IPVA 20 anos" style="max-width:100%;height:auto;display:block;margin:12px 0;"/></p>
+<p><strong>Promulgada emenda que isenta IPVA de veículos com mais de 20 anos</strong></p>
+
+<p>Da Ag&ecirc;ncia Senado | 09/12/2025, 17h55</p>
+<p>O Congresso Nacional promulgou nesta ter&ccedil;a-feira (9) a emenda constitucional que isenta ve&iacute;culos com 20 anos ou mais<br />de fabrica&ccedil;&atilde;o do pagamento do Imposto sobre a Propriedade de Ve&iacute;culos Automotores (IPVA). A Emenda Constitucional<br />137 tem origem na PEC 72/2023, apresentada pelo senador Cleitinho (Republicanos&ndash;MG). O texto foi aprovado pelo<br />Senado em mar&ccedil;o de 2024 e pela C&acirc;mara dos Deputados na &uacute;ltima ter&ccedil;a-feira (2).<br />A emenda altera o artigo 155 da Constitui&ccedil;&atilde;o para proibir a cobran&ccedil;a do imposto sobre carros de passeio, caminhonetes e<br />ve&iacute;culos de uso misto com mais de duas d&eacute;cadas de uso. O texto tamb&eacute;m estende a imunidade a micro-&ocirc;nibus, &ocirc;nibus,<br />reboques e semirreboques, conforme ajuste redacional feito no Senado pelo relator da proposta, senador Marcos Rog&eacute;rio<br />(PL&ndash;RO).<br />O Presidente do Senado e do Congresso, Davi Alcolumbre, afirmou que a mudan&ccedil;a representa um avan&ccedil;o de &ldquo;justi&ccedil;a<br />fiscal&rdquo;. Ele lembrou que, ap&oacute;s a reforma tribut&aacute;ria (Emenda Constitucional 132), o IPVA deixou de incidir apenas sobre<br />autom&oacute;veis e passou a alcan&ccedil;ar tamb&eacute;m ve&iacute;culos a&eacute;reos e aqu&aacute;ticos, como helic&oacute;pteros, avi&otilde;es, lanchas e iates. Na<br />avalia&ccedil;&atilde;o de Davi, a nova emenda &ldquo;elimina uma distor&ccedil;&atilde;o que penalizava as fam&iacute;lias mais pobres&rdquo;.<br />&mdash; Estamos falando de trabalho, de sustento, de mobilidade b&aacute;sica, de gente que depende de carro para garantir o p&atilde;o de<br />cada dia, de gente que n&atilde;o tem um ve&iacute;culo antigo porque quer, mas porque necessita e precisa. Um autom&oacute;vel com mais<br />de 20 anos n&atilde;o &eacute;, efetivamente, s&iacute;mbolo de riqueza. &Eacute; s&iacute;mbolo de necessidade e &eacute;, muitas vezes, a &uacute;nica ferramenta para<br />n&atilde;o perder o emprego, para levar um filho &agrave; escola, para ir a uma igreja ou para chegar ao servi&ccedil;o na hora &mdash; ressaltou.<br />Davi ainda destacou que a medida corrige desigualdades sociais regionais e alivia o or&ccedil;amento de milhares de fam&iacute;lias.<br />&mdash; A vit&oacute;ria &eacute; do povo brasileiro e ela reflete um esfor&ccedil;o conjunto entre a C&acirc;mara dos deputados e o Senado federal, que<br />souberam construir solu&ccedil;&otilde;es para melhorar a vida de quem mais precisa &mdash; disse.<br />Cleitinho afirmou que a nova emenda tem como objetivo principal &ldquo;mudar a vida da popula&ccedil;&atilde;o&rdquo; e reduzir o custo di&aacute;rio<br />enfrentado pelas fam&iacute;lias brasileiras. Visivelmente emocionado, ele lembrou da pr&oacute;pria trajet&oacute;ria e disse que encara o<br />mandato como miss&atilde;o de defesa dos mais vulner&aacute;veis.<br />&mdash; N&atilde;o tem pre&ccedil;o que pague quando a gente &eacute; da vida p&uacute;blica e vem c&aacute; servir seu povo, vem c&aacute; cuidar do seu povo e vem<br />fazer o que &eacute; o melhor de tudo, diminuir o custo da vida do povo brasileiro [...]. O que eu fiz hoje aqui, sabe o que vai<br />acontecer l&aacute; em Minas Gerais? Eu vou tirar R$ 1 bilh&atilde;o do caixa do Estado e colocar no bolso da popula&ccedil;&atilde;o. Porque o que<br />eu queria mesmo era acabar com o IPVA que nem deveria existir &mdash; declarou.<br />A sess&atilde;o contou com a presen&ccedil;a do deputado Lafayette de Andrada (Republicanos-MG), relator da proposta na Comiss&atilde;o<br />de Constitui&ccedil;&atilde;o e Justi&ccedil;a (CCJ) da C&acirc;mara.<br />Camily Oliveira, sob supervis&atilde;o de Patr&iacute;cia Oliveira.<br />Ag&ecirc;ncia Senado (Reprodu&ccedil;&atilde;o autorizada mediante cita&ccedil;&atilde;o da Ag&ecirc;ncia Senado)</p>`
+      }
     ];
 
     // Configurações de paginação
     const postsPerPage = 4;
     let currentPage = 1;
+
+    const reflexoesPerPage = 4;
+    let currentReflexoesPage = 1;
+
+    const noticiasPerPage = 4;
+    let currentNoticiasPage = 1;
 
     // Helper para escapar HTML (segurança)
     function escapeHtml(unsafe) {
@@ -4750,7 +5445,7 @@
           <img src="${latestPost.image}" alt="${latestPost.title}">
           <h1>${latestPost.title}</h1>
           <p class="excerpt">${latestPost.excerpt}</p>
-          <div style="margin-top:12px"><a href="#" class="btn primary" onclick="openArticle(${latestPost.id})">Leia na íntegra</a></div>
+          <div style="margin-top:12px"><a href="#" class="btn primary" onclick="openArticle(${latestPost.id}, event)">Leia na íntegra</a></div>
         `;
       }
 
@@ -4797,7 +5492,7 @@
         const popularPosts = [...posts].sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 3);
 
         maisLidosWidget.innerHTML = popularPosts.map((post, index) => `
-          <li><a href="#" onclick="openArticle(${post.id})">
+          <li><a href="javascript:void(0);" onclick="openArticle(${post.id}); return false;">
             <span class="category ${post.category}" style="font-size:10px;padding:2px 6px">${post.categoryName.split(' ')[0]}</span> 
             ${post.title}
           </a></li>
@@ -4825,7 +5520,7 @@
             <div class="category ${post.category}">${post.categoryName}</div>
             <div class="meta">${post.date} • ${post.readTime}</div>
             <img src="${post.image}" alt="post">
-            <h3><a href="#" onclick="openArticle(${post.id})">${post.title}</a></h3>
+            <h3><a href="javascript:void(0);" onclick="openArticle(${post.id}); return false;">${post.title}</a></h3>
             <p class="excerpt">${post.excerpt}</p>
           </div>
         `;
@@ -4883,10 +5578,167 @@
       paginationContainer.appendChild(nextButton);
     }
 
+    // Função para renderizar as reflexões
+    function renderReflexoes() {
+      const reflexoesContainer = document.getElementById('reflexoesContainer');
+      if (!reflexoesContainer) {
+        console.warn('reflexoesContainer não encontrado');
+        return;
+      }
+      reflexoesContainer.innerHTML = '';
+
+      const startIndex = (currentReflexoesPage - 1) * reflexoesPerPage;
+      const endIndex = startIndex + reflexoesPerPage;
+      const reflexoesToShow = reflexoes.slice(startIndex, endIndex);
+
+      reflexoesToShow.forEach(reflexao => {
+        const reflexaoElement = document.createElement('article');
+        reflexaoElement.className = 'post';
+        reflexaoElement.innerHTML = `
+          <div>
+            <div class="category ${reflexao.category}">${reflexao.categoryName}</div>
+            <div class="meta">${reflexao.date} • ${reflexao.readTime}</div>
+            <img src="${reflexao.image}" alt="reflexão">
+            <h3><a href="javascript:void(0);" onclick="openArticle(${reflexao.id}); return false;">${reflexao.title}</a></h3>
+            <p class="excerpt">${reflexao.excerpt}</p>
+          </div>
+        `;
+        reflexoesContainer.appendChild(reflexaoElement);
+      });
+
+      renderReflexoesPagination();
+    }
+
+    // Função para renderizar a paginação das reflexões
+    function renderReflexoesPagination() {
+      const paginationContainer = document.getElementById('reflexoesPaginationContainer');
+      if (!paginationContainer) {
+        console.warn('reflexoesPaginationContainer não encontrado');
+        return;
+      }
+      paginationContainer.innerHTML = '';
+
+      const totalPages = Math.ceil(reflexoes.length / reflexoesPerPage);
+
+      const prevButton = document.createElement('a');
+      prevButton.className = 'btn';
+      prevButton.textContent = '« Anterior';
+      prevButton.disabled = currentReflexoesPage === 1;
+      if (currentReflexoesPage > 1) {
+        prevButton.addEventListener('click', () => {
+          currentReflexoesPage--;
+          renderReflexoes();
+        });
+      }
+      paginationContainer.appendChild(prevButton);
+
+      for (let i = 1; i <= totalPages; i++) {
+        const pageButton = document.createElement('a');
+        pageButton.className = i === currentReflexoesPage ? 'btn active' : 'btn';
+        pageButton.textContent = i;
+        pageButton.addEventListener('click', () => {
+          currentReflexoesPage = i;
+          renderReflexoes();
+        });
+        paginationContainer.appendChild(pageButton);
+      }
+
+      const nextButton = document.createElement('a');
+      nextButton.className = 'btn';
+      nextButton.textContent = 'Próxima »';
+      nextButton.disabled = currentReflexoesPage === totalPages;
+      if (currentReflexoesPage < totalPages) {
+        nextButton.addEventListener('click', () => {
+          currentReflexoesPage++;
+          renderReflexoes();
+        });
+      }
+      paginationContainer.appendChild(nextButton);
+    }
+
+    // Função para renderizar as notícias
+    function renderNoticias() {
+      const noticiasContainer = document.getElementById('noticiasContainer');
+      if (!noticiasContainer) {
+        console.warn('noticiasContainer não encontrado');
+        return;
+      }
+      noticiasContainer.innerHTML = '';
+
+      const startIndex = (currentNoticiasPage - 1) * noticiasPerPage;
+      const endIndex = startIndex + noticiasPerPage;
+      const noticiasToShow = noticias.slice(startIndex, endIndex);
+
+      noticiasToShow.forEach(noticia => {
+        const noticiaElement = document.createElement('article');
+        noticiaElement.className = 'post';
+        noticiaElement.innerHTML = `
+          <div>
+            <div class="category ${noticia.category}">${escapeHtml(noticia.categoryName)}</div>
+            <div class="meta">${escapeHtml(noticia.date)} • ${escapeHtml(noticia.readTime)}</div>
+            <img src="${noticia.image}" alt="notícia">
+            <h3><a href="javascript:void(0);" onclick="openArticle(${noticia.id}); return false;">${escapeHtml(noticia.title)}</a></h3>
+            <p class="excerpt">${escapeHtml(noticia.excerpt)}</p>
+          </div>
+        `;
+        noticiasContainer.appendChild(noticiaElement);
+      });
+
+      renderNoticiasPagination();
+    }
+
+    // Função para renderizar a paginação das notícias
+    function renderNoticiasPagination() {
+      const paginationContainer = document.getElementById('noticiasPaginationContainer');
+      if (!paginationContainer) {
+        console.warn('noticiasPaginationContainer não encontrado');
+        return;
+      }
+      paginationContainer.innerHTML = '';
+
+      const totalPages = Math.ceil(noticias.length / noticiasPerPage);
+
+      const prevButton = document.createElement('a');
+      prevButton.className = 'btn';
+      prevButton.textContent = '« Anterior';
+      prevButton.disabled = currentNoticiasPage === 1;
+      if (currentNoticiasPage > 1) {
+        prevButton.addEventListener('click', () => {
+          currentNoticiasPage--;
+          renderNoticias();
+        });
+      }
+      paginationContainer.appendChild(prevButton);
+
+      for (let i = 1; i <= totalPages; i++) {
+        const pageButton = document.createElement('a');
+        pageButton.className = i === currentNoticiasPage ? 'btn active' : 'btn';
+        pageButton.textContent = i;
+        pageButton.addEventListener('click', () => {
+          currentNoticiasPage = i;
+          renderNoticias();
+        });
+        paginationContainer.appendChild(pageButton);
+      }
+
+      const nextButton = document.createElement('a');
+      nextButton.className = 'btn';
+      nextButton.textContent = 'Próxima »';
+      nextButton.disabled = currentNoticiasPage === totalPages;
+      if (currentNoticiasPage < totalPages) {
+        nextButton.addEventListener('click', () => {
+          currentNoticiasPage++;
+          renderNoticias();
+        });
+      }
+      paginationContainer.appendChild(nextButton);
+    }
+
     // Função para abrir o artigo
-    function openArticle(id) {
+    function openArticle(id, event) {
+      if (event && event.preventDefault) event.preventDefault();
       console.log('openArticle called with id=', id);
-      const post = posts.find(p => p.id === id);
+      let post = posts.find(p => p.id === id) || reflexoes.find(r => r.id === id) || noticias.find(n => n.id === id);
       if (!post) {
         console.error('Post not found for id=', id);
         alert('Artigo não encontrado (id=' + id + '). Verifique o console para mais detalhes.');
@@ -4995,21 +5847,103 @@
       renderMainContent(); // Renderizar conteúdo principal
       renderPosts();       // Renderizar lista de posts
       renderPagination();  // Renderizar paginação
+      renderReflexoes();   // Renderizar lista de reflexões
+      renderNoticias();    // Renderizar lista de notícias
 
       // Adicionar event listeners para o menu mobile
       const menuToggle = document.getElementById('menuToggle');
       const overlay = document.getElementById('overlay');
       const mainNav = document.getElementById('mainNav');
 
-      menuToggle.addEventListener('click', () => toggleMobileMenu());
-      overlay.addEventListener('click', () => toggleMobileMenu(false));
+      if (menuToggle) menuToggle.addEventListener('click', () => toggleMobileMenu());
+      if (overlay) overlay.addEventListener('click', () => toggleMobileMenu(false));
 
       // Fechar menu ao clicar em um link
-      mainNav.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', () => toggleMobileMenu(false));
+      if (mainNav) mainNav.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', (e) => {
+          const href = link.getAttribute('href') || '';
+          if (href.startsWith('#') && href.length > 1) {
+            e.preventDefault();
+            const id = href.substring(1);
+            const target = document.getElementById(id);
+            if (target) {
+              target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+          }
+          // Fechar o menu mobile em qualquer clique no link
+          toggleMobileMenu(false);
+        });
       });
+
+      // Tornar os títulos "Artigos" e "Reflexoes" clicáveis para rolar até o conteúdo
+      document.querySelectorAll('.titulo').forEach(title => {
+        const txt = (title.textContent || '').toLowerCase();
+        let targetId = null;
+        if (txt.includes('artigo')) targetId = 'postsContainer';
+        if (txt.includes('reflex')) targetId = 'reflexoesContainer';
+        const target = targetId ? document.getElementById(targetId) : null;
+        if (target) {
+          title.addEventListener('click', (e) => {
+            e.preventDefault();
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            // small offset if header covers content
+            window.setTimeout(() => window.scrollBy(0, 2), 2);
+          });
+        }
+      });
+
+    // Listener para detectar cópia de conteúdo
+    document.addEventListener('copy', () => {
+      alert('⚠️ Conteúdo do Portal Jurídico\n\nO conteúdo deste portal é aberto e pode ser reproduzido, desde que a fonte "fatimafelippe.com.br" seja citada.\n\nObrigado por respeitar nossa autoria!');
+    });
+    });
+  </script>
+
+  <!-- Cookie Banner -->
+  <div class="cookie-banner" id="cookieBanner">
+    <div class="cookie-message">
+      Este site utiliza cookies para melhorar sua experiência. Ao continuar, você concorda com nossa <a href="privacidade.html">Política de Privacidade</a>.
+    </div>
+    <div class="cookie-actions">
+      <a class="cookie-btn" href="privacidade.html">Saiba mais</a>
+      <button class="cookie-btn accept" onclick="acceptCookies()">Ok</button>
+    </div>
+  </div>
+
+  <script>
+    // Cookie Banner Functions
+    function showCookieBanner() {
+      const cookieBanner = document.getElementById('cookieBanner');
+      const cookieConsent = localStorage.getItem('cookieConsent');
+      
+      // Mostrar banner apenas se o usuário não consentiu ainda
+      if (!cookieConsent) {
+        cookieBanner.classList.add('active');
+      }
+    }
+
+    function acceptCookies() {
+      localStorage.setItem('cookieConsent', 'accepted');
+      const cookieBanner = document.getElementById('cookieBanner');
+      cookieBanner.classList.remove('active');
+      
+      // Aqui você pode adicionar o Google Analytics depois
+      // loadGoogleAnalytics();
+    }
+
+    function rejectCookies() {
+      // Mantido por compatibilidade caso seja usado em outras páginas
+      localStorage.setItem('cookieConsent', 'rejected');
+      const cookieBanner = document.getElementById('cookieBanner');
+      cookieBanner.classList.remove('active');
+    }
+
+    // Mostrar banner ao carregar a página
+    document.addEventListener('DOMContentLoaded', function() {
+      showCookieBanner();
     });
   </script>
 </body>
 
 </html>
+
